@@ -290,7 +290,7 @@ void geometric_shape::shape::move_shape(int &x_inside,int &y_inside,std::vector<
                     int x2;
                     int y2;
                     MLV_get_mouse_position( &x2, &y2 );
-                    draw(MLV_COLOR_BLACK);
+                    draw(MLV_COLOR_GRAY, MLV_COLOR_GRAY);
                     drawAllShapes(motif,MLV_COLOR_BLACK,MLV_COLOR_ORANGE);
                     translate(x2-x_inside,y2-y_inside);
                     MLV_wait_milliseconds( 0.01 );
@@ -316,7 +316,7 @@ void geometric_shape::shape::move_shape(int &x_inside,int &y_inside,std::vector<
             }
             while(MLV_get_mouse_button_state(MLV_BUTTON_RIGHT) == MLV_PRESSED)
                 {
-                    draw(MLV_COLOR_BLACK);
+                    draw(MLV_COLOR_GRAY, MLV_COLOR_GRAY);
                     int x_rot;
                     int y_rot;
                     MLV_wait_milliseconds( 10 );
@@ -335,7 +335,7 @@ void geometric_shape::shape::move_shape(int &x_inside,int &y_inside,std::vector<
                 }
             if(MLV_get_mouse_button_state(MLV_BUTTON_MIDDLE) == MLV_PRESSED)
             {
-                draw(MLV_COLOR_BLACK);
+                draw(MLV_COLOR_GRAY, MLV_COLOR_GRAY);
                 MLV_wait_milliseconds( 1 );
                 reverse();
                 drawAllShapes(motif,MLV_COLOR_BLACK,MLV_COLOR_ORANGE);

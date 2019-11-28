@@ -112,6 +112,23 @@ void drawJeu(std::vector<const char*> figures, int width, int height){
                 MLV_wait_mouse(&x2, &y2);
             }
 
+            // if( MLV_get_keyboard_state( MLV_KEYBOARD_LCTRL ) == MLV_PRESSED 
+            //                 && MLV_get_keyboard_state( MLV_KEYBOARD_s ) == MLV_PRESSED ){
+            //                     int interligne=40;
+            //                     MLV_draw_text_box(round(width/2),round(height/2),100,50,"Save", interligne , 
+            //                                 MLV_COLOR_GREY,MLV_COLOR_BLACK,MLV_COLOR_WHITE,MLV_TEXT_LEFT, MLV_HORIZONTAL_CENTER,MLV_VERTICAL_CENTER);
+            //                     MLV_draw_text_box(round(width/2)+120,round(height/2),100,50,"Cancel", interligne , 
+            //                                 MLV_COLOR_GREY,MLV_COLOR_BLACK,MLV_COLOR_WHITE,MLV_TEXT_LEFT, MLV_HORIZONTAL_CENTER,MLV_VERTICAL_CENTER);
+            //                     MLV_actualise_window();
+            //                     int x_inside,y_inside;
+            //                     MLV_wait_mouse(&x_inside, &y_inside);
+            //                     if (x_inside >=  round(width/2))
+            //                     savedraw(fig);
+            //         }
+            //         MLV_clear_window ( MLV_COLOR_BLACK ) ;
+            //         drawAllShapes(motif,MLV_COLOR_BLACK,MLV_COLOR_ORANGE);
+            //         drawAllShapes(fig,MLV_COLOR_WHITE,MLV_COLOR_RED);
+
             switch(bouton){
                 case 1: // Retourner
                     std::cout << "Fleche gauche" << std::endl;
