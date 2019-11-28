@@ -9,7 +9,7 @@
 #include <vector>
 #include <iostream>
 #include <MLV/MLV_all.h>
-
+#include <memory> // shared_ptr
 namespace geometric_shape{
 	 /**
      * \class shape
@@ -27,20 +27,23 @@ namespace geometric_shape{
                 shape(const shape &tc);
                 shape & operator=(const shape &tc);
                 bool operator== (const shape &) const;
-                //friend bool operator == (const std::vector<geometric_shape::shape*> vectshapes,const std::vector<geometric_shape::shape*> vectshapes2) ;
-                virtual void move_shape(int &x_inside,int &y_inside, std::vector<geometric_shape::shape*> fig);
-
+                friend bool operator == (const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectshapes,const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectmodel) ;
+                friend bool areEqual(const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectshapes,const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectmodel) ;
+               //virtual void move_shape(int &x_inside,int &y_inside, std::vector<geometric_shape::shape*> fig);
+                void move_shape(int &x_inside,int &y_inside, std::vector<std::shared_ptr<geometric_shape::shape> >  &fig);
                 void draw(MLV_Color color_shape,  MLV_Color color_border= MLV_COLOR_BLACK) const;
     /*           
      * 
-     * Overload draw(MLV_Color color,  MLV_Color color_border= MLV_COLOR_BLACK) for vector of shape
+     * friend class that draw all shape for a vector of shape. 
      * 
      */
-                friend void drawAllShapes(const std::vector<geometric_shape::shape*> vectshapes,MLV_Color color,  MLV_Color color_border= MLV_COLOR_BLACK);
+                //friend void drawAllShapes(const std::vector<geometric_shape::shape*> vectshapes,MLV_Color color,  MLV_Color color_border= MLV_COLOR_BLACK);
+                friend void drawAllShapes(const  std::vector<std::shared_ptr<geometric_shape::shape> >  &vectshapes,MLV_Color color_shape,  MLV_Color color_border);
 
                 virtual void display( std::ostream & out = std::cout ) const;
                 bool isInside(const int &x,const int &y) const;
                 virtual void reverse();
+                void rotate_hw(int angle,unsigned int n);
                 
         protected:
                 void set_shape(std::vector<double> &pxnew, std::vector<double> &pynew,std::vector<double> &cnew,int &scnew);
@@ -49,7 +52,6 @@ namespace geometric_shape{
                 std::vector<double> get_py() const;
                 std::vector<double> get_center() const;
                 void rotate_center(int angle,int x=0,int y=0,int x0=0, int y0=0);
-                void rotate_hw(int angle);
                 void translate(int x,int y);
                 bool isrevert = false;
                 /*shape & operator[](shape &) const {return this;}*/
@@ -60,7 +62,13 @@ namespace geometric_shape{
                 std::vector<double> _py;
                 std::vector<double> center;
         };
-        void drawAllShapes(const std::vector<geometric_shape::shape*> vectshapes,MLV_Color color_shape,  MLV_Color color_border);
+        //void drawAllShapes(const std::vector<geometric_shape::shape*> vectshapes,MLV_Color color_shape,  MLV_Color color_border);
+        void drawAllShapes(const  std::vector<std::shared_ptr<geometric_shape::shape> >  &vectshapes,MLV_Color color_shape,  MLV_Color color_border);
+        bool operator == (const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectshapes,
+                          const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectmodel
+                          ) ;
+        bool areEqual(const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectshapes,const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectmodel) ;
+               
 }
 
 std::ostream &operator<<(std::ostream &os, const geometric_shape::shape &_tr);

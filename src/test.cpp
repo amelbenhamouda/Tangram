@@ -3,6 +3,8 @@
 #include "../include/square.hpp"
 #include "../include/parallelogram.hpp"
 #include "../include/shape.hpp"
+
+#include <memory> // shared_ptr
 #include <vector>
 #include <algorithm>
 #include <cmath>
@@ -11,42 +13,11 @@
 // la position du sommet Nord-Ouest ( paramètres x et y ) et la taille de la 
 // boîte de texte ( paramètres width et height ).
 //
-std::vector<geometric_shape::shape*> Initialise(int size,int width, int height){
+/*std::vector<geometric_shape::shape*> Initialise(int size,int width, int height){
         MLV_clear_window ( MLV_COLOR_BLACK ) ;  
         int allHeigth = height-200;
         int allWidth =width - 1400;
 
-        /*geometric_shape::square sq(size,allHeigth,allWidth);
-        //sq.rotate_center(45);
-        geometric_shape::rigth_triangle tr1(size,allHeigth,allWidth+1*(size+15));
-        geometric_shape::rigth_triangle tr2(size,allHeigth,allWidth+2*(size+15));
-        geometric_shape::rigth_triangle tr3(size*2,allHeigth,allWidth+3*(size+15));
-        geometric_shape::rigth_triangle tr4(size*2,allHeigth,allWidth+5*(size+15));
-        geometric_shape::rigth_triangle tr5(round(size*sqrt(2)),allHeigth,allWidth+7*(size+15));
-        geometric_shape::parallelogram par(size,allHeigth,allWidth+9*(size+15));
-        geometric_shape::parallelogram *parp;
-        geometric_shape::rigth_triangle *tr1p;
-        geometric_shape::rigth_triangle *tr2p;
-        geometric_shape::rigth_triangle *tr3p;
-        geometric_shape::rigth_triangle *tr4p;
-        geometric_shape::rigth_triangle *tr5p;
-        geometric_shape::square *sqp ;
-        parp = &par;
-        tr1p = &tr1;
-        tr2p = &tr2;
-        tr3p = &tr3;
-        tr4p = &tr4;
-        tr5p = &tr5;
-        sqp  = &sq;
-        sqp->draw(MLV_COLOR_WHITE);
-        tr1p->draw(MLV_COLOR_WHITE);
-        tr2.draw(MLV_COLOR_WHITE);
-        tr3.draw(MLV_COLOR_WHITE);
-        tr4.draw(MLV_COLOR_WHITE);
-        tr5.draw(MLV_COLOR_WHITE);
-        parp->reverse();
-        parp->draw(MLV_COLOR_WHITE);
-        */
         std::vector<geometric_shape::shape*>  shapes;
         try
         {
@@ -57,52 +28,81 @@ std::vector<geometric_shape::shape*> Initialise(int size,int width, int height){
             geometric_shape::rigth_triangle *tr4p2= new geometric_shape::rigth_triangle(size*2,allHeigth,allWidth+5*(size+15));
             geometric_shape::rigth_triangle *tr5p2= new geometric_shape::rigth_triangle(round(size*sqrt(2)),allHeigth,allWidth+7*(size+15));
             geometric_shape::square *sqp2 = new geometric_shape::square(size,allHeigth,allWidth);
-            /*parp2->draw(MLV_COLOR_WHITE, MLV_COLOR_RED);
-            tr1p2->draw(MLV_COLOR_WHITE, MLV_COLOR_RED);
-            tr2p2->draw(MLV_COLOR_WHITE, MLV_COLOR_RED);
-            tr3p2->draw(MLV_COLOR_WHITE, MLV_COLOR_RED);
-            tr4p2->draw(MLV_COLOR_WHITE, MLV_COLOR_RED);
-            tr5p2->draw(MLV_COLOR_WHITE, MLV_COLOR_RED);
-            sqp2->draw(MLV_COLOR_WHITE, MLV_COLOR_RED);*/
             shapes = std::vector<geometric_shape::shape*>{sqp2,tr1p2,tr2p2,tr3p2,tr4p2,tr5p2,parp2};
-            drawAllShapes(shapes,MLV_COLOR_WHITE,MLV_COLOR_RED);        }
+            drawAllShapes(shapes,MLV_COLOR_WHITE,MLV_COLOR_RED);   
+
+     }
         catch (std::bad_alloc & e)
         {
             std::cerr << "bad_alloc caught: " << e.what() << '\n';
             exit(EXIT_FAILURE);
         }
 
-
-
-        /*geometric_shape::shape ** tabshape = new geometric_shape::shape*[6];
-        tabshape[0]= parp2;
-        tabshape[1]= tr1p2;
-        tabshape[2]= tr2p2;
-        tabshape[3]= tr3p2;
-        tabshape[4]= tr4p2;
-        tabshape[5]= tr5p2;
-        tabshape[6]= sqp2;*/
-        
-        /*std::vector<geometric_shape::shape> shape{sq,tr1,tr2,tr3,tr4,tr5,par};*/
         MLV_actualise_window();
         return shapes;
+}*/
+
+void Initialise_shared(int size,int width, int height,std::vector<std::shared_ptr<geometric_shape::shape> > &shape_shared){
+        MLV_clear_window ( MLV_COLOR_BLACK ) ;  
+        int allHeigth = height-200;
+        int allWidth =width - 1400;
+
+        
+        try{
+            shape_shared.push_back(std::make_shared<geometric_shape::square>(size,allHeigth,allWidth) );
+            shape_shared.push_back(std::make_shared<geometric_shape::parallelogram>(size,allHeigth,allWidth+9*(size+15)) );
+            shape_shared.push_back(std::make_shared<geometric_shape::rigth_triangle>(size,allHeigth,allWidth+1*(size+15)) );
+            shape_shared.push_back(std::make_shared<geometric_shape::rigth_triangle>(size,allHeigth,allWidth+2*(size+15)) );
+            shape_shared.push_back(std::make_shared<geometric_shape::rigth_triangle>(size*2,allHeigth,allWidth+3*(size+15)) );
+            shape_shared.push_back(std::make_shared<geometric_shape::rigth_triangle>(size*2,allHeigth,allWidth+5*(size+15)) );
+            shape_shared.push_back(std::make_shared<geometric_shape::rigth_triangle>(round(size*sqrt(2)),allHeigth,allWidth+7*(size+15)) );
+            drawAllShapes(shape_shared,MLV_COLOR_WHITE,MLV_COLOR_RED); 
+
+        }
+        catch (std::bad_alloc & e){
+            std::cerr << "bad_alloc caught: " << e.what() << '\n';
+            exit(EXIT_FAILURE);
+        }
+
+        MLV_actualise_window();
+        return;
 }
+void Initialise_motif(int size,int width, int height,std::vector<std::shared_ptr<geometric_shape::shape> > &motif){
+ 
+        int allHeigth = 250;
+        int allWidth =200;
+        try{
+            motif.push_back(std::make_shared<geometric_shape::square>(size,allHeigth,allWidth) );
+            motif.push_back(std::make_shared<geometric_shape::parallelogram>(size,allHeigth-size,allWidth+size*2) );
+            motif[1]->rotate_hw(80,3);
+            motif.push_back(std::make_shared<geometric_shape::rigth_triangle>(size,allHeigth,allWidth-round(size/3.3)) );
+            motif[2]->rotate_hw(-60,1);
+            motif.push_back(std::make_shared<geometric_shape::rigth_triangle>(size,allHeigth-round(size/2.7),allWidth-round(size/1.45)) );
+            motif[3]->rotate_hw(120,0);
+            motif.push_back(std::make_shared<geometric_shape::rigth_triangle>(size*2,allHeigth+2.98*size,allWidth+round(size/0.9 )));
+            motif[4]->rotate_hw(100,0);
+            motif.push_back(std::make_shared<geometric_shape::rigth_triangle>(size*2,allHeigth+round(size*2.62),allWidth+round(size*3.09)) );
+            motif[5]->rotate_hw(-80,0);
+            motif.push_back(std::make_shared<geometric_shape::rigth_triangle>(round(size*sqrt(2))
+                                                ,allHeigth+round(size*3.88),allWidth+round(size*2.4) ));
+            motif[6]->rotate_hw(-35,0);
+            drawAllShapes(motif,MLV_COLOR_BLACK,MLV_COLOR_ORANGE); 
 
+        }
+        catch (std::bad_alloc & e){
+            std::cerr << "bad_alloc caught: " << e.what() << '\n';
+            exit(EXIT_FAILURE);
+        }
 
-void print_cote( int O, int N, int width, int height, MLV_Color color ){
-        int espace = 3;
-        int sizeLine = 10;
-        int S = N + height -1;
-        int E = O + width - 1;
-        MLV_draw_line(O, N - espace, O, N - espace - sizeLine , color);
-        MLV_draw_line(E, N - espace, E, N - espace - sizeLine , color);
-        MLV_draw_line(O, S + espace, O, S + espace + sizeLine , color);
-        MLV_draw_line(E, S + espace, E, S + espace + sizeLine , color);
-        MLV_draw_line(O - espace, N, O - espace - sizeLine, N, color);
-        MLV_draw_line(O - espace, S, O - espace - sizeLine, S, color);
-        MLV_draw_line(E + espace, N, E + espace + sizeLine, N, color);
-        MLV_draw_line(E + espace, S, E + espace + sizeLine, S, color);
-};
+        MLV_actualise_window();
+        return;
+}
+void clone(std::vector<std::shared_ptr<geometric_shape::shape> > &clone, std::vector<std::shared_ptr<geometric_shape::shape> > &shape_shared){
+    for(auto it : shape_shared){
+        auto  fig = it;
+        clone.push_back(it);
+    }
+}
 
 //
 // Attention ! 
@@ -111,12 +111,12 @@ void print_cote( int O, int N, int width, int height, MLV_Color color ){
 // suivante :
 //
 int main( int argc, char *argv[] ){
-        int width = 1500, height = 700;
+        int width = 1950, height = 900;
 
         // Créé et affiche la fenêtre
         //
         MLV_create_window(
-                "advanced - 1 - texts and boxes", "texts and boxes", width, height );
+                "Test Tangram", "Test Tangram", width, height );
         // texte à afficher dans une boîte
         /*const char* text = "Voici une boite de texte, \ncentré par rapport à la fenetre.";
         // Taille de la future boite qui affichera le texte.
@@ -231,7 +231,25 @@ int main( int argc, char *argv[] ){
         MLV_actualise_window();
 
         std::cout << tr1 << sq << par << std::endl;*/
-        std::vector<geometric_shape::shape*> fig = Initialise(size,width,height);
+        //std::vector<geometric_shape::shape*> fig = Initialise(size,width,height);
+        std::vector<std::shared_ptr<geometric_shape::shape> >  fig;
+        Initialise_shared(size,width,height,fig);
+        std::vector<std::shared_ptr<geometric_shape::shape> >  fig2;
+        clone(fig2,fig);
+        std::vector<std::shared_ptr<geometric_shape::shape> >  fig3;
+        Initialise_shared(size,width,height,fig3);
+        std::cout << "areEqual(fig,fig): "<< areEqual(fig,fig) << std::endl;
+        std::cout << "areEqual(fig,fig2): "<< areEqual(fig,fig2) << std::endl;
+        std::cout << "areEqual(fig,fig3): "<< areEqual(fig,fig3) << std::endl;
+       // std::vector<std::shared_ptr<geometric_shape::shape> > fig3= std::make_shared<std::vector<std::shared_ptr<geometric_shape::shape>>>(fig);
+        /*for (auto it : fig){
+            it->draw(MLV_COLOR_YELLOW,MLV_COLOR_YELLOW);
+            //std::cout << *it << std::endl;
+        }*/
+        //drawAllShapes(fig,MLV_COLOR_WHITE,MLV_COLOR_RED);
+        std::vector<std::shared_ptr<geometric_shape::shape> >  motif;
+        Initialise_motif(size,width,height,motif);
+        MLV_actualise_window();
         /* ////////////TEST ROTATION//////////////////////
         for (int i = 0;i<20000;i++)
         {
@@ -273,7 +291,16 @@ int main( int argc, char *argv[] ){
         geometric_shape::rigth_triangle t1(size,allHeigth,allWidth);
         geometric_shape::rigth_triangle t2(size,allHeigth,allWidth);
         std::cout << (t1 == t2) << std::endl;*/
-
+        /*std::vector<geometric_shape::shape*> fig2 = fig;
+        for(auto it : fig)
+        {
+            //std::vector<geometric_shape::shape*> drawfig = fig;
+            //v.erase(std::remove(v.begin(), v.end(), 5), v.end());
+            std::cout << *it << std::endl;
+            it-> reverse();
+            //it-> draw(MLV_COLOR_WHITE,MLV_COLOR_RED);
+        }*/
+       // MLV_Color color= MLV_COLOR_WHITE;
         while(1)
         {               
 
@@ -300,11 +327,28 @@ int main( int argc, char *argv[] ){
                             drawAllShapes(fig,MLV_COLOR_WHITE,MLV_COLOR_RED);
                             //it-> draw(MLV_COLOR_WHITE,MLV_COLOR_RED);
                         }*/
-                        std::for_each(fig.begin(), fig.end(), [&x_inside,&y_inside,fig](geometric_shape::shape* it)
+                        //std::for_each(fig.begin(), fig.end(), [&x_inside,&y_inside,fig](geometric_shape::shape* it)
+                        std::for_each(fig.begin(), fig.end(), [&x_inside,&y_inside,&fig,&motif](std::shared_ptr<geometric_shape::shape> it)
+                            
                         { 
                             it-> move_shape(x_inside,y_inside,fig);
                             drawAllShapes(fig,MLV_COLOR_WHITE,MLV_COLOR_RED);
+                            drawAllShapes(motif,MLV_COLOR_BLACK,MLV_COLOR_ORANGE);
                         });
+                        std::cout << areEqual(fig,motif) << std::endl;
+                        /*auto i1 = fig.begin();
+                        auto i2 = motif.begin();
+                        i1++;
+                        i1++;
+                        i2++;
+                        i2++;*/
+
+                        //if (**i1==**i2){
+                        if(areEqual(motif,fig)==1){
+                            drawAllShapes(motif,MLV_COLOR_GREEN,MLV_COLOR_ORANGE);
+                            int x2,y2;
+                            MLV_wait_mouse(&x2, &y2);
+                        }
                         //ispermutation;
                         /*fig[0]->move_shape(x_inside,y_inside);
                         fig[1]->move_shape(x_inside,y_inside);
@@ -325,10 +369,10 @@ int main( int argc, char *argv[] ){
         }
         //delete[] fig;
         std::cout << "oui sa ferme" << std::endl;
-        for (unsigned int i=0; i<fig.size();i++)
+        /*for (unsigned int i=0; i<fig.size();i++)
         {
             delete fig[i];
-        }
+        }*/
         
 
         // Ferme la fenêtre

@@ -31,6 +31,4 @@ namespace geometric_shape{
         };
 }
 
-std::ostream &operator<<(std::ostream &os, const geometric_shape::square &_tr);
-
 #endif // SQUARE_H

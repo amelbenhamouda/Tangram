@@ -51,13 +51,6 @@ void geometric_shape::parallelogram::display ( std::ostream & os) const
   geometric_shape::shape::display();
 }
 
-std::ostream &operator<<(std::ostream &os, const geometric_shape::parallelogram &_tr)
-{
-
-    _tr.display(os);
-    return os ;
-}
-
 
 void geometric_shape::parallelogram::reverse()
 {

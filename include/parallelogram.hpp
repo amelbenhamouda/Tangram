@@ -32,6 +32,5 @@ namespace geometric_shape{
         };
 }
 
-std::ostream &operator<<(std::ostream &os, const geometric_shape::parallelogram &_tr);
 
 #endif // PARALLELOGRAM_H

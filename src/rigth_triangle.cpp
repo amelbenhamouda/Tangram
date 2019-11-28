@@ -54,9 +54,3 @@ void geometric_shape::rigth_triangle::display ( std::ostream & os) const
   geometric_shape::shape::display();
 }
 
-std::ostream &operator<<(std::ostream &os, const geometric_shape::rigth_triangle &_tr)
-{
-
-    _tr.display(os);
-    return os ;
-}

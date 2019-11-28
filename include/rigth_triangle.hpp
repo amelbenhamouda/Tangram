@@ -34,6 +34,5 @@ namespace geometric_shape{
         };
 }
 
-std::ostream &operator<<(std::ostream &os, const geometric_shape::rigth_triangle &_tr);
 
 #endif // RIGTH_TRIANGLE_H

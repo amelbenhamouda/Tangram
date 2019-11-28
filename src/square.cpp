@@ -51,9 +51,4 @@ void geometric_shape::square::display ( std::ostream & os) const
   geometric_shape::shape::display();
 }
 
-std::ostream &operator<<(std::ostream &os, const geometric_shape::square &_tr)
-{
 
-    _tr.display(os);
-    return os ;
-}
