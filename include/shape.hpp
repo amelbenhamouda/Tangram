@@ -30,7 +30,7 @@ namespace geometric_shape{
                 friend bool operator == (const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectshapes,const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectmodel) ;
                 friend bool areEqual(const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectshapes,const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectmodel) ;
                //virtual void move_shape(int &x_inside,int &y_inside, std::vector<geometric_shape::shape*> fig);
-                void move_shape(int &x_inside,int &y_inside, std::vector<std::shared_ptr<geometric_shape::shape> >  &fig);
+                void move_shape(int &x_inside,int &y_inside, std::vector<std::shared_ptr<geometric_shape::shape> >  &fig, std::vector<std::shared_ptr<geometric_shape::shape> >  &motif);
                 void draw(MLV_Color color_shape,  MLV_Color color_border= MLV_COLOR_BLACK) const;
     /*           
      * 

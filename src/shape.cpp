@@ -2,13 +2,9 @@
 #include <cmath>
 #include <assert.h> 
 
-geometric_shape::shape::~shape()
-{
-   
-}
+geometric_shape::shape::~shape() {}
 
-geometric_shape::shape & geometric_shape::shape::operator=(const shape & tc)
-{
+geometric_shape::shape & geometric_shape::shape::operator=(const shape & tc) {
     if (this == &tc)
         return *this;
 
@@ -19,54 +15,31 @@ geometric_shape::shape & geometric_shape::shape::operator=(const shape & tc)
     std::swap(center, copy.center);
     return *this;
 }
-bool geometric_shape::shape::operator== (const shape & s) const
-{
 
+bool geometric_shape::shape::operator==(const shape & s)const {
     bool ret = false;
-    /*
-    if ((_px <= s._px) && (_py <= s._py) && (center <= s.center) && (_size_cote== s._size_cote))
-    {
-        // les valeurs sont exactements les mêmes
-        return true;
-    }*/
-    int thresh = round(_size_cote*0.2);
-    /*bool centequal = false;
-    //operator== defined +/- threshold
-    
-    if ((center[0] <= s.center[0]+thresh) && (center[0] >= s.center[0]-thresh) 
-        && (center[1] <= s.center[1]+thresh) && (center[1] >= s.center[1]-thresh) 
-        ){
-            centequal=true;
-    }*/
-    unsigned int nbequal =0;
-    for (unsigned int i=0 ; i < _px.size();i++){
-        for (unsigned int j =0 ; j < s._px.size();j++){
-            if((_px[i] <= s._px[j]+thresh) && (_px[i] >= s._px[j]-thresh) 
-                 && (_py[i] <= s._py[j]+thresh) && (_py[i] >= s._py[j]-thresh)) {
-                    nbequal++;
-                 }
-
+    int thresh = round(_size_cote *  0.2);
+    unsigned int nbequal = 0;
+    for (unsigned int i = 0; i < _px.size(); i++){
+        for (unsigned int j = 0; j < s._px.size(); j++){
+            if ((_px[i] <= s._px[j] + thresh) && (_px[i] >= s._px[j] - thresh) && (_py[i] <= s._py[j] + thresh) && (_py[i] >= s._py[j] - thresh)) {
+                nbequal++;
+            }
         }
     }
-    //std::cout << "nbequal: " << nbequal << std::endl;
-    if( (nbequal == _px.size()) && (_size_cote== s._size_cote)){
+    if ((nbequal == _px.size()) && (_size_cote == s._size_cote)){
         ret = true;
     }
     return ret;
-};
-/*
- (const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectshapes,
-                          const std::allocator<std::shared_ptr<geometric_shape::shape> >  &,
-                          const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectmodel,
-                          const std::allocator<std::shared_ptr<geometric_shape::shape> >  &)*/
-bool operator == (const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectshapes,const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectmodel){
-    bool ret = false;
-    if(vectshapes.size() == vectmodel.size()){
-        auto model_it = vectmodel.begin();
+}
 
-        for (auto shap_it = vectshapes.begin() ; shap_it < vectshapes.end(); shap_it++){
-                bool loc = (*shap_it==*model_it);
-                ret=loc;
+bool operator == (const std::vector<std::shared_ptr<geometric_shape::shape>> &vectshapes, const std::vector<std::shared_ptr<geometric_shape::shape>> &vectmodel) {
+    bool ret = false;
+    if (vectshapes.size() == vectmodel.size()){
+        auto model_it = vectmodel.begin();
+        for (auto shap_it = vectshapes.begin(); shap_it < vectshapes.end(); shap_it++){
+                bool loc = (*shap_it == *model_it);
+                ret = loc;
                 if (ret == false){
                     return false;
                 }
@@ -75,25 +48,21 @@ bool operator == (const std::vector<std::shared_ptr<geometric_shape::shape> >  &
         }
     return ret;
 }
-bool geometric_shape::areEqual(const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectshapes,const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectmodel)
-{
+
+bool geometric_shape::areEqual(const std::vector<std::shared_ptr<geometric_shape::shape>> &vectshapes, const std::vector<std::shared_ptr<geometric_shape::shape>> &vectmodel){
     unsigned int count = 0;
     bool ret = false;
     if(vectshapes.size() == vectmodel.size()){
-        //std::cout << "le test est la: " << **it << std::endl;
         for (auto shap_it : vectshapes){
             for (auto model_it : vectmodel){
-                bool loc = (*shap_it==*model_it);
-                ret=loc;
-                //std::cout << *shap_it<< " "<<*model_it <<" " << ret << std::endl<< std::endl;
+                bool loc = (*shap_it == *model_it);
+                ret = loc;
                 if (loc == true){
                     count++;
-                    std::cout << *shap_it<< " "<<*model_it <<" " << ret << std::endl<< std::endl;
                 }
             }
-
         }
-        if ( count == vectshapes.size()){
+        if (count == vectshapes.size()){
             ret = true;
         }
         else {
@@ -103,58 +72,51 @@ bool geometric_shape::areEqual(const std::vector<std::shared_ptr<geometric_shape
     return ret; 
 }
                
+geometric_shape::shape::shape(const shape & tc):_size_cote(tc._size_cote), _px(tc._px), _py(tc._py), center(tc.center){}
 
+geometric_shape::shape::shape(int size_cote,int height,int width):_size_cote(size_cote), _px(0), _py(0), center(0){}
 
-
-
-geometric_shape::shape::shape(const shape & tc):_size_cote(tc._size_cote),_px(tc._px),_py(tc._py),center(tc.center)
-{
-        //std::cout << "constructeur de copie" << std::endl;
+void geometric_shape::shape::set_shape(std::vector<double> &pxnew, std::vector<double> &pynew, std::vector<double> &cnew, int &scnew) {
+    _size_cote = scnew;
+    _px = pxnew;
+    _py = pynew;
+    center = cnew;
 }
 
-
-geometric_shape::shape::shape(int size_cote,int height,int width):_size_cote(size_cote),_px(0),_py(0),center(0)
-{
-
+int geometric_shape::shape::get_size_cote() const{
+    return _size_cote;
 }
-void geometric_shape::shape::set_shape(std::vector<double> &pxnew, std::vector<double> &pynew,std::vector<double> &cnew, int &scnew)
-{
-    _size_cote=scnew;
-    _px=pxnew;
-    _py=pynew;
-    center=cnew;
+
+std::vector<double> geometric_shape::shape::get_px() const{
+    return _px;
 }
-int geometric_shape::shape::get_size_cote() const{return _size_cote;}
-std::vector<double> geometric_shape::shape::get_px() const{return _px;}
-std::vector<double> geometric_shape::shape::get_py() const{return _py;}
-std::vector<double> geometric_shape::shape::get_center() const{return center;}
 
+std::vector<double> geometric_shape::shape::get_py() const{
+    return _py;
+}
 
+std::vector<double> geometric_shape::shape::get_center() const{
+    return center;
+}
 
-void geometric_shape::shape::draw(MLV_Color color_shape, MLV_Color color_border) const
-{
+void geometric_shape::shape::draw(MLV_Color color_shape, MLV_Color color_border) const {
     std::vector<int> px_draw;
     std::vector<int> py_draw;
-    for(unsigned int i = 0; i<_px.size();i++)
-    {
-      px_draw.push_back(floor(_px[i]+0.5));
-      py_draw.push_back(floor(_py[i]+0.5));
+    for(unsigned int i = 0; i < _px.size(); i++) {
+      px_draw.push_back(floor(_px[i] + 0.5));
+      py_draw.push_back(floor(_py[i] + 0.5));
     }
-    MLV_draw_filled_polygon(px_draw.data(), py_draw.data(),_px.size(),color_shape);
-    MLV_draw_polygon(px_draw.data(), py_draw.data(),_px.size(), color_border);
-};
+    MLV_draw_filled_polygon(px_draw.data(), py_draw.data(), _px.size(), color_shape);
+    MLV_draw_polygon(px_draw.data(), py_draw.data(), _px.size(), color_border);
+}
 
-//void geometric_shape::drawAllShapes(const std::vector<shape*> vectshapes,MLV_Color color_shape,  MLV_Color color_border) 
-void geometric_shape::drawAllShapes(const std::vector<std::shared_ptr<geometric_shape::shape> > &vectshapes,MLV_Color color_shape,  MLV_Color color_border) 
-{
-
-    for(auto it : vectshapes){
+void geometric_shape::drawAllShapes(const std::vector<std::shared_ptr<geometric_shape::shape> > &vectshapes,MLV_Color color_shape,  MLV_Color color_border) {
+    for(auto it : vectshapes) {
         std::vector<int> px_draw;
         std::vector<int> py_draw;
-        for(unsigned int i = 0; i<it->_px.size();i++)
-        {
-          px_draw.push_back(floor(it->_px[i]+0.5));
-          py_draw.push_back(floor(it->_py[i]+0.5));
+        for(unsigned int i = 0; i < it->_px.size(); i++){
+          px_draw.push_back(floor(it->_px[i] + 0.5));
+          py_draw.push_back(floor(it->_py[i] + 0.5));
         }
         MLV_draw_filled_polygon(px_draw.data(), py_draw.data(),it->_px.size(),color_shape);
         MLV_draw_polygon(px_draw.data(), py_draw.data(),it->_px.size(), color_border);
@@ -267,7 +229,7 @@ for(unsigned int i=0;i<_px.size();i++)
 
 //void geometric_shape::shape::move_shape(int &x_inside,int &y_inside,std::vector<geometric_shape::shape*> fig )
 
-void geometric_shape::shape::move_shape(int &x_inside,int &y_inside,std::vector<std::shared_ptr<geometric_shape::shape> > &fig )
+void geometric_shape::shape::move_shape(int &x_inside,int &y_inside,std::vector<std::shared_ptr<geometric_shape::shape> > &fig , std::vector<std::shared_ptr<geometric_shape::shape> >  &motif)
 {
     if(isInside(x_inside,y_inside) == 1)
     { 
@@ -289,7 +251,8 @@ void geometric_shape::shape::move_shape(int &x_inside,int &y_inside,std::vector<
                     int x2;
                     int y2;
                     MLV_get_mouse_position( &x2, &y2 );
-                    draw(MLV_COLOR_BLACK);
+                    draw(MLV_COLOR_GRAY, MLV_COLOR_GRAY);
+                    drawAllShapes(motif,MLV_COLOR_BLACK,MLV_COLOR_ORANGE);
                     translate(x2-x_inside,y2-y_inside);
                     MLV_wait_milliseconds( 0.01 );
                     
@@ -303,6 +266,7 @@ void geometric_shape::shape::move_shape(int &x_inside,int &y_inside,std::vector<
                     {
                         reverse();
                     }
+                    drawAllShapes(motif,MLV_COLOR_BLACK,MLV_COLOR_ORANGE);
                     drawAllShapes(fig,MLV_COLOR_WHITE,MLV_COLOR_RED);
                     //draw(MLV_COLOR_WHITE,MLV_COLOR_RED);
                     MLV_actualise_window();
@@ -313,7 +277,8 @@ void geometric_shape::shape::move_shape(int &x_inside,int &y_inside,std::vector<
             }
             while(MLV_get_mouse_button_state(MLV_BUTTON_RIGHT) == MLV_PRESSED)
                 {
-                    draw(MLV_COLOR_BLACK);
+                    draw(MLV_COLOR_GRAY, MLV_COLOR_GRAY);
+                    drawAllShapes(motif,MLV_COLOR_BLACK,MLV_COLOR_ORANGE);
                     int x_rot;
                     int y_rot;
                     MLV_wait_milliseconds( 10 );
@@ -321,6 +286,7 @@ void geometric_shape::shape::move_shape(int &x_inside,int &y_inside,std::vector<
                     if ((x_rot != x_rot0 ) && (y_rot!=y_rot0))
                     {
                         rotate_center(1,x_rot,y_rot,x_rot0,y_rot0);
+                        drawAllShapes(motif,MLV_COLOR_BLACK,MLV_COLOR_ORANGE);
                         drawAllShapes(fig,MLV_COLOR_WHITE,MLV_COLOR_RED);
                         //draw(MLV_COLOR_WHITE,MLV_COLOR_RED);
                         MLV_actualise_window();
@@ -331,9 +297,11 @@ void geometric_shape::shape::move_shape(int &x_inside,int &y_inside,std::vector<
                 }
             if(MLV_get_mouse_button_state(MLV_BUTTON_MIDDLE) == MLV_PRESSED)
             {
-                draw(MLV_COLOR_BLACK);
+                draw(MLV_COLOR_GRAY, MLV_COLOR_GRAY);
+                drawAllShapes(motif,MLV_COLOR_BLACK,MLV_COLOR_ORANGE);
                 MLV_wait_milliseconds( 1 );
                 reverse();
+                drawAllShapes(motif,MLV_COLOR_BLACK,MLV_COLOR_ORANGE);
                 drawAllShapes(fig,MLV_COLOR_WHITE,MLV_COLOR_RED);
                 //draw(MLV_COLOR_WHITE,MLV_COLOR_RED);
                 MLV_actualise_window();

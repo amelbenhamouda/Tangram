@@ -1,4 +1,4 @@
-TARGET = test rigth_triangle square parallelogram shape
+TARGET = main rigth_triangle square parallelogram shape menu board
 
 ##########################################################"
 
@@ -14,25 +14,33 @@ vpath %.hpp include/
 #CFLAGS = -g -O2 -Wall `pkg-config --cflags MLV`
 #DFLAGS = `pkg-config --libs-only-other --libs-only-L MLV`
 #LDLIBS = `pkg-config --libs-only-l MLV`
-all: test
 
-test: $(TARGET_OBJECT)
+Tangram: $(TARGET_OBJECT)
 	g++ $(CFLAGS) $^ $(LDFLAGS) $(LDLIBS) -o $@ 
 
 bin/shape.o: shape.cpp shape.hpp 
 	g++ $(CFLAGS) -c $< -o $@
+
 bin/rigth_triangle.o: rigth_triangle.cpp rigth_triangle.hpp shape.hpp
 	g++ $(CFLAGS) -c $< -o $@
+
 bin/square.o: square.cpp square.hpp shape.hpp
 	g++ $(CFLAGS) -c $< -o $@
+
 bin/parallelogram.o: parallelogram.cpp parallelogram.hpp shape.hpp 
 	g++ $(CFLAGS) -c $< -o $@
-bin/test.o: test.cpp rigth_triangle.hpp parallelogram.hpp square.hpp shape.hpp
+
+bin/board.o: board.cpp board.hpp 
 	g++ $(CFLAGS) -c $< -o $@
 
+bin/menu.o: menu.cpp menu.hpp
+	g++ $(CFLAGS) -c $< -o $@
+
+bin/main.o: main.cpp menu.hpp board.hpp rigth_triangle.hpp parallelogram.hpp square.hpp shape.hpp
+	g++ $(CFLAGS) -c $< -o $@
 
 clean:
-	-rm -rf $(TARGET_OBJECT) test
+	-rm -rf $(TARGET_OBJECT) Tangram
 
 #   This file is part of the MLV Library.
 #
