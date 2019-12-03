@@ -9,12 +9,12 @@ geometric_shape::shape::~shape()
    
 }
 
-geometric_shape::shape & geometric_shape::shape::operator=(const shape & tc)
+geometric_shape::shape & geometric_shape::shape::operator=(const shape & cshape)
 {
-    if (this == &tc)
+    if (this == &cshape)
         return *this;
 
-    geometric_shape::shape copy(tc);
+    geometric_shape::shape copy(cshape);
     std::swap(_size_cote, copy._size_cote);
     std::swap(_px, copy._px);
     std::swap(_py, copy._py);
@@ -60,28 +60,17 @@ bool geometric_shape::shape::operator== (const shape & s) const
                           const std::allocator<std::shared_ptr<geometric_shape::shape> >  &,
                           const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectmodel,
                           const std::allocator<std::shared_ptr<geometric_shape::shape> >  &)*/
-bool operator == (const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectshapes,const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectmodel){
-    bool ret = false;
-    if(vectshapes.size() == vectmodel.size()){
-        auto model_it = vectmodel.begin();
-
-        for (auto shap_it = vectshapes.begin() ; shap_it < vectshapes.end(); shap_it++){
-                bool loc = (*shap_it==*model_it);
-                ret=loc;
-                if (ret == false){
-                    return false;
-                }
-                model_it++;
-            }
-        }
-    return ret;
+bool operator== (const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectshapes,
+				 const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectmodel){
+    return areEqual(vectshapes,vectmodel); 
 }
+
+
 bool geometric_shape::areEqual(const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectshapes,const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectmodel)
 {
     unsigned int count = 0;
     bool ret = false;
     if(vectshapes.size() == vectmodel.size()){
-        //std::cout << "le test est la: " << **it << std::endl;
         for (auto shap_it : vectshapes){
             for (auto model_it : vectmodel){
                 bool loc = (*shap_it==*model_it);
@@ -108,7 +97,7 @@ bool geometric_shape::areEqual(const std::vector<std::shared_ptr<geometric_shape
 
 
 
-geometric_shape::shape::shape(const shape & tc):_size_cote(tc._size_cote),_px(tc._px),_py(tc._py),center(tc.center)
+geometric_shape::shape::shape(const shape & cshape):_size_cote(cshape._size_cote),_px(cshape._px),_py(cshape._py),center(cshape.center)
 {
         //std::cout << "constructeur de copie" << std::endl;
 }
@@ -150,15 +139,7 @@ void geometric_shape::drawAllShapes(const std::vector<std::shared_ptr<geometric_
 {
 
     for(auto it : vectshapes){
-        std::vector<int> px_draw;
-        std::vector<int> py_draw;
-        for(unsigned int i = 0; i<it->_px.size();i++)
-        {
-          px_draw.push_back(floor(it->_px[i]+0.5));
-          py_draw.push_back(floor(it->_py[i]+0.5));
-        }
-        MLV_draw_filled_polygon(px_draw.data(), py_draw.data(),it->_px.size(),color_shape);
-        MLV_draw_polygon(px_draw.data(), py_draw.data(),it->_px.size(), color_border);
+    	it->draw(color_shape,color_border);
     }
 }
 
@@ -281,7 +262,7 @@ for(unsigned int i=0;i<_px.size();i++)
   }
   return true;
 }
-bool geometric_shape::isInsideBoard(const int &x,const int &y) {
+bool geometric_shape::isInsideBoard(const int &x,const int &y,const int &with,const int &heigth,const int &sizew,const int &sizeh) {
     std::vector<double> Boardx; // 40, 30, sizex 1150, sizey 950
     std::vector<double> Boardy;
     Boardx.push_back(45);

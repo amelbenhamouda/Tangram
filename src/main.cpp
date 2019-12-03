@@ -186,6 +186,7 @@ bool importdraw (const int n,const int size,std::vector<std::shared_ptr<geometri
     return true;
 
 }
+
 void drawJeu(std::vector<const char*> figures, int width, int height){
     Board board;
     int numFig = 1;
@@ -218,8 +219,12 @@ void drawJeu(std::vector<const char*> figures, int width, int height){
                 drawAllShapes(fig,MLV_COLOR_WHITE,MLV_COLOR_RED);
                 drawAllShapes(motif,motifshape,motifborder);
             });
-            
+            /*bool oui = (figh == motif);
+            if (oui==true) {
+            	std::cout << "oui" << std::endl;
+            }*/
             if(areEqual(motif,fig)==1){
+
                 std::cout << "equal" << std::endl;
                 motifshape= MLV_COLOR_GREEN;
                 drawAllShapes(fig,MLV_COLOR_WHITE,MLV_COLOR_RED);
