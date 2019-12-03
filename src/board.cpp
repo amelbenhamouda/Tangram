@@ -16,6 +16,7 @@ void Board::drawModel(const char * fileImage) {
 	MLV_Image *image = MLV_load_image(fileImage);
 	MLV_draw_image(image, 1200, 200);
 	MLV_resize_image_with_proportions(image, 500, 500);
+	MLV_free_image(image); // fermer l'image sinon perte mémoire
 	MLV_actualise_window();
 }
 

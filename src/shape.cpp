@@ -3,6 +3,7 @@
 #include <assert.h> 
 #include <fstream>
 #include <iostream>
+#include <string>
 geometric_shape::shape::~shape()
 {
    
@@ -88,7 +89,7 @@ bool geometric_shape::areEqual(const std::vector<std::shared_ptr<geometric_shape
                 //std::cout << *shap_it<< " "<<*model_it <<" " << ret << std::endl<< std::endl;
                 if (loc == true){
                     count++;
-                    std::cout << *shap_it<< " "<<*model_it <<" " << ret << std::endl<< std::endl;
+                    //std::cout << *shap_it<< " "<<*model_it <<" " << ret << std::endl<< std::endl;
                 }
             }
 
@@ -207,29 +208,45 @@ void geometric_shape::shape::rotate_center(int angle,int x,int y,int x0, int y0)
     {
         angle_rad = (double)angle*3.141592653589793238462643383279 /180;
     }
-
+    std::vector<double> pxloc = _px;
+    std::vector<double> pyloc = _py; 
+    bool inside = false;
     for (unsigned int it = 0; it < _px.size() ; it++)
     {
-        double xM = _px[it] - center[0];
-        double yM = _py[it] - center[1];
-        _px[it]= xM*cos(angle_rad) + yM*sin(angle_rad) + center[0] ;   /* [cos(0) -sin(0); sin(0) cos(0)]*/
-        _py[it]=-xM*sin(angle_rad) + yM*cos(angle_rad) + center[1] ;
+        double xM = pxloc[it] - center[0];
+        double yM = pyloc[it] - center[1];
+        pxloc[it]= xM*cos(angle_rad) + yM*sin(angle_rad) + center[0] ;   /* [cos(0) -sin(0); sin(0) cos(0)]*/
+        pyloc[it]=-xM*sin(angle_rad) + yM*cos(angle_rad) + center[1] ;
+        inside = isInsideBoard(pxloc[it],pyloc[it]);
+        if(inside == 0) break;
     }
-
+    if(inside == true)
+    {
+        _px=pxloc;
+        _py=pyloc;
+    }
 
 } 
 
 void geometric_shape::shape::translate(int x,int y) 
 {
+    std::vector<double> pxloc = _px;
+    std::vector<double> pyloc = _py; 
+    bool inside = false;
+    for (unsigned int it = 0; it < pxloc.size() ; it++)
+    {
+        pxloc[it]+=x;   /* [cos(0) -sin(0); sin(0) cos(0)]*/
+        pyloc[it]+=y;
+        inside = isInsideBoard(pxloc[it],pyloc[it]);
+        if(inside == false) break;
 
-        for (unsigned int it = 0; it < _px.size() ; it++)
-        {
-            _px[it]+=x;   /* [cos(0) -sin(0); sin(0) cos(0)]*/
-            _py[it]+=y;
-
+    }
+    if (inside==true){
+            _px=pxloc;
+            _py=pyloc;
+            center[0]+=x;
+            center[1]+=y;
         }
-        center[0]+=x;
-        center[1]+=y;
 }
 void geometric_shape::shape::reverse() 
     {
@@ -264,6 +281,49 @@ for(unsigned int i=0;i<_px.size();i++)
   }
   return true;
 }
+bool geometric_shape::isInsideBoard(const int &x,const int &y) {
+    std::vector<double> Boardx; // 40, 30, sizex 1150, sizey 950
+    std::vector<double> Boardy;
+    Boardx.push_back(45);
+    Boardy.push_back(35);
+    Boardx.push_back(45+1140);
+    Boardy.push_back(35);
+    Boardx.push_back(45+1140);
+    Boardy.push_back(35+940);
+    Boardx.push_back(45);
+    Boardy.push_back(35+940);
+
+    for(unsigned int i=0;i<Boardx.size();i++)
+  {
+     int Ax=Boardx[i];
+     int Ay=Boardy[i];
+     int Bx,By;
+     if (i==Boardx.size()-1)  // if i== last point of vector px then B == first point
+         {
+         Bx = Boardx[0];
+         By = Boardy[0];
+         }
+     else           // else B take the point at i+1
+         {
+            Bx = Boardx[i+1];
+            By = Boardy[i+1];
+         }
+     double Dx,Dy,Tx,Ty;
+     Dx = Bx - Ax;
+     Dy = By - Ay;
+     Tx = x - Ax;
+     Ty = y - Ay;
+     double d = Dx*Ty - Dy*Tx;
+     if (d<0)
+        return false;  // Point (x,y) is not inside.
+  }
+  return true;
+
+}
+
+
+
+
 
 //void geometric_shape::shape::move_shape(int &x_inside,int &y_inside,std::vector<geometric_shape::shape*> fig )
 
@@ -365,19 +425,28 @@ void geometric_shape::shape::display ( std::ostream & os) const
   os << std::endl;
 }
 
- void geometric_shape::savedraw (const std::vector<std::shared_ptr<geometric_shape::shape> >  &fig){
+void geometric_shape::savedraw (const std::vector<std::shared_ptr<geometric_shape::shape> >  &fig){
 
     std::ofstream savefig("savefig.txt",std::ios::app);
     if(savefig)  
-    {
-        savefig << "fig test" << std::endl;
+    {   
+        int n=1;
+        for(auto it : fig){
+            savefig << n ;
+            n++;
+            for(unsigned int itp = 0; itp < it->_px.size(); itp++){
+                savefig <<" " <<it->_px[itp] <<" "<< it->_py[itp] <<"  ";
+            }
+            savefig <<" "<< it->center[0] <<" "<<it->center[1]<<" "<< it->_size_cote <<" ";
+            savefig << std::endl;
+        }
+        savefig << std::endl;   
         savefig.close();
     }
     else
     {
         std::cout << "ERROR: Cannot open savefig.txt." << std::endl;
     }
-    
  }
 
 

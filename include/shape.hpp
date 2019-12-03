@@ -43,11 +43,12 @@ namespace geometric_shape{
 
                 virtual void display( std::ostream & out = std::cout ) const;
                 bool isInside(const int &x,const int &y) const;
+                friend bool isInsideBoard(const int &x,const int &y) ;
                 virtual void reverse();
                 void rotate_hw(int angle,unsigned int n);
+                void set_shape(std::vector<double> &pxnew, std::vector<double> &pynew,std::vector<double> &cnew,int &scnew);
                 
         protected:
-                void set_shape(std::vector<double> &pxnew, std::vector<double> &pynew,std::vector<double> &cnew,int &scnew);
                 int get_size_cote() const;
                 std::vector<double> get_px() const;
                 std::vector<double> get_py() const;
@@ -68,7 +69,8 @@ namespace geometric_shape{
         bool operator == (const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectshapes,
                           const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectmodel) ;
         bool areEqual(const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectshapes,const std::vector<std::shared_ptr<geometric_shape::shape> >  &vectmodel) ;
-        void savedraw (const std::vector<std::shared_ptr<geometric_shape::shape> >  &fig);       
+        void savedraw (const std::vector<std::shared_ptr<geometric_shape::shape> >  &fig);  
+        bool isInsideBoard(const int &x,const int &y);   
 }
 
 std::ostream &operator<<(std::ostream &os, const geometric_shape::shape &_tr);
