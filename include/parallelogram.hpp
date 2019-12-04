@@ -10,27 +10,24 @@
 #include <iostream>
 #include "../include/shape.hpp"
 
-namespace geometric_shape{
-     /**
-     * \class parallelogram
-     * \brief object parallelogram.
+namespace geometricShape{
+    /**
+     * \class Parallelogram
+     * \brief object Parallelogram.
      *
-     * parallelogram herite from geometric_shape::shape and compute a parallelogram by the given size of his side.
+     * Parallelogram herite from geometricShape::Shape and compute a Parallelogram by the given size of his side.
      * The first point is draw at the position width and heigth given. 
      * 
      */
-        class parallelogram : public geometric_shape::shape
-        {       
+    class Parallelogram : public geometricShape::Shape {       
         public:
-                parallelogram(int size_cote,int height,int width);
-                virtual ~parallelogram();
-                parallelogram(const parallelogram &tc);
-                parallelogram & operator=(const parallelogram &tc);
-                void display( std::ostream & out = std::cout ) const override;
-                void reverse() override;
-
-        };
+            Parallelogram(int sizeCote, int width, int height);
+            virtual ~Parallelogram();
+            Parallelogram(const Parallelogram &tc);
+            Parallelogram & operator=(const Parallelogram &tc);
+            void display(std::ostream & out = std::cout) const override;
+            void reverse() override;
+    };
 }
-
 
 #endif // PARALLELOGRAM_H

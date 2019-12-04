@@ -4,35 +4,32 @@
  * \author BEN HAMOUDA Amel & DURAND Aurélien
  */
 
-#ifndef RIGTH_TRIANGLE_H
-#define RIGTH_TRIANGLE_H
+#ifndef RIGTHTRIANGLE_H
+#define RIGTHTRIANGLE_H
 #include <vector>
 #include <iostream>
 #include "../include/shape.hpp"
 
-namespace geometric_shape{
-	 /**
-     * \class rigth_triangle
-     * \brief object rigth_triangle.
+namespace geometricShape{
+	/**
+     * \class RigthTriangle
+     * \brief object RigthTriangle.
      *
-     * square herite from geometric_shape::shape and compute a rigth triangle by the given size of his side.
+     * square herite from geometricShape::Shape and compute a rigth triangle by the given size of his side.
      * The first point is draw at the position width and heigth given.
      *        .
      * 
      */
-        class rigth_triangle : public geometric_shape::shape
-        {       
+    class RigthTriangle : public geometricShape::Shape {       
         public:
-                rigth_triangle(int size_cote,int height,int width);
-                virtual ~rigth_triangle();
-                rigth_triangle(const rigth_triangle &tc);
-                rigth_triangle & operator=(const rigth_triangle &tc);
-                void display( std::ostream & out = std::cout ) const;
-
+            RigthTriangle(int sizeCote, int width, int height);
+            virtual ~RigthTriangle();
+            RigthTriangle(const RigthTriangle &tc);
+            RigthTriangle & operator=(const RigthTriangle &tc);
+            void display(std::ostream & out = std::cout) const;
         private:        
-                double hauteur;
-        };
+            double hauteur;
+    };
 }
 
-
-#endif // RIGTH_TRIANGLE_H
+#endif // RIGTHTRIANGLE_H

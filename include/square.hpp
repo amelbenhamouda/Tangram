@@ -10,25 +10,23 @@
 #include <iostream>
 #include "../include/shape.hpp"
 
-namespace geometric_shape{
-     /**
-     * \class square
-     * \brief object square.
+namespace geometricShape{
+    /**
+     * \class Square
+     * \brief object Square.
      *
-     * square herite from geometric_shape::shape and compute a square by the given size of his side.
+     * Square herite from geometricShape::Shape and compute a Square by the given size of his side.
      * The first point is draw at the position width and heigth given. 
      * 
      */
-        class square : public geometric_shape::shape
-        {       
+    class Square : public geometricShape::Shape {       
         public:
-                square(int size_cote,int height,int width);
-                virtual ~square();
-                square(const square &tc);
-                square & operator=(const square &tc);
-                void display( std::ostream & out = std::cout ) const;
-
-        };
+            Square(int size_cote, int width, int height);
+            virtual ~Square();
+            Square(const Square &tc);
+            Square & operator=(const Square &tc);
+            void display(std::ostream & out = std::cout) const;
+    };
 }
 
 #endif // SQUARE_H

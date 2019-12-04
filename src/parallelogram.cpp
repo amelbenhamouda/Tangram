@@ -2,75 +2,53 @@
 #include <cmath>
 #include <MLV/MLV_all.h>
 
-geometric_shape::parallelogram::~parallelogram()
-{
-   
+geometricShape::Parallelogram::~Parallelogram() {}
+
+geometricShape::Parallelogram::Parallelogram(int sizeCote, int width, int height) : Shape(sizeCote, width, height) {
+    int _size_cote = sizeCote;
+    std::vector<double> _px;
+    std::vector<double> _py;
+    std::vector<double> center;
+    _px.push_back(width);
+    _px.push_back(width + _size_cote);
+    _px.push_back(width);
+    _px.push_back(width - _size_cote);
+    _py.push_back(height);
+    _py.push_back(height);
+    _py.push_back(height + _size_cote);
+    _py.push_back(height + _size_cote);
+    center.push_back((double)width);
+    center.push_back((double)height + (double)_size_cote / 2);
+    setShape(_px, _py, center, _size_cote);
 }
 
-geometric_shape::parallelogram & geometric_shape::parallelogram::operator=(const parallelogram & tc)
-{
-    if (this == &tc)
+geometricShape::Parallelogram & geometricShape::Parallelogram::operator=(const Parallelogram & tc) {
+    if (this == &tc) {
         return *this;
-    geometric_shape::parallelogram copy(tc);
+    }
+    geometricShape::Parallelogram copy(tc);
     return *this;
 }
-geometric_shape::parallelogram::parallelogram(const parallelogram & tc):shape(tc)
-{
-        //std::cout << "constructeur de copie" << std::endl;
 
+geometricShape::Parallelogram::Parallelogram(const Parallelogram & tc) : Shape(tc) {}
+
+
+void geometricShape::Parallelogram::display(std::ostream & os) const {
+    os << "[Parallelogram]";
+    geometricShape::Shape::display();
 }
 
-
-geometric_shape::parallelogram::parallelogram(int size_cote,int height,int width):shape(size_cote,height,width)
-                                                                                
-{
-        int _size_cote=size_cote;
-        std::vector<double> _px;
-        std::vector<double> _py;
-        std::vector<double> center;
-        _px.push_back(width);
-        _px.push_back(width+_size_cote);
-        _px.push_back(width);
-        _px.push_back(width-_size_cote);
-        _py.push_back(height);
-        _py.push_back(height);
-        _py.push_back(height+_size_cote);
-        _py.push_back(height+_size_cote);
-        center.push_back((double)width);
-        center.push_back((double)height+(double)_size_cote/2);
-        set_shape(_px,_py,center,_size_cote);
-        /*_px.push_back(center[0]);
-        _py.push_back(center[1]);*/
-
-};
-
-
-void geometric_shape::parallelogram::display ( std::ostream & os) const
-{
-  os << "[parallelogram]";
-  geometric_shape::shape::display();
-}
-
-
-void geometric_shape::parallelogram::reverse()
-{
-    //std::cout << "reverse virtual"<< std::endl;
-    double px0 ;
-    double py0 ;
-    double px2 ;
-    double py2 ;
-
-    std::vector <double> px=get_px();
-    std::vector <double> py=get_py();
-    if (isrevert== true)
-    {
+void geometricShape::Parallelogram::reverse() {
+    double px0, py0, px2, py2 ;
+    std::vector <double> px = getPx();
+    std::vector <double> py = getPy();
+    if (isRevert == true) {
         px0 = px[2];
         py0 = py[2];
         px2 = px[0];
         py2 = py[0];
     }
-    else
-    {
+    else {
         px0 = px[0];
         py0 = py[0];
         px2 = px[2];
@@ -79,10 +57,10 @@ void geometric_shape::parallelogram::reverse()
     }
     std::vector <double> newpx;
     std::vector <double> newpy;
-    double npx1=2*px0-px[1];
-    double npy1=2*py0-py[1];
-    double npx3=2*px2-px[3];
-    double npy3=2*py2-py[3];
+    double npx1 = 2 * px0 - px[1];
+    double npy1 = 2 * py0 - py[1];
+    double npx3 = 2 * px2 - px[3];
+    double npy3 = 2 * py2 - py[3];
     newpx.push_back(px[2]);
     newpx.push_back(npx1);
     newpx.push_back(px[0]);
@@ -91,11 +69,9 @@ void geometric_shape::parallelogram::reverse()
     newpy.push_back(npy1);
     newpy.push_back(py[0]);
     newpy.push_back(npy3);
-    std::vector <double> newcenter = get_center();
-    int newsizecote= get_size_cote();
-    set_shape(newpx,newpy,newcenter,newsizecote);
-    isrevert = !isrevert;
-    //std::cout << isrevert << " -- ";
+    std::vector <double> newcenter = getCenter();
+    int newsizecote = getSizeCote();
+    setShape(newpx, newpy, newcenter, newsizecote);
+    isRevert = !isRevert;
     MLV_wait_milliseconds(500);
 }
-    

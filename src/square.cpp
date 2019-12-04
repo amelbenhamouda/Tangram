@@ -2,19 +2,20 @@
 #include <cmath>
 #include <MLV/MLV_all.h>
 
-geometric_shape::square::~square(){}
+geometricShape::Square::~Square(){}
 
-geometric_shape::square & geometric_shape::square::operator=(const square & tc) {
-    if (this == &tc)
+geometricShape::Square & geometricShape::Square::operator=(const Square & tc) {
+    if (this == &tc) {
         return *this;
-    geometric_shape::square copy(tc);
+    }
+    geometricShape::Square copy(tc);
     return *this;
 }
 
-geometric_shape::square::square(const square & tc):shape(tc) {}
+geometricShape::Square::Square(const Square & tc) : Shape(tc) {}
 
-geometric_shape::square::square(int size_cote, int height, int width):shape(size_cote, height, width) {
-    int _size_cote = size_cote;
+geometricShape::Square::Square(int sizeCote, int width, int height) : Shape(sizeCote, width, height) {
+    int _size_cote = sizeCote;
     std::vector<double> _px;
     std::vector<double> _py;
     std::vector<double> center;
@@ -28,10 +29,10 @@ geometric_shape::square::square(int size_cote, int height, int width):shape(size
     _py.push_back(height + _size_cote);
     center.push_back((double)width + (double)_size_cote / 2);
     center.push_back((double)height + (double)_size_cote / 2);
-    set_shape(_px, _py, center, _size_cote);
+    setShape(_px, _py, center, _size_cote);
 }
 
-void geometric_shape::square::display(std::ostream & os)const {
-    os << "[square]";
-    geometric_shape::shape::display();
+void geometricShape::Square::display(std::ostream & os)const {
+    os << "[Square]";
+    geometricShape::Shape::display();
 }
