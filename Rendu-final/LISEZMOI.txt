@@ -1,2 +1,1 @@
-L'UML est fait sur StartUML, il manque encore quelque fonction a mettre.
-Voir probleme qd on appel le nom de la classe en argument de fonction
+Reste a faire le document qui explique l'UML.
