@@ -95,7 +95,7 @@ namespace geometricShape{
              *  \param motif : ensembles des figures de du modèle à redesinner.
              */        
             //virtual void move_shape(int &xInside, int &yInside, std::vector<geometricShape::Shape*> fig);
-            void moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, std::vector<std::shared_ptr<geometricShape::Shape>> &motif);
+            void moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, MLV_Color motifBorder);
            
             /*!
              *  \brief Methode permettant desinner une figure de la classe Shape.

@@ -120,7 +120,7 @@ namespace geometricShape{
              *  \param colorBorder : couleur du contour.
              */  
             //friend void drawAllShapes(const std::vector<geometricShape::Shape*> vectShapes,MLV_Color color,  MLV_Color colorBorder= MLV_COLOR_BLACK);
-            friend void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder);
+            friend void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder, MLV_Color colorShape, MLV_Color colorBorder);
 
             /*!
              *  \brief Methode permettant d'afficher sur la console l'objet souhaité.

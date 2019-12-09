@@ -196,54 +196,8 @@ void Interface::saveFigure(int width, int height, std::vector<std::shared_ptr<ge
     }
 }
 
-void Interface::drawJeu(int width, int height) {
-    Board board(width, height);
-    int numFig = 1;
-    MLV_draw_filled_rectangle(0, 0, width, height, MLV_COLOR_BLACK);
-    MLV_actualise_window();
-    /* Loading contour. */
-    int size = 100;
-    MLV_Color motifBorder = MLV_COLOR_ORANGE ;
-    MLV_Color motifShape = MLV_COLOR_BLACK ;
-    
-    board.drawBoard();
-    board.drawButtonForBoard(numFig);
-    numFig++;
-    std::vector<std::shared_ptr<geometricShape::Shape>> fig;
-    initialiseShared(size, width, height, fig);
-
-    std::vector<std::shared_ptr<geometricShape::Shape>> motif;
-    initialiseMotif(size, width, height, motif);
-    MLV_actualise_window();
-    unsigned int nbFig = 1; // figure motif
-    while (1) {               
-        int xInside, yInside;
-        MLV_get_mouse_position(&xInside, &yInside);
-        std::for_each(fig.begin(), fig.end(), 
-            [&xInside, &yInside, &fig, &motif, &motifBorder, &motifShape](std::shared_ptr<geometricShape::Shape> it){ 
-            it-> moveShape(xInside, yInside, fig, motif);
-            drawAllShapes(fig, MLV_COLOR_WHITE, MLV_COLOR_RED);
-            drawAllShapes(motif, motifShape, motifBorder);
-        });
-            
-        if (areEqual(motif, fig) == 1) {
-            std::cout << "equal" << std::endl;
-            motifShape = MLV_COLOR_GREEN;
-            drawAllShapes(fig, MLV_COLOR_WHITE, MLV_COLOR_RED);
-            drawAllShapes(motif, motifShape, motifBorder);
-            MLV_actualise_window();
-            int x2, y2;
-            MLV_wait_mouse(&x2, &y2);
-        }
-        else {
-            motifShape = MLV_COLOR_BLACK;
-        }
-
-        if (MLV_get_keyboard_state(MLV_KEYBOARD_LCTRL) == MLV_PRESSED && MLV_get_keyboard_state(MLV_KEYBOARD_s) == MLV_PRESSED) {
-            /* Save a polygon for new figure */
-            std::cout << "save" << std::endl;
-            //saveFigure(width, height, fig);
-            int interligne = 40;
+void save(int width, int height, std::vector<std::shared_ptr<geometricShape::Shape>> &fig){
+                int interligne = 40;
             MLV_draw_filled_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_DIM_GREY);
             MLV_draw_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_BLACK);
             MLV_actualise_window();
@@ -267,6 +221,58 @@ void Interface::drawJeu(int width, int height) {
                     MLV_wait_mouse(&xInside, &yInside);
                 }
             }
+}
+
+void Interface::drawJeu(int width, int height) {
+    Board board(width, height);
+    int numFig = 1;
+    MLV_draw_filled_rectangle(0, 0, width, height, MLV_COLOR_BLACK);
+    MLV_actualise_window();
+    /* Loading contour. */
+    int size = 100;
+    MLV_Color motifBorder = MLV_COLOR_BLACK ;
+    MLV_Color motifShape = MLV_COLOR_BLACK ;
+    
+    board.drawBoard();
+    board.drawButtonForBoard(numFig);
+    numFig++;
+    std::vector<std::shared_ptr<geometricShape::Shape>> fig;
+    initialiseShared(size, width, height, fig);
+
+    std::vector<std::shared_ptr<geometricShape::Shape>> motif;
+    initialiseMotif(size, width, height, motif);
+    MLV_actualise_window();
+    unsigned int nbFig = 1; // figure motif
+    bool contour = false; 
+    while (1) {               
+        int xInside, yInside;
+        MLV_get_mouse_position(&xInside, &yInside);
+        std::for_each(fig.begin(), fig.end(), 
+            [&xInside, &yInside, &fig, &motif, &motifBorder, &motifShape](std::shared_ptr<geometricShape::Shape> it){ 
+            it-> moveShape(xInside, yInside, fig, motif, motifShape, motifBorder);
+            drawAllShapes(fig, MLV_COLOR_WHITE, MLV_COLOR_RED);
+            drawAllShapes(motif, motifShape, motifBorder);
+        });
+            
+        if (areEqual(motif, fig) == 1) {
+            std::cout << "equal" << std::endl;
+            motifShape = MLV_COLOR_GREEN;
+            drawAllShapes(fig, MLV_COLOR_WHITE, MLV_COLOR_RED);
+            drawAllShapes(motif, motifShape, motifBorder);
+            MLV_actualise_window();
+            int x2, y2;
+            MLV_wait_mouse(&x2, &y2);
+        }
+        else {
+            motifShape = MLV_COLOR_BLACK;
+        }
+
+        if (MLV_get_keyboard_state(MLV_KEYBOARD_LCTRL) == MLV_PRESSED && MLV_get_keyboard_state(MLV_KEYBOARD_s) == MLV_PRESSED) {
+            /* Save a polygon for new figure */
+            std::cout << "save" << std::endl;
+            //saveFigure(width, height, fig);
+            save(width, height, fig);
+
         }
         MLV_draw_filled_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_GRAY);
         drawAllShapes(motif, motifShape, motifBorder);
@@ -312,11 +318,25 @@ void Interface::drawJeu(int width, int height) {
                     break;
                 case 3: // Contour
                     std::cout << "Contour" << std::endl;
+
+                    if ( contour == true ){
+                        motifBorder = MLV_COLOR_ORANGE;
+                    }
+                    else if( contour == false){
+                       motifBorder = MLV_COLOR_BLACK; 
+                    }
+                    contour = !contour;
+                    drawAllShapes(motif, motifShape, motifBorder);
+                    MLV_actualise_window();
 	                break;
 	            case 4: // Quitter
-	                std::cout << "Quitter" << std::endl;
-	                MLV_free_window();
-	                exit(EXIT_SUCCESS); 
+	                std::cout << "Sauvegarde" << std::endl;
+                    save(width, height, fig);
+                    break;
+                case 5: // Quitter
+                    std::cout << "Quitter" << std::endl;
+                    MLV_free_window();
+                    exit(EXIT_SUCCESS); 
                     break;
 	            default: break;
 	        }

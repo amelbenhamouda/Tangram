@@ -23,7 +23,8 @@ void Board::drawButtonForBoard(int numFig) {
     buttons.push_back(Button(x + heightButton + interligne, y, size, heightButton, (std::to_string(numFig)).c_str()));
     buttons.push_back(Button(x + (interligne + heightButton) * 2, y, size, heightButton, "->"));
     buttons.push_back(Button(x, y + heightButton + interligne, widthButton, heightButton, "Contour"));
-    buttons.push_back(Button(x, y + (heightButton * 2) + (interligne * 2), widthButton, heightButton, "Quitter"));
+    buttons.push_back(Button(x, y + (heightButton * 2) + (interligne * 2), widthButton, heightButton, "Sauvegarder"));
+    buttons.push_back(Button(x, y + (heightButton * 3) + (interligne * 3), widthButton, heightButton, "Quitter"));
 
     for (auto button : buttons) {
         button.drawButton(interligne, MLV_COLOR_GREY, MLV_COLOR_BLACK, MLV_COLOR_WHITE);

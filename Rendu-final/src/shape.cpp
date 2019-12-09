@@ -280,7 +280,7 @@ bool geometricShape::isInsideBoard(const int &x, const int &y, const int &with, 
     return true;
 }
 
-void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, std::vector<std::shared_ptr<geometricShape::Shape>> &motif) {
+void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, MLV_Color motifBorder) {
     if (isInside(xInside, yInside) == 1) { 
         bool done = false;
         while (done != true) {
@@ -292,7 +292,7 @@ void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<st
                     int x2, y2;
                     MLV_get_mouse_position(&x2, &y2);
                     draw(MLV_COLOR_GRAY, MLV_COLOR_GRAY);
-                    drawAllShapes(motif, MLV_COLOR_BLACK, MLV_COLOR_ORANGE);
+                    drawAllShapes(motif, motifShape, motifBorder);
                     translate(x2 - xInside, y2 - yInside);
                     MLV_wait_milliseconds(0.01);
                     if (MLV_get_mouse_button_state(MLV_BUTTON_RIGHT) == MLV_PRESSED) {
@@ -302,7 +302,7 @@ void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<st
                     if (MLV_get_mouse_button_state(MLV_BUTTON_MIDDLE) == MLV_PRESSED) {
                         reverse();
                     }
-                    drawAllShapes(motif, MLV_COLOR_BLACK, MLV_COLOR_ORANGE);
+                    drawAllShapes(motif, motifShape, motifBorder);
                     drawAllShapes(fig, MLV_COLOR_WHITE, MLV_COLOR_RED);
                     MLV_actualise_window();
                     xInside = x2; 
@@ -316,7 +316,7 @@ void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<st
                     MLV_get_mouse_position(&xRot, &yRot);
                     if ((xRot != xRot0) && (yRot != yRot0)) {
                         rotateCenter(1, xRot, yRot, xRot0, yRot0);
-                        drawAllShapes(motif, MLV_COLOR_BLACK, MLV_COLOR_ORANGE);
+                        drawAllShapes(motif, motifShape, motifBorder);
                         drawAllShapes(fig, MLV_COLOR_WHITE, MLV_COLOR_RED);
                         MLV_actualise_window();
                         MLV_wait_milliseconds(10);
@@ -328,7 +328,7 @@ void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<st
                 draw(MLV_COLOR_GRAY, MLV_COLOR_GRAY);
                 MLV_wait_milliseconds(1);
                 reverse();
-                drawAllShapes(motif, MLV_COLOR_BLACK, MLV_COLOR_ORANGE);
+                drawAllShapes(motif, motifShape, motifBorder);
                 drawAllShapes(fig, MLV_COLOR_WHITE, MLV_COLOR_RED);
                 MLV_actualise_window();
             }

@@ -31,7 +31,7 @@ std::vector<double> geometricShape::Shape::getCenter() const {}
 
 void geometricShape::Shape::draw(MLV_Color colorShape, MLV_Color colorBorder) const {}
 
-void geometricShape::drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder) {}
+void geometricShape::drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder, MLV_Color colorShape, MLV_Color colorBorder) {}
 
 void geometricShape::Shape::rotateHW(int angle, unsigned int n) {} 
 
