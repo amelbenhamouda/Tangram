@@ -15,6 +15,18 @@
 #include <iostream>
 #include <string>
 
+std::vector<MLV_Color> figcolor(){
+    std::vector<MLV_Color> figloc;
+    figloc.push_back(MLV_COLOR_GREEN);
+    figloc.push_back(MLV_COLOR_PINK);
+    figloc.push_back(MLV_COLOR_ORANGE);
+    figloc.push_back(MLV_COLOR_BLUE);
+    figloc.push_back(MLV_COLOR_CYAN);
+    figloc.push_back(MLV_COLOR_MAGENTA);
+    figloc.push_back(MLV_COLOR_YELLOW);
+    return figloc;
+}
+
 
 void Interface::initialiseShared(int size, int width, int height, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared) {
     shapeShared.clear();
@@ -29,7 +41,8 @@ void Interface::initialiseShared(int size, int width, int height, std::vector<st
         shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size * 2, allWidth + 3 * (size + 15), allHeigth));
         shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size * 2, allWidth + 5 * (size + 15), allHeigth));
         shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(round(size * sqrt(2)), allWidth + 7 * (size + 15), allHeigth));
-        drawAllShapes(shapeShared, MLV_COLOR_WHITE, MLV_COLOR_RED); 
+
+        drawAllShapes(shapeShared, figcolor(), MLV_COLOR_RED); 
     }
     catch (std::bad_alloc & e) {
         std::cerr << "bad_alloc caught: " << e.what() << '\n';
@@ -244,20 +257,21 @@ void Interface::drawJeu(int width, int height) {
     MLV_actualise_window();
     unsigned int nbFig = 1; // figure motif
     bool contour = false; 
+    std::vector<MLV_Color> colorfig = figcolor();
     while (1) {               
         int xInside, yInside;
         MLV_get_mouse_position(&xInside, &yInside);
         std::for_each(fig.begin(), fig.end(), 
-            [&xInside, &yInside, &fig, &motif, &motifBorder, &motifShape](std::shared_ptr<geometricShape::Shape> it){ 
-            it-> moveShape(xInside, yInside, fig, motif, motifShape, motifBorder);
-            drawAllShapes(fig, MLV_COLOR_WHITE, MLV_COLOR_RED);
+            [&xInside, &yInside, &fig, &motif, &motifBorder, &motifShape , &colorfig](std::shared_ptr<geometricShape::Shape> it){ 
+            it-> moveShape(xInside, yInside, fig, motif, motifShape, motifBorder , colorfig);
+            drawAllShapes(fig, colorfig, MLV_COLOR_RED);
             drawAllShapes(motif, motifShape, motifBorder);
         });
             
         if (areEqual(motif, fig) == 1) {
             std::cout << "equal" << std::endl;
             motifShape = MLV_COLOR_GREEN;
-            drawAllShapes(fig, MLV_COLOR_WHITE, MLV_COLOR_RED);
+            drawAllShapes(fig, colorfig, MLV_COLOR_RED);
             drawAllShapes(motif, motifShape, motifBorder);
             MLV_actualise_window();
             int x2, y2;
@@ -276,7 +290,7 @@ void Interface::drawJeu(int width, int height) {
         }
         MLV_draw_filled_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_GRAY);
         drawAllShapes(motif, motifShape, motifBorder);
-        drawAllShapes(fig, MLV_COLOR_WHITE, MLV_COLOR_RED);
+        drawAllShapes(fig, colorfig, MLV_COLOR_RED);
         bool next;
         //std::cout << nbFig << " ";  
         if ((MLV_get_mouse_button_state(MLV_BUTTON_LEFT) == MLV_PRESSED)) {
@@ -292,7 +306,7 @@ void Interface::drawJeu(int width, int height) {
 	                    motifShape = MLV_COLOR_BLACK;
 	                    drawAllShapes(motif, motifShape, motifBorder);
 	                    initialiseShared(size, width, height, fig);
-	                    drawAllShapes(fig, MLV_COLOR_WHITE,MLV_COLOR_RED);
+	                    drawAllShapes(fig, colorfig,MLV_COLOR_RED);
 	                    board.drawButtonForBoard(nbFig);
 	                    MLV_actualise_window();
 	                };
@@ -312,7 +326,7 @@ void Interface::drawJeu(int width, int height) {
 	                motifShape = MLV_COLOR_BLACK;
 	                drawAllShapes(motif, motifShape, motifBorder);
 	                initialiseShared(size, width, height, fig);
-	                drawAllShapes(fig, MLV_COLOR_WHITE, MLV_COLOR_RED);
+	                drawAllShapes(fig, colorfig, MLV_COLOR_RED);
 	                board.drawButtonForBoard(nbFig);
 	                MLV_actualise_window();
                     break;

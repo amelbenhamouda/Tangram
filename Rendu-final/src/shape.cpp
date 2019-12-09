@@ -136,6 +136,15 @@ void geometricShape::drawAllShapes(const std::vector<std::shared_ptr<geometricSh
         it->draw(colorShape, colorBorder);
     }
 }
+void geometricShape::drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, std::vector<MLV_Color> colorShape, MLV_Color  colorBorder) {
+    int i=0;
+    for(auto it : vectShapes){
+        it->draw(colorShape[i], colorBorder);
+        i++;
+    }
+}
+
+
 
 void geometricShape::Shape::rotateHW(int angle, unsigned int n) {       
         assert(n <= px.size() && n >= 0);
@@ -280,7 +289,9 @@ bool geometricShape::isInsideBoard(const int &x, const int &y, const int &with, 
     return true;
 }
 
-void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, MLV_Color motifBorder) {
+void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, 
+                                            std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, 
+                                                    MLV_Color motifBorder, std::vector<MLV_Color> &colorfig) {
     if (isInside(xInside, yInside) == 1) { 
         bool done = false;
         while (done != true) {
@@ -303,7 +314,7 @@ void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<st
                         reverse();
                     }
                     drawAllShapes(motif, motifShape, motifBorder);
-                    drawAllShapes(fig, MLV_COLOR_WHITE, MLV_COLOR_RED);
+                    drawAllShapes(fig, colorfig, MLV_COLOR_RED);
                     MLV_actualise_window();
                     xInside = x2; 
                     yInside = y2;
@@ -317,7 +328,7 @@ void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<st
                     if ((xRot != xRot0) && (yRot != yRot0)) {
                         rotateCenter(1, xRot, yRot, xRot0, yRot0);
                         drawAllShapes(motif, motifShape, motifBorder);
-                        drawAllShapes(fig, MLV_COLOR_WHITE, MLV_COLOR_RED);
+                        drawAllShapes(fig, colorfig, MLV_COLOR_RED);
                         MLV_actualise_window();
                         MLV_wait_milliseconds(10);
                         xRot0 = xRot;
@@ -329,7 +340,7 @@ void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<st
                 MLV_wait_milliseconds(1);
                 reverse();
                 drawAllShapes(motif, motifShape, motifBorder);
-                drawAllShapes(fig, MLV_COLOR_WHITE, MLV_COLOR_RED);
+                drawAllShapes(fig, colorfig, MLV_COLOR_RED);
                 MLV_actualise_window();
             }
             MLV_wait_milliseconds(1);
