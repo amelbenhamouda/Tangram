@@ -202,7 +202,7 @@ void Interface::drawJeu(int width, int height) {
     MLV_draw_filled_rectangle(0, 0, width, height, MLV_COLOR_BLACK);
     MLV_actualise_window();
     /* Loading contour. */
-    int size = width / 50;//100;
+    int size = 100;
     MLV_Color motifBorder = MLV_COLOR_ORANGE ;
     MLV_Color motifShape = MLV_COLOR_BLACK ;
     

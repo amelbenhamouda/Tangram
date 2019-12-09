@@ -6,7 +6,7 @@ Board::Board(int width, int height) : width(width), height(height), buttons(0) {
 Board::~Board() {}
 
 void Board::drawBoard() {
-    MLV_draw_filled_rectangle(40, 30, width - (round(width / 6) * 2), height - (round(height / 35) * 2), MLV_COLOR_GRAY);
+    MLV_draw_filled_rectangle(40, 30, width - (round(width / 6) * 2) + 150, height - (round(height / 35) * 2), MLV_COLOR_GRAY);
 	MLV_actualise_window();
 }
 
