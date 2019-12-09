@@ -9,7 +9,7 @@ void Button::drawButton(int interligne, MLV_Color borderColor, MLV_Color textCol
     // x, y	La coordonnée en X, Y de la position du coin Nord-Ouest de la boîte.
     const char * cstr = message.c_str();
     MLV_draw_text_box(x, y, width, height, cstr, interligne, borderColor, textColor, backgroundColor, MLV_TEXT_LEFT, MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
-    MLV_actualise_window();
+   // MLV_actualise_window();
 }
 
 bool Button::inButton(int pX, int pY) {

@@ -22,6 +22,7 @@ int main( int argc, char *argv[] ){
 
     /* Displays buttons. */
     menu.drawMenu();
+    MLV_actualise_window();
     MLV_wait_mouse(&x, &y);
     bool action = true;
     while (action){
@@ -29,6 +30,7 @@ int main( int argc, char *argv[] ){
             std::cout << "Jouer" << std::endl;
             // Afficher board
             interface.drawJeu(width, height);
+            MLV_actualise_window();
             action = false;
         }
         else if (menu.inMenu(x, y) == 1) {

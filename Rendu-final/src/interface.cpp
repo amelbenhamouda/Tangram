@@ -272,6 +272,7 @@ void Interface::drawJeu(int width, int height) {
         drawAllShapes(motif, motifShape, motifBorder);
         drawAllShapes(fig, MLV_COLOR_WHITE, MLV_COLOR_RED);
         bool next;
+        //std::cout << nbFig << " ";  
         if ((MLV_get_mouse_button_state(MLV_BUTTON_LEFT) == MLV_PRESSED)) {
             int bouton = board.inBoard(xInside, yInside);
             switch (bouton) {
@@ -295,7 +296,7 @@ void Interface::drawJeu(int width, int height) {
                     break;
 	            case 2: 
 	                std::cout << "Fleche droite" << std::endl;
-	                nbFig++;                
+	                nbFig++;              
 	                drawAllShapes(fig, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
 	                drawAllShapes(motif, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
 	                next = importDraw(nbFig, size, motif);
