@@ -93,9 +93,11 @@ namespace geometricShape{
              *  \param yInside :  position en y de la souris.
              *  \param fig : ensembles des figures de l'utilisateur à bouger/redesinner.
              *  \param motif : ensembles des figures de du modèle à redesinner.
+             *  \param motifShape :
+             *  \param motifBorder :
+             *  \param colorfig : vecteur couleur de la figure.
              */        
-            //virtual void move_shape(int &xInside, int &yInside, std::vector<geometricShape::Shape*> fig);
-            void moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, std::vector<std::shared_ptr<geometricShape::Shape>> &motif);
+            void moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, MLV_Color motifBorder, std::vector<MLV_Color> &colorfig);
            
             /*!
              *  \brief Methode permettant desinner une figure de la classe Shape.
@@ -119,8 +121,16 @@ namespace geometricShape{
              *  \param colorShape : couleur de la forme.
              *  \param colorBorder : couleur du contour.
              */  
-            //friend void drawAllShapes(const std::vector<geometricShape::Shape*> vectShapes,MLV_Color color,  MLV_Color colorBorder= MLV_COLOR_BLACK);
-            friend void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder, MLV_Color colorShape, MLV_Color colorBorder);
+            friend void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder);
+
+            /*!
+             *  \brief Methode permettant desinner un ensemble de figures de la classe Shape (tous les objets d'un motif de tangram).
+             *  Fait appel à MLV_draw_filled_polygon et MLV_draw_polygon.
+             *  \param vectShapes : ensembles des figures de l'utilisateur à desinner.
+             *  \param colorShape : vecteur de couleurs de la forme.
+             *  \param colorBorder : couleur du contour.
+             */  
+            friend void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, std::vector<MLV_Color> colorShape, MLV_Color colorBorder);
 
             /*!
              *  \brief Methode permettant d'afficher sur la console l'objet souhaité.
@@ -212,7 +222,6 @@ namespace geometricShape{
             void translate(int x, int y);
 
             bool isRevert = false; /*!< Booléen pour savoir si une symétrie à été effectué*/
-            /*Shape & operator[](Shape &) const {return this;}*/
                 
         private:        
             int sizeCote; /*!< Taille du coté de la forme*/
@@ -220,8 +229,8 @@ namespace geometricShape{
             std::vector<double> py; /*!< Coordonnée en y*/
             std::vector<double> center; /*!< Coordonnée du centre*/
     };
-    //void drawAllShapes(const std::vector<geometricShape::Shape*> vectshapes,MLV_Color color_shape,  MLV_Color color_border);
     void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder);
+    void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, std::vector<MLV_Color> colorShape, MLV_Color colorBorder);
     bool operator == (const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel) ;
     bool areEqual(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel);
     void saveDraw(const std::vector<std::shared_ptr<geometricShape::Shape>> &fig);  

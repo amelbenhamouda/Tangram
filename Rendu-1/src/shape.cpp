@@ -33,6 +33,8 @@ void geometricShape::Shape::draw(MLV_Color colorShape, MLV_Color colorBorder) co
 
 void geometricShape::drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder, MLV_Color colorShape, MLV_Color colorBorder) {}
 
+void geometricShape::drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, std::vector<MLV_Color> colorShape, MLV_Color colorBorder, MLV_Color colorShape, MLV_Color colorBorder) {}
+
 void geometricShape::Shape::rotateHW(int angle, unsigned int n) {} 
 
 void geometricShape::Shape::rotateCenter(int angle, int x,int y, int x0, int y0) {} 

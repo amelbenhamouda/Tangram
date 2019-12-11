@@ -27,7 +27,6 @@ std::vector<MLV_Color> figcolor(){
     return figloc;
 }
 
-
 void Interface::initialiseShared(int size, int width, int height, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared) {
     shapeShared.clear();
     int allHeigth = height - 225;
@@ -210,30 +209,30 @@ void Interface::saveFigure(int width, int height, std::vector<std::shared_ptr<ge
 }
 
 void save(int width, int height, std::vector<std::shared_ptr<geometricShape::Shape>> &fig){
-                int interligne = 40;
-            MLV_draw_filled_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_DIM_GREY);
-            MLV_draw_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_BLACK);
-            MLV_actualise_window();
-            MLV_draw_text_box(round(width / 2), round(height / 2), 100, 50,"Save", interligne , MLV_COLOR_GREY,MLV_COLOR_BLACK,MLV_COLOR_WHITE,MLV_TEXT_LEFT, MLV_HORIZONTAL_CENTER,MLV_VERTICAL_CENTER);
-            MLV_draw_text_box(round(width / 2) + 120, round(height / 2), 100, 50, "Cancel", interligne , MLV_COLOR_GREY,MLV_COLOR_BLACK,MLV_COLOR_WHITE,MLV_TEXT_LEFT, MLV_HORIZONTAL_CENTER,MLV_VERTICAL_CENTER);
-            MLV_actualise_window();
-            int xInside, yInside;
+    int interligne = 40;
+    MLV_draw_filled_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_DIM_GREY);
+    MLV_draw_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_BLACK);
+    MLV_actualise_window();
+    MLV_draw_text_box(round(width / 2), round(height / 2), 100, 50,"Save", interligne , MLV_COLOR_GREY,MLV_COLOR_BLACK,MLV_COLOR_WHITE,MLV_TEXT_LEFT, MLV_HORIZONTAL_CENTER,MLV_VERTICAL_CENTER);
+    MLV_draw_text_box(round(width / 2) + 120, round(height / 2), 100, 50, "Cancel", interligne , MLV_COLOR_GREY,MLV_COLOR_BLACK,MLV_COLOR_WHITE,MLV_TEXT_LEFT, MLV_HORIZONTAL_CENTER,MLV_VERTICAL_CENTER);
+    MLV_actualise_window();
+    int xInside, yInside;
+    MLV_wait_mouse(&xInside, &yInside);
+    bool save = true;
+    while (save) {
+        if (xInside >= round(width / 2) and xInside <= round(width / 2) + 100 and yInside >= round(height / 2) and yInside <= round(height / 2) + 50) {  // Bouton Save
+            std::cout << "Motif saved" << std::endl;
+            saveDraw(fig);
+            save = false;
+        }
+        else if (xInside >= round(width / 2) + 120 and xInside <= round(width / 2) + 220 and yInside >= round(height / 2) and yInside <= round(height / 2) + 50) {  // Bouton Cancel
+            std::cout << "Cancel" << std::endl;
+            save = false;
+        }
+        else {
             MLV_wait_mouse(&xInside, &yInside);
-            bool save = true;
-            while (save) {
-                if (xInside >= round(width / 2) and xInside <= round(width / 2) + 100 and yInside >= round(height / 2) and yInside <= round(height / 2) + 50) {  // Bouton Save
-                    std::cout << "Motif saved" << std::endl;
-                    saveDraw(fig);
-                    save = false;
-                }
-                else if (xInside >= round(width / 2) + 120 and xInside <= round(width / 2) + 220 and yInside >= round(height / 2) and yInside <= round(height / 2) + 50) {  // Bouton Cancel
-                    std::cout << "Cancel" << std::endl;
-                    save = false;
-                }
-                else {
-                    MLV_wait_mouse(&xInside, &yInside);
-                }
-            }
+        }
+    }
 }
 
 void Interface::drawJeu(int width, int height) {
@@ -284,15 +283,12 @@ void Interface::drawJeu(int width, int height) {
         if (MLV_get_keyboard_state(MLV_KEYBOARD_LCTRL) == MLV_PRESSED && MLV_get_keyboard_state(MLV_KEYBOARD_s) == MLV_PRESSED) {
             /* Save a polygon for new figure */
             std::cout << "save" << std::endl;
-            //saveFigure(width, height, fig);
             save(width, height, fig);
-
         }
         MLV_draw_filled_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_GRAY);
         drawAllShapes(motif, motifShape, motifBorder);
         drawAllShapes(fig, colorfig, MLV_COLOR_RED);
         bool next;
-        //std::cout << nbFig << " ";  
         if ((MLV_get_mouse_button_state(MLV_BUTTON_LEFT) == MLV_PRESSED)) {
             int bouton = board.inBoard(xInside, yInside);
             switch (bouton) {

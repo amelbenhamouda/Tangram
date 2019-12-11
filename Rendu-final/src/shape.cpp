@@ -37,22 +37,6 @@ bool geometricShape::Shape::operator==(const Shape & s) const {
     return ret;
 }
 
-// bool operator==(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel) {
-//     bool ret = false;
-//     if (vectShapes.size() == vectModel.size()) {
-//         auto model_it = vectModel.begin();
-//         for (auto shap_it = vectShapes.begin(); shap_it < vectShapes.end(); shap_it++) {
-//                 bool loc = (*shap_it == *model_it);
-//                 ret = loc;
-//                 if (ret == false) {
-//                     return false;
-//                 }
-//                 model_it++;
-//             }
-//         }
-//     return ret;
-// }
-
 bool operator==(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel){
     return areEqual(vectShapes, vectModel); 
 }
@@ -118,24 +102,12 @@ void geometricShape::Shape::draw(MLV_Color colorShape, MLV_Color colorBorder) co
     MLV_draw_polygon(pxDraw.data(), pyDraw.data(), px.size(), colorBorder);
 }
 
-// void geometricShape::drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder) {
-//     for (auto it : vectShapes) {
-//         std::vector<int> pxDraw;
-//         std::vector<int> pyDraw;
-//         for (unsigned int i = 0; i < it->_px.size(); i++) {
-//           pxDraw.push_back(floor(it->px[i] + 0.5));
-//           pyDraw.push_back(floor(it->py[i] + 0.5));
-//         }
-//         MLV_draw_filled_polygon(pxDraw.data(), pyDraw.data(), it->px.size(), colorShape);
-//         MLV_draw_polygon(pxDraw.data(), pyDraw.data(), it->px.size(), colorBorder);
-//     }
-// }
-
 void geometricShape::drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder) {
     for(auto it : vectShapes){
         it->draw(colorShape, colorBorder);
     }
 }
+
 void geometricShape::drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, std::vector<MLV_Color> colorShape, MLV_Color  colorBorder) {
     int i=0;
     for(auto it : vectShapes){
@@ -144,25 +116,23 @@ void geometricShape::drawAllShapes(const std::vector<std::shared_ptr<geometricSh
     }
 }
 
-
-
 void geometricShape::Shape::rotateHW(int angle, unsigned int n) {       
-        assert(n <= px.size() && n >= 0);
-        double pivoX = px[n];
-        double pivoY = py[n];
-        double angleRad = (double) angle * 3.141592653589793238462643383279 / 180;
-        for (unsigned int it = 0; it < px.size(); it++){
-            if (it != n) {
-                double xM = px[it] - pivoX;
-                double yM = py[it] - pivoY;
-                px[it] = xM * cos(angleRad) + yM * sin(angleRad) + pivoX;   /* [cos(0) -sin(0); sin(0) cos(0)]*/
-                py[it] = -xM * sin(angleRad) + yM * cos(angleRad) + pivoY;
-            }
+    assert(n <= px.size() && n >= 0);
+    double pivoX = px[n];
+    double pivoY = py[n];
+    double angleRad = (double) angle * 3.141592653589793238462643383279 / 180;
+    for (unsigned int it = 0; it < px.size(); it++){
+        if (it != n) {
+            double xM = px[it] - pivoX;
+            double yM = py[it] - pivoY;
+            px[it] = xM * cos(angleRad) + yM * sin(angleRad) + pivoX;   /* [cos(0) -sin(0); sin(0) cos(0)]*/
+            py[it] = -xM * sin(angleRad) + yM * cos(angleRad) + pivoY;
         }
-        double xM = center[0] - pivoX;
-        double yM = center[1] - pivoY;
-        center[0] = xM * cos(angleRad) + yM * sin(angleRad) + pivoX;
-        center[1] = xM * sin(angleRad) + yM * cos(angleRad) + pivoY;
+    }
+    double xM = center[0] - pivoX;
+    double yM = center[1] - pivoY;
+    center[0] = xM * cos(angleRad) + yM * sin(angleRad) + pivoX;
+    center[1] = xM * sin(angleRad) + yM * cos(angleRad) + pivoY;
 } 
 
 void geometricShape::Shape::rotateCenter(int angle, int x,int y, int x0, int y0) {   
@@ -289,9 +259,7 @@ bool geometricShape::isInsideBoard(const int &x, const int &y, const int &with, 
     return true;
 }
 
-void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, 
-                                            std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, 
-                                                    MLV_Color motifBorder, std::vector<MLV_Color> &colorfig) {
+void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, MLV_Color motifBorder, std::vector<MLV_Color> &colorfig) {
     if (isInside(xInside, yInside) == 1) { 
         bool done = false;
         while (done != true) {
