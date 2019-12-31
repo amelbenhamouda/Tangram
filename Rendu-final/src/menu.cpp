@@ -13,8 +13,8 @@ void Menu::drawMenu() {
     int x = width / 2;
 
     // x, y La coordonnée en X, Y de la position du coin Nord-Ouest de la boîte.
-    buttons.push_back(Button(x, y, widthButton, heightButton, "Jouer"));
-    buttons.push_back(Button(x, y + heightButton + interligne, widthButton, heightButton, "Quitter"));
+    buttons.push_back(Button<int>(x, y, widthButton, heightButton, "Jouer"));
+    buttons.push_back(Button<int>(x, y + heightButton + interligne, widthButton, heightButton, "Quitter"));
 
     for (auto button : buttons){
         button.drawButton(interligne, MLV_COLOR_GREY, MLV_COLOR_BLACK, MLV_COLOR_WHITE);

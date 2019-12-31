@@ -184,8 +184,8 @@ void Interface::saveFigure(int width, int height, std::vector<std::shared_ptr<ge
 
     int interligne = 40;
 
-    Button button1 (round(width / 2), round(height / 2), 50, 100, "Save");
-    Button button2 (round(width / 2) + 120, round(height / 2), 50, 100, "Cancel");
+    Button<int> button1 (round(width / 2), round(height / 2), 50, 100, "Save");
+    Button<int> button2 (round(width / 2) + 120, round(height / 2), 50, 100, "Cancel");
     button1.drawButton(interligne, MLV_COLOR_GREY, MLV_COLOR_BLACK, MLV_COLOR_WHITE);
     button2.drawButton(interligne, MLV_COLOR_GREY, MLV_COLOR_BLACK, MLV_COLOR_WHITE);
     

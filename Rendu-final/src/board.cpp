@@ -19,12 +19,12 @@ void Board::drawButtonForBoard(int numFig) {
     int size = 25;
 
     // x, y La coordonnée en X, Y de la position du coin Nord-Ouest de la boîte.
-    buttons.push_back(Button(x, y, size, heightButton, "<-"));
-    buttons.push_back(Button(x + heightButton + interligne, y, size, heightButton, (std::to_string(numFig)).c_str()));
-    buttons.push_back(Button(x + (interligne + heightButton) * 2, y, size, heightButton, "->"));
-    buttons.push_back(Button(x, y + heightButton + interligne, widthButton, heightButton, "Contour"));
-    buttons.push_back(Button(x, y + (heightButton * 2) + (interligne * 2), widthButton, heightButton, "Sauvegarder"));
-    buttons.push_back(Button(x, y + (heightButton * 3) + (interligne * 3), widthButton, heightButton, "Quitter"));
+    buttons.push_back(Button<int>(x, y, size, heightButton, "<-"));
+    buttons.push_back(Button<int>(x + heightButton + interligne, y, size, heightButton, (std::to_string(numFig)).c_str()));
+    buttons.push_back(Button<int>(x + (interligne + heightButton) * 2, y, size, heightButton, "->"));
+    buttons.push_back(Button<int>(x, y + heightButton + interligne, widthButton, heightButton, "Contour"));
+    buttons.push_back(Button<int>(x, y + (heightButton * 2) + (interligne * 2), widthButton, heightButton, "Sauvegarder"));
+    buttons.push_back(Button<int>(x, y + (heightButton * 3) + (interligne * 3), widthButton, heightButton, "Quitter"));
 
     for (auto button : buttons) {
         button.drawButton(interligne, MLV_COLOR_GREY, MLV_COLOR_BLACK, MLV_COLOR_WHITE);

@@ -10,6 +10,7 @@
 	#include <MLV/MLV_all.h>
    	#include <vector>
 	#include <cmath>
+	template<class T> 
    	class Button;
    	/*! \class Board
      *  \brief classe representant le plateau de jeu
@@ -20,7 +21,7 @@
 		private:
 			int width; /*!< La longeur de la fenêtre*/
 			int height; /*!< La largeur de la fenêtre*/
-			std::vector<Button> buttons; /*!< La liste des boutons du plateau*/
+			std::vector<Button<int>> buttons; /*!< La liste des boutons du plateau*/
 
 	    public:
 	    	/*!
