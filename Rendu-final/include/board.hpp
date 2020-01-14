@@ -8,7 +8,7 @@
 #define BOARD_H
 	#include <iostream>	
 	#include <MLV/MLV_all.h>
-   	#include <vector>
+   	#include <map>
 	#include <cmath>
 	template<class T> 
    	class Button;
@@ -21,7 +21,7 @@
 		private:
 			int width; /*!< La longeur de la fenêtre*/
 			int height; /*!< La largeur de la fenêtre*/
-			std::vector<Button<int>> buttons; /*!< La liste des boutons du plateau*/
+			std::map<int,Button<int>> buttons; /*!< La liste des boutons du plateau*/
 
 	    public:
 	    	/*!

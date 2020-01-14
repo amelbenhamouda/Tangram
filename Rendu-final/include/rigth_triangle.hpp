@@ -9,6 +9,7 @@
 #include <vector>
 #include <iostream>
 #include "../include/shape.hpp"
+//#include "../include/point.hpp"
 
 namespace geometricShape{
 	/*! \class RigthTriangle
@@ -27,7 +28,7 @@ namespace geometricShape{
              *  \param height
              *  \param width
              */
-            RigthTriangle(int sizeCote, int width, int height);
+            RigthTriangle(double sizeCote, int width, int height);
 
             /*!
              *  \brief

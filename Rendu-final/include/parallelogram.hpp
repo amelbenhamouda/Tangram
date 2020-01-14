@@ -27,7 +27,7 @@ namespace geometricShape{
              *  \param height 
              *  \param width
              */
-            Parallelogram(int sizeCote, int width, int height);
+            Parallelogram(double sizeCote, int width, int height);
 
             /*!
              *  \brief 

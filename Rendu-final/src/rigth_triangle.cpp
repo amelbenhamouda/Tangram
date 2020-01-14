@@ -1,4 +1,5 @@
 #include "../include/rigth_triangle.hpp"
+#include "../include/point.hpp"
 #include <cmath>
 #include <MLV/MLV_all.h>
 
@@ -15,17 +16,23 @@ geometricShape::RigthTriangle & geometricShape::RigthTriangle::operator=(const R
 
 geometricShape::RigthTriangle::RigthTriangle(const RigthTriangle & tc) : Shape(tc), hauteur(tc.hauteur) {}
 
-geometricShape::RigthTriangle::RigthTriangle(int sizeCote, int width, int height) : Shape(sizeCote, width, height), hauteur(0) {
-    int _size_cote = sizeCote;
+geometricShape::RigthTriangle::RigthTriangle(double sizeCote, int width, int height) : Shape(sizeCote, width, height), hauteur(0) {
+    double _size_cote = sizeCote;
     std::vector<double> _px;
     std::vector<double> _py;
     std::vector<double> center;
-    _px.push_back(width);
+    double dw = (double)width;
+    double dh = (double)height;
+    Point<double> point_triangle({dw,dw+_size_cote,dw},{dh,dh,dh+_size_cote});
+   // Point<double> test_py{height,height,height+_size_cote};
+    /*_px.push_back(width);
     _px.push_back(width + _size_cote);
     _px.push_back(width);
     _py.push_back(height);
     _py.push_back(height);
-    _py.push_back(height + _size_cote);
+    _py.push_back(height + _size_cote);*/
+    _px=point_triangle.get_Px();
+    _py=point_triangle.get_Py();
     center.push_back((double)width + (double)_size_cote / 3);
     center.push_back((double)height + (double)_size_cote / 3);
     hauteur = sqrt(pow(_size_cote, 2) * 2) / 2;

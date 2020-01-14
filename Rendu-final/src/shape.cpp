@@ -22,7 +22,7 @@ geometricShape::Shape & geometricShape::Shape::operator=(const Shape & tc) {
 
 bool geometricShape::Shape::operator==(const Shape & s) const {
     bool ret = false;
-    int thresh = round(sizeCote * 0.2);
+    double thresh = round(sizeCote * 0.2);
     unsigned int nbequal = 0;
     for (unsigned int i = 0; i < px.size(); i++) {
         for (unsigned int j = 0; j < s.px.size(); j++) {
@@ -66,16 +66,16 @@ bool geometricShape::areEqual(const std::vector<std::shared_ptr<geometricShape::
                 
 geometricShape::Shape::Shape(const Shape & tc) : sizeCote(tc.sizeCote), px(tc.px), py(tc.py), center(tc.center) {}
 
-geometricShape::Shape::Shape(int sizeCote, int width, int height) : sizeCote(sizeCote), px(0), py(0), center(0) {}
+geometricShape::Shape::Shape(double sizeCote, int width, int height) : sizeCote(sizeCote), px(0), py(0), center(0) {}
 
-void geometricShape::Shape::setShape(std::vector<double> &pXnew, std::vector<double> &pYnew, std::vector<double> &cnew, int &scnew) {
+void geometricShape::Shape::setShape(std::vector<double> &pXnew, std::vector<double> &pYnew, std::vector<double> &cnew, double &scnew) {
     sizeCote = scnew;
     px = pXnew;
     py = pYnew;
     center = cnew;
 }
 
-int geometricShape::Shape::getSizeCote() const {
+double geometricShape::Shape::getSizeCote() const {
     return sizeCote;
 }
 
@@ -108,11 +108,11 @@ void geometricShape::drawAllShapes(const std::vector<std::shared_ptr<geometricSh
     }
 }
 
-void geometricShape::drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, std::vector<MLV_Color> colorShape, MLV_Color  colorBorder) {
-    int i=0;
+void geometricShape::drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, std::list<MLV_Color> colorShapes, MLV_Color  colorBorder) {
+    auto itcolor = colorShapes.begin();
     for(auto it : vectShapes){
-        it->draw(colorShape[i], colorBorder);
-        i++;
+        it->draw(*itcolor, colorBorder);
+        itcolor++;
     }
 }
 
@@ -173,6 +173,7 @@ void geometricShape::Shape::rotateCenter(int angle, int x,int y, int x0, int y0)
 } 
 
 void geometricShape::Shape::translate(int x, int y) {
+    // translation de l'objet en fonction de la position x,y de la souris
     std::vector<double> pxloc = px;
     std::vector<double> pyloc = py; 
     bool inside = false;
@@ -191,6 +192,15 @@ void geometricShape::Shape::translate(int x, int y) {
         center[1] += y;
     }
 }
+
+void geometricShape::Shape::operator()(int x, int y) {
+    translate(x,y);
+}
+
+
+
+
+
 
 void geometricShape::Shape::reverse() {
     rotateCenter(180);
@@ -259,20 +269,31 @@ bool geometricShape::isInsideBoard(const int &x, const int &y, const int &with, 
     return true;
 }
 
-void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, MLV_Color motifBorder, std::vector<MLV_Color> &colorfig) {
+void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, 
+                                    std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, MLV_Color motifBorder, 
+                                    std::list<MLV_Color> &colorfig, std::list<MLV_Color>::iterator fig_num) {
+
     if (isInside(xInside, yInside) == 1) { 
         bool done = false;
+        std::list<MLV_Color> colorfig_loc = colorfig;
+        Uint8 red,green,blue,alpha;
+        MLV_convert_color_to_rgba (*fig_num, &red, &green, &blue, &alpha);
+        red=red*0.5;
+        green=green*0.5;
+        blue=blue*0.5;
+        *fig_num = MLV_convert_rgba_to_color ( red,  green,  blue,  alpha);
+
         while (done != true) {
-            int xEnd, yEnd, xRot0, yRot0;
-            MLV_get_mouse_position(&xRot0, &yRot0);
+            int x, y;
+            MLV_get_mouse_position(&x, &y); 
             MLV_wait_milliseconds(0.01);
-            if (MLV_get_mouse_button_state(MLV_BUTTON_LEFT) == MLV_PRESSED) {
+            if (MLV_get_mouse_button_state(MLV_BUTTON_LEFT) == MLV_PRESSED && (isInside(x, y) == true)) {
                 while (MLV_get_mouse_button_state(MLV_BUTTON_LEFT) == MLV_PRESSED) {
                     int x2, y2;
                     MLV_get_mouse_position(&x2, &y2);
                     draw(MLV_COLOR_GRAY, MLV_COLOR_GRAY);
                     drawAllShapes(motif, motifShape, motifBorder);
-                    translate(x2 - xInside, y2 - yInside);
+                    operator()(x2 - xInside, y2 - yInside);
                     MLV_wait_milliseconds(0.01);
                     if (MLV_get_mouse_button_state(MLV_BUTTON_RIGHT) == MLV_PRESSED) {
                         rotateCenter(1);
@@ -287,36 +308,42 @@ void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<st
                     xInside = x2; 
                     yInside = y2;
                 }
+            } 
+            else if(MLV_get_mouse_button_state(MLV_BUTTON_LEFT) == MLV_PRESSED && (isInside(x, y) == 0)){
+                done = true;
             }
             while (MLV_get_mouse_button_state(MLV_BUTTON_RIGHT) == MLV_PRESSED) {
                     draw(MLV_COLOR_GRAY, MLV_COLOR_GRAY);
                     int xRot, yRot;
-                    MLV_wait_milliseconds(10);
+                    //MLV_wait_milliseconds(10);
                     MLV_get_mouse_position(&xRot, &yRot);
-                    if ((xRot != xRot0) && (yRot != yRot0)) {
-                        rotateCenter(1, xRot, yRot, xRot0, yRot0);
+                    if ((xRot != x) && (yRot != y)) {
+                        rotateCenter(1, xRot, yRot, x, y);
                         drawAllShapes(motif, motifShape, motifBorder);
                         drawAllShapes(fig, colorfig, MLV_COLOR_RED);
                         MLV_actualise_window();
                         MLV_wait_milliseconds(10);
-                        xRot0 = xRot;
-                        yRot0 = yRot;
+                        x = xRot;
+                        y = yRot;
                     }
                 }
             if (MLV_get_mouse_button_state(MLV_BUTTON_MIDDLE) == MLV_PRESSED) {
                 draw(MLV_COLOR_GRAY, MLV_COLOR_GRAY);
-                MLV_wait_milliseconds(1);
+                //MLV_wait_milliseconds(1);
                 reverse();
                 drawAllShapes(motif, motifShape, motifBorder);
                 drawAllShapes(fig, colorfig, MLV_COLOR_RED);
                 MLV_actualise_window();
             }
-            MLV_wait_milliseconds(1);
-            MLV_get_mouse_position(&xEnd, &yEnd);
-            if (MLV_get_mouse_button_state(MLV_BUTTON_LEFT) == MLV_PRESSED && (isInside(xEnd, yEnd) == 0)) {
-                done = true;
-            }
+            //MLV_wait_milliseconds(1);
+            // MLV_get_mouse_position(&xEnd, &yEnd);
+            // if (MLV_get_mouse_button_state(MLV_BUTTON_LEFT) == MLV_PRESSED && (isInside(xEnd, yEnd) == 0)) {
+            //     done = true;
+            // }
         }
+        colorfig=colorfig_loc;
+        drawAllShapes(motif, motifShape, motifBorder);
+        drawAllShapes(fig, colorfig, MLV_COLOR_RED);
     }
 }
 

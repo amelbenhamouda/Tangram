@@ -7,9 +7,11 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 #include <vector>
+#include <list>
 #include <iostream>
 #include <MLV/MLV_all.h>
 #include <memory> // shared_ptr
+
 
 /*!
  *  \namespace geometricShape
@@ -30,13 +32,13 @@ namespace geometricShape{
             /*!
              *  \brief Constructeur
              *
-             *  Constructeur de la classe Shape
+             *  Constructeur explicit de la classe Shape
              *
              *  \param sizeCote : taille du coté de la figure
              *  \param width : emplacement en ligne du premier point de construction
              *  \param height : emplacement en collone du premier point de construction
              */
-            Shape(int sizeCote, int width, int height);
+            explicit Shape(double sizeCote, int width, int height);
 
             /*!
              *  \brief Destructeur
@@ -95,7 +97,7 @@ namespace geometricShape{
              *  \param motif : ensembles des figures de du modèle à redesinner.
              *  \param colorfig : vecteur couleur de la figure.
              */        
-            void moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, MLV_Color motifBorder, std::vector<MLV_Color> &colorfig);
+            void moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, MLV_Color motifBorder, std::list<MLV_Color> &colorfig, std::list<MLV_Color>::iterator  fig_num);
            
             /*!
              *  \brief Methode permettant desinner une figure de la classe Shape.
@@ -122,13 +124,13 @@ namespace geometricShape{
             friend void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder);
 
             /*!
-             *  \brief Methode permettant desinner un ensemble de figures de la classe Shape (tous les objets d'un motif de tangram).
+             *  \brief Methode permettant de desinner un ensemble de figures de la classe Shape (tous les objets d'un motif de tangram).
              *  Fait appel à MLV_draw_filled_polygon et MLV_draw_polygon.
              *  \param vectShapes : ensembles des figures de l'utilisateur à desinner.
              *  \param colorShape : vecteur de couleurs de la forme.
              *  \param colorBorder :  couleur du contour.
              */  
-            friend void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, std::vector<MLV_Color> colorShape, MLV_Color colorBorder);
+            friend void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, std::list<MLV_Color> colorShapes, MLV_Color colorBorder);
            
             /*!
              *  \brief Methode permettant d'afficher sur la console l'objet souhaité.
@@ -175,14 +177,14 @@ namespace geometricShape{
              *  \param cnew : nouveau centre.
              *  \param scnew : nnouvelle taille de coté.
              */ 
-            void setShape(std::vector<double> &pXnew, std::vector<double> &pYnew, std::vector<double> &cnew, int &scnew);
+            void setShape(std::vector<double> &pXnew, std::vector<double> &pYnew, std::vector<double> &cnew, double &scnew);
                 
         protected:
             /*!
              *  \brief Geter pour sizeCote de la class geometricShape
              *  renvoie la taille du coté de construction de la forme
              */ 
-            int getSizeCote() const;
+            double getSizeCote() const;
 
             /*!
              *  \brief Geter pour px la class geometricShape
@@ -213,22 +215,28 @@ namespace geometricShape{
             void rotateCenter(int angle, int x = 0, int y = 0, int x0 = 0, int y0 = 0);
 
             /*!
-             *  \brief Methode permettant de faire la translation d'un objet par rapport à son centre.
+             *  \brief Methode permettant de faire la translation d'un objet.
              *  \param x : position en x de la souris.
              *  \param y : position en y de la souris.
              */ 
             void translate(int x, int y);
+            /*!
+             *  \brief Foncteur de la méthode translate qui réalise donc la translation d'un objet.
+             *  \param x : position en x de la souris.
+             *  \param y : position en y de la souris.
+             */ 
+            void operator()(int x, int y);
 
             bool isRevert = false; /*!< Booléen pour savoir si une symétrie à été effectué*/
                 
         private:        
-            int sizeCote; /*!< Taille du coté de la forme*/
+            double sizeCote; /*!< Taille du coté de la forme*/
             std::vector<double> px; /*!< Coordonnée en x*/
             std::vector<double> py; /*!< Coordonnée en y*/
             std::vector<double> center; /*!< Coordonnée du centre*/
     };
     void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder);
-    void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, std::vector<MLV_Color> colorShape, MLV_Color colorBorder);
+    void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, std::list<MLV_Color> colorShapes, MLV_Color colorBorder);
     bool operator == (const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel) ;
     bool areEqual(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel);
     void saveDraw(const std::vector<std::shared_ptr<geometricShape::Shape>> &fig);  

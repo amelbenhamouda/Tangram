@@ -28,7 +28,7 @@ namespace geometricShape{
              *  \param height
              *  \param width
              */
-            Square(int sizeCote, int width, int height);
+            Square(double sizeCote, int width, int height);
 
             /*!
              *  \brief

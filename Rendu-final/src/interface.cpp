@@ -9,14 +9,15 @@
 
 #include <memory> 
 #include <vector>
+#include <list>
 #include <algorithm>
 #include <cmath>
 #include <fstream>
 #include <iostream>
 #include <string>
 
-std::vector<MLV_Color> figcolor(){
-    std::vector<MLV_Color> figloc;
+std::list<MLV_Color> figcolor(){
+    std::list<MLV_Color> figloc;
     figloc.push_back(MLV_COLOR_GREEN);
     figloc.push_back(MLV_COLOR_PINK);
     figloc.push_back(MLV_COLOR_ORANGE);
@@ -40,7 +41,6 @@ void Interface::initialiseShared(int size, int width, int height, std::vector<st
         shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size * 2, allWidth + 3 * (size + 15), allHeigth));
         shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size * 2, allWidth + 5 * (size + 15), allHeigth));
         shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(round(size * sqrt(2)), allWidth + 7 * (size + 15), allHeigth));
-
         drawAllShapes(shapeShared, figcolor(), MLV_COLOR_RED); 
     }
     catch (std::bad_alloc & e) {
@@ -100,7 +100,7 @@ bool Interface::importDraw (const int n, const int size, std::vector<std::shared
         std::vector<double> pxloc;
         std::vector<double> pyloc;
         std::vector<double> centloc;
-        int sizeloc;
+        double sizeloc;
         int x;
         double valx;
         double valy;
@@ -256,15 +256,17 @@ void Interface::drawJeu(int width, int height) {
     MLV_actualise_window();
     unsigned int nbFig = 1; // figure motif
     bool contour = false; 
-    std::vector<MLV_Color> colorfig = figcolor();
+    std::list<MLV_Color> colorfig = figcolor();
     while (1) {               
         int xInside, yInside;
         MLV_get_mouse_position(&xInside, &yInside);
+        auto fig_i = colorfig.begin();
         std::for_each(fig.begin(), fig.end(), 
-            [&xInside, &yInside, &fig, &motif, &motifBorder, &motifShape , &colorfig](std::shared_ptr<geometricShape::Shape> it){ 
-            it-> moveShape(xInside, yInside, fig, motif, motifShape, motifBorder , colorfig);
+            [&xInside, &yInside, &fig, &motif, &motifBorder, &motifShape , &colorfig ,&fig_i](std::shared_ptr<geometricShape::Shape> it){ 
+            it-> moveShape(xInside, yInside, fig, motif, motifShape, motifBorder , colorfig,fig_i);
             drawAllShapes(fig, colorfig, MLV_COLOR_RED);
             drawAllShapes(motif, motifShape, motifBorder);
+            fig_i++;
         });
             
         if (areEqual(motif, fig) == 1) {
@@ -350,7 +352,7 @@ void Interface::drawJeu(int width, int height) {
                     break;
 	            default: break;
 	        }
-	        MLV_wait_milliseconds(500);
+	       // MLV_wait_milliseconds(500);
 	    }
         MLV_actualise_window();
     }
