@@ -10,7 +10,7 @@ void Board::drawBoard() {
 	MLV_actualise_window();
 }
 
-void Board::drawButtonForBoard(unsigned int numFig) {
+void Board::createButtonForBoard(unsigned int numFig) {
     int y = height / 2;
     int widthButton = round(width / 6);
     int heightButton = round(height / 35);
@@ -27,7 +27,30 @@ void Board::drawButtonForBoard(unsigned int numFig) {
     buttons.insert(std::make_pair(4,Button<int>(x, y + heightButton + interligne, widthButton, heightButton, "Contour")));
     buttons.insert(std::make_pair(5,Button<int>(x, y + (heightButton * 2) + (interligne * 2), widthButton, heightButton, "Sauvegarder")));
     buttons.insert(std::make_pair(6,Button<int>(x, y + (heightButton * 3) + (interligne * 3), widthButton, heightButton, "Quitter")));
+    std::cout << "map size: " << buttons.size() << std::endl; 
+    for (auto button : buttons) {
+        std::cout << "draw buton"<< std::endl;
+        button.second.drawButton(interligne, MLV_COLOR_GREY, MLV_COLOR_BLACK, MLV_COLOR_WHITE);
+    }
+    
+}
+
+void Board::drawButtonForBoard(unsigned int numFig) {
+    int y = height / 2;
+    //int widthButton = round(width / 6);
+    int heightButton = round(height / 35);
+    int interligne = 15;
+    int x = width - 300;
+    int size = 25;
+    std::cout << "std(numfig) " <<(std::to_string(numFig)).c_str() << std::endl;
     std::cout << "map size: " << buttons.size() << std::endl;
+    // x, y La coordonnée en X, Y de la position du coin Nord-Ouest de la boîte.
+    //buttons.clear();
+    std::map<int,Button<int>>::iterator it = buttons.find(2);
+    std::cout << "map it: " << it->first << std::endl;
+    buttons.erase(it);
+    buttons.insert(std::make_pair(2,Button<int>(x + heightButton + interligne, y, size, heightButton, (std::to_string(numFig)).c_str())));
+    
     for (auto button : buttons) {
         std::cout << "draw buton"<< std::endl;
         button.second.drawButton(interligne, MLV_COLOR_GREY, MLV_COLOR_BLACK, MLV_COLOR_WHITE);

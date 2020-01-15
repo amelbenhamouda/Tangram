@@ -204,6 +204,7 @@ void geometricShape::Shape::operator()(int x, int y) {
 
 void geometricShape::Shape::reverse() {
     rotateCenter(180);
+    MLV_wait_milliseconds(500);
 }
 
 bool geometricShape::Shape::isInside(const int &x, const int &y) const {

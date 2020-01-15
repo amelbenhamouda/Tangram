@@ -246,7 +246,7 @@ void Interface::drawJeu(int width, int height) {
     MLV_Color motifShape = MLV_COLOR_BLACK ;
     
     board.drawBoard();
-    board.drawButtonForBoard(1);
+    board.createButtonForBoard(1);
 
     std::vector<std::shared_ptr<geometricShape::Shape>> fig;
     initialiseShared(size, width, height, fig);
