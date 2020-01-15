@@ -1,4 +1,4 @@
-TARGET = main rigth_triangle square parallelogram shape menu board interface #button
+TARGET = main rigth_triangle square parallelogram shape menu board interface 
 
 ##########################################################"
 
@@ -39,7 +39,7 @@ bin/menu.o: menu.cpp menu.hpp #button.hpp
 #bin/button.o: button.cpp button.hpp
 #	g++ $(CFLAGS) -c $< -o $@
 
-bin/interface.o: interface.cpp interface.hpp menu.hpp board.hpp shape.hpp rigth_triangle.hpp parallelogram.hpp square.hpp #button.hpp
+bin/interface.o: interface.cpp interface.hpp menu.hpp board.hpp shape.hpp rigth_triangle.hpp parallelogram.hpp square.hpp button.hpp
 	g++ $(CFLAGS) -c $< -o $@
 
 bin/main.o: main.cpp interface.hpp menu.hpp
