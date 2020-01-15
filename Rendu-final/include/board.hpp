@@ -52,7 +52,7 @@
 	    	 *
 			 *  \param numFig
 			 */
-	    	void drawButtonForBoard(int numFig);
+	    	void drawButtonForBoard(unsigned int numFig);
 
 	    	/*!
 	    	 *  \brief

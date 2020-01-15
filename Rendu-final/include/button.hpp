@@ -19,7 +19,7 @@
             T y; /*!<  ... */
             T width; /*!< La longeur de la fenêtre*/
 			T height; /*!< La largeur de la fenêtre*/
-            const std::string message; /*!<  ... */
+            std::string message; /*!<  ... */
             T interligne; /*!<  ... */
             MLV_Color borderColor; /*!<  ... */
             MLV_Color textColor; /*!<  ... */
@@ -41,7 +41,7 @@
 			 *  \param height
 			 *  \param message
 			 */
-	    	Button(T x, T y, T width, T height, const std::string message);
+	    	Button(T x, T y, T width, T height,  std::string message);
             
             /*!
 			 * 
@@ -70,7 +70,7 @@
 template <class T>
 Button<T>::Button() : x(0), y(0), width(0), height(0), message(0), interligne(0), borderColor(MLV_COLOR_BLACK), textColor(MLV_COLOR_BLACK), backgroundColor(MLV_COLOR_BLACK) {}
 template <class T>
-Button<T>::Button(T x, T y, T width, T height, const std::string message) : x(x), y(y), width(width), height(height), message(message), interligne(0), borderColor(MLV_COLOR_BLACK), textColor(MLV_COLOR_BLACK), backgroundColor(MLV_COLOR_BLACK) {}
+Button<T>::Button(T x, T y, T width, T height,  std::string message) : x(x), y(y), width(width), height(height), message(message), interligne(0), borderColor(MLV_COLOR_BLACK), textColor(MLV_COLOR_BLACK), backgroundColor(MLV_COLOR_BLACK) {}
 template <class T>
 Button<T>::~Button(){}
 

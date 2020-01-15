@@ -10,14 +10,14 @@ void Board::drawBoard() {
 	MLV_actualise_window();
 }
 
-void Board::drawButtonForBoard(int numFig) {
+void Board::drawButtonForBoard(unsigned int numFig) {
     int y = height / 2;
     int widthButton = round(width / 6);
     int heightButton = round(height / 35);
     int interligne = 15;
     int x = width - 300;
     int size = 25;
-
+    std::cout << "std(numfig) " <<(std::to_string(numFig)).c_str() << std::endl;
     // x, y La coordonnée en X, Y de la position du coin Nord-Ouest de la boîte.
     buttons.insert(std::make_pair(1,Button<int>(x, y, size, heightButton, "<-")));
     buttons.insert(std::make_pair(2,Button<int>(x + heightButton + interligne, y, size, heightButton, (std::to_string(numFig)).c_str())));
@@ -27,8 +27,10 @@ void Board::drawButtonForBoard(int numFig) {
     buttons.insert(std::make_pair(6,Button<int>(x, y + (heightButton * 3) + (interligne * 3), widthButton, heightButton, "Quitter")));
 
     for (auto button : buttons) {
+        std::cout << "draw buton"<< std::endl;
         button.second.drawButton(interligne, MLV_COLOR_GREY, MLV_COLOR_BLACK, MLV_COLOR_WHITE);
     }
+    
 }
 
 int Board::inBoard(int pX, int pY) {

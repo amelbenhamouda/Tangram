@@ -42,4 +42,5 @@ geometricShape::RigthTriangle::RigthTriangle(double sizeCote, int width, int hei
 void geometricShape::RigthTriangle::display(std::ostream & os) const {
     os << "[RigthTriangle]";
     geometricShape::Shape::display();
+    os << "Hauteur: "<< hauteur << std::endl;
 }

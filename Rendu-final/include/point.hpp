@@ -70,7 +70,7 @@ namespace geometricShape{
 
     template <class T>
     Point<T>::Point(std::initializer_list<T> list_x,std::initializer_list<T> list_y) : _px(list_x),_py(list_y){
-                std::cout << "Point avec list d'initialisation"<< std::endl;
+                //std::cout << "Point avec list d'initialisation"<< std::endl;
             };
 
 }

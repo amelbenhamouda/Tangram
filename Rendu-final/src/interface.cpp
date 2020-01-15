@@ -237,7 +237,7 @@ void save(int width, int height, std::vector<std::shared_ptr<geometricShape::Sha
 
 void Interface::drawJeu(int width, int height) {
     Board board(width, height);
-    int numFig = 1;
+    //int numFig = 1;
     MLV_draw_filled_rectangle(0, 0, width, height, MLV_COLOR_BLACK);
     MLV_actualise_window();
     /* Loading contour. */
@@ -246,8 +246,8 @@ void Interface::drawJeu(int width, int height) {
     MLV_Color motifShape = MLV_COLOR_BLACK ;
     
     board.drawBoard();
-    board.drawButtonForBoard(numFig);
-    numFig++;
+    board.drawButtonForBoard(1);
+
     std::vector<std::shared_ptr<geometricShape::Shape>> fig;
     initialiseShared(size, width, height, fig);
 
@@ -257,7 +257,9 @@ void Interface::drawJeu(int width, int height) {
     unsigned int nbFig = 1; // figure motif
     bool contour = false; 
     std::list<MLV_Color> colorfig = figcolor();
-    while (1) {               
+    //std::cout << "oui";
+    while (1) {
+        //board.drawButtonForBoard(nbFig);               
         int xInside, yInside;
         MLV_get_mouse_position(&xInside, &yInside);
         auto fig_i = colorfig.begin();
@@ -292,6 +294,7 @@ void Interface::drawJeu(int width, int height) {
         drawAllShapes(fig, colorfig, MLV_COLOR_RED);
         bool next;
         if ((MLV_get_mouse_button_state(MLV_BUTTON_LEFT) == MLV_PRESSED)) {
+
             int bouton = board.inBoard(xInside, yInside);
             switch (bouton) {
                 case 0: 
@@ -310,7 +313,7 @@ void Interface::drawJeu(int width, int height) {
 	                };
 	                break;
 	            case 1: 
-                    std::cout << "Num Fig" << std::endl;
+                    std::cout << "Num Fig: " << nbFig << std::endl;
                     break;
 	            case 2: 
 	                std::cout << "Fleche droite" << std::endl;
@@ -351,7 +354,15 @@ void Interface::drawJeu(int width, int height) {
                     exit(EXIT_SUCCESS); 
                     break;
 	            default: break;
-	        }
+	        } 
+
+            // int x,y;s
+            while(MLV_get_mouse_button_state(MLV_BUTTON_LEFT) != MLV_RELEASED ){
+                MLV_wait_milliseconds(500);
+            }
+            // std::cout << MLV_wait_event <<
+          
+            
 	       // MLV_wait_milliseconds(500);
 	    }
         MLV_actualise_window();

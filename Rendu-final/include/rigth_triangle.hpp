@@ -24,36 +24,35 @@ namespace geometricShape{
             /*!
              *  \brief
              *
-             *  \param sizeCote
-             *  \param height
-             *  \param width
+             *  \brief Constructeur de la class RigtTriangle 
+             *  Le constructeur reçoit en entrer la taille d'un coté et la position du triangle droit dans la fenêtre.
+             *  \param int sizeCote : taille d'un coté du triangle rectangle
+             *  \param width : emplacement du premier point en largeur
+             *  \param height : emplacement du premier point en hauteur
              */
             RigthTriangle(double sizeCote, int width, int height);
 
             /*!
-             *  \brief
-             * 
+             *  \brief destructeur de la class RigthTriangle   
              */
             virtual ~RigthTriangle();
 
             /*!
-             *  \brief
-             *
-             *  \param tc
+             *  \brief Constructeur de copie
+             *  \param tc : objet de type RigthTriangle à copié
              */
             RigthTriangle(const RigthTriangle &tc);
 
             /*!
-             *  \brief
-             *
-             *  \param tc
+             *  \brief Opérateur de copie
+             *  \param tc : objet de type RigthTriangle à copié
              */
             RigthTriangle & operator=(const RigthTriangle &tc);
 
             /*!
-             *  \brief
-             *
-             *  \param out
+             *  \brief méthode d'affichage pour le fulx de sortie,
+             *  Cette méthode permet d'afficher les paramètres de l'objet RigthTriangle dans un flux de sortie ( par défault std::cout).
+             *  \param out : flux de sortie, par default std::cout
              */
             void display(std::ostream & out = std::cout) const;
 
