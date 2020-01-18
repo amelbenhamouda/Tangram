@@ -23,16 +23,9 @@ geometricShape::RigthTriangle::RigthTriangle(double sizeCote, int width, int hei
     std::vector<double> center;
     double dw = (double)width;
     double dh = (double)height;
-    Point<double> point_triangle({dw,dw+_size_cote,dw},{dh,dh,dh+_size_cote});
-   // Point<double> test_py{height,height,height+_size_cote};
-    /*_px.push_back(width);
-    _px.push_back(width + _size_cote);
-    _px.push_back(width);
-    _py.push_back(height);
-    _py.push_back(height);
-    _py.push_back(height + _size_cote);*/
-    _px=point_triangle.get_Px();
-    _py=point_triangle.get_Py();
+    Point<double> point_triangle({dw, dw + _size_cote, dw}, {dh, dh, dh + _size_cote});
+    _px = point_triangle.get_Px();
+    _py = point_triangle.get_Py();
     center.push_back((double)width + (double)_size_cote / 3);
     center.push_back((double)height + (double)_size_cote / 3);
     hauteur = sqrt(pow(_size_cote, 2) * 2) / 2;

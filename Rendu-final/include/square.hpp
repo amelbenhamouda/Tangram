@@ -10,7 +10,7 @@
 #include <iostream>
 #include "../include/shape.hpp"
 
-namespace geometricShape{
+namespace geometricShape {
 
     /*! \class Square
      *  \brief classe representant le carré*

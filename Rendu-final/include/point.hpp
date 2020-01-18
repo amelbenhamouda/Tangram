@@ -10,7 +10,7 @@
 #include <iostream>
 
 
-namespace geometricShape{
+namespace geometricShape {
 
     /*! \class Point
      *  \brief classe Pour créer des points 2D le carré
@@ -20,7 +20,8 @@ namespace geometricShape{
      *        .
      */
 
-    template<class T> class Point {       
+    template<class T> 
+    class Point {       
         public:
             /*!
              *  \brief constructeur de Point
@@ -30,49 +31,52 @@ namespace geometricShape{
              *  \param width
              */
             Point(T x, T y);
+
             /*!
              *  \brief Destructeur de Point
              */
             virtual ~Point();
-                        /*!
+
+            /*!
              *  \brief constructeur avec list d'initialisation de point
              *
              *  \param list_x : liste de coordonnée en x
              *  \param list_y : liste de coordonnée en y 
              */
-            Point(std::initializer_list<T> list_x,std::initializer_list<T> list_y) ;
+            Point(std::initializer_list<T> list_x, std::initializer_list<T> list_y);
+
             /*!
              *  \brief Geter du vecteur _px
              * 
              */
-            std::vector<T> get_Px(){return _px;}
-             /*!
+            std::vector<T> get_Px() {
+                return _px;
+            }
+
+            /*!
              *  \brief \brief Geter du vecteur _py
              * 
              */
-            std::vector<T> get_Py(){return _py;}
-
+            std::vector<T> get_Py() {
+                return _py;
+            }
             
         private:
             std::vector<T> _px;
             std::vector<T> _py;
-
     };
 
     template <class T>
-    Point<T>::Point(T x, T y){
-                _px.push_back(x);
-                _py.push_back(y);
-            };
+    Point<T>::Point(T x, T y) {
+        _px.push_back(x);
+        _py.push_back(y);
+    };
 
     template <class T>
     Point<T>::~Point(){};
 
     template <class T>
-    Point<T>::Point(std::initializer_list<T> list_x,std::initializer_list<T> list_y) : _px(list_x),_py(list_y){
-                //std::cout << "Point avec list d'initialisation"<< std::endl;
-            };
-
+    Point<T>::Point(std::initializer_list<T> list_x, std::initializer_list<T> list_y) : _px(list_x), _py(list_y){};
 }
 
 #endif // POINT_H

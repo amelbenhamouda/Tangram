@@ -12,14 +12,13 @@
 #include <MLV/MLV_all.h>
 #include <memory> // shared_ptr
 
-
 /*!
  *  \namespace geometricShape
  *  \brief  geometricShape.
  *  Le namespace geometricShape permet de regouper les différentes figures et fonction extern des class utiliser pour le tangram.
  *  Les classs du namespace sont shape, rigth_triangle, paralleogram, square. 
  */
-namespace geometricShape{
+namespace geometricShape {
     /*!
      *  \class Shape
      *  \brief Shape.

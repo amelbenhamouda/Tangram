@@ -16,7 +16,7 @@
 #include <iostream>
 #include <string>
 
-std::list<MLV_Color> figcolor(){
+std::list<MLV_Color> figcolor() {
     std::list<MLV_Color> figloc;
     figloc.push_back(MLV_COLOR_GREEN);
     figloc.push_back(MLV_COLOR_PINK);
@@ -30,17 +30,26 @@ std::list<MLV_Color> figcolor(){
 
 void Interface::initialiseShared(int size, int width, int height, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared) {
     shapeShared.clear();
-    int allHeigth = height - 225;
-    int allWidth = 50;
+    int allHeigth = 50; //height - 225;
+    int allWidth = 50 ;//+ 7 * (size + 15); //50;
 
     try {
-        shapeShared.push_back(std::make_shared<geometricShape::Square>(size, allWidth, allHeigth));
-        shapeShared.push_back(std::make_shared<geometricShape::Parallelogram>(size, allWidth + 9 * (size + 15), allHeigth));
-        shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size, allWidth + 1 * (size + 15), allHeigth));
-        shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size, allWidth + 2 * (size + 15), allHeigth));
-        shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size * 2, allWidth + 3 * (size + 15), allHeigth));
-        shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size * 2, allWidth + 5 * (size + 15), allHeigth));
-        shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(round(size * sqrt(2)), allWidth + 7 * (size + 15), allHeigth));
+        // shapeShared.push_back(std::make_shared<geometricShape::Square>(size, allWidth, allHeigth));
+        // shapeShared.push_back(std::make_shared<geometricShape::Parallelogram>(size, allWidth + 9 * (size + 15), allHeigth));
+        // shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size, allWidth + 1 * (size + 15), allHeigth));
+        // shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size, allWidth + 2 * (size + 15), allHeigth));
+        // shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size * 2, allWidth + 3 * (size + 15), allHeigth));
+        // shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size * 2, allWidth + 5 * (size + 15), allHeigth));
+        // shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(round(size * sqrt(2)), allWidth + 7 * (size + 15), allHeigth));
+
+        shapeShared.push_back(std::make_shared<geometricShape::Square>(size, allWidth + 70, allHeigth + 100));
+        shapeShared.push_back(std::make_shared<geometricShape::Parallelogram>(size, allWidth + 110, allHeigth + 500));
+        shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size, allWidth + 70, allHeigth + 300));
+        shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size, allWidth + 70, allHeigth + 450));
+        shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size * 2, allWidth, allHeigth));
+        shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size * 2, allWidth, allHeigth + 200));
+        shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(round(size * sqrt(2)), allWidth, allHeigth + 400));
+
         drawAllShapes(shapeShared, figcolor(), MLV_COLOR_RED); 
     }
     catch (std::bad_alloc & e) {
@@ -114,14 +123,12 @@ bool Interface::importDraw (const int n, const int size, std::vector<std::shared
         }   
         else { 
             std::cout << "  Read error "<< std::endl; 
-            break;
             return 0;
         }
 
         if (importFig.eof()) {
             std::cout << " Eof or figure n° " << n << " does not exist" << std::endl;
             return 0;
-            break;
         }
         for (int i = 0; i < countFig; i++) {
             importFig >> valx;
@@ -141,6 +148,7 @@ bool Interface::importDraw (const int n, const int size, std::vector<std::shared
         if (count == n) {
             sizeloc = valx;
         }
+
         if (count == n) {
             switch(x) {
                 case 1:
@@ -237,11 +245,10 @@ void save(int width, int height, std::vector<std::shared_ptr<geometricShape::Sha
 
 void Interface::drawJeu(int width, int height) {
     Board board(width, height);
-    //int numFig = 1;
     MLV_draw_filled_rectangle(0, 0, width, height, MLV_COLOR_BLACK);
     MLV_actualise_window();
     /* Loading contour. */
-    int size = 100;
+    int size = (width + height) / 25; //100;
     MLV_Color motifBorder = MLV_COLOR_BLACK ;
     MLV_Color motifShape = MLV_COLOR_BLACK ;
     
@@ -257,9 +264,7 @@ void Interface::drawJeu(int width, int height) {
     unsigned int nbFig = 1; // figure motif
     bool contour = false; 
     std::list<MLV_Color> colorfig = figcolor();
-    //std::cout << "oui";
     while (1) {
-        //board.drawButtonForBoard(nbFig);               
         int xInside, yInside;
         MLV_get_mouse_position(&xInside, &yInside);
         auto fig_i = colorfig.begin();
@@ -272,7 +277,6 @@ void Interface::drawJeu(int width, int height) {
         });
             
         if (areEqual(motif, fig) == 1) {
-            std::cout << "equal" << std::endl;
             motifShape = MLV_COLOR_GREEN;
             drawAllShapes(fig, colorfig, MLV_COLOR_RED);
             drawAllShapes(motif, motifShape, motifBorder);
@@ -286,7 +290,6 @@ void Interface::drawJeu(int width, int height) {
 
         if (MLV_get_keyboard_state(MLV_KEYBOARD_LCTRL) == MLV_PRESSED && MLV_get_keyboard_state(MLV_KEYBOARD_s) == MLV_PRESSED) {
             /* Save a polygon for new figure */
-            std::cout << "save" << std::endl;
             save(width, height, fig);
         }
         MLV_draw_filled_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_GRAY);
@@ -294,7 +297,6 @@ void Interface::drawJeu(int width, int height) {
         drawAllShapes(fig, colorfig, MLV_COLOR_RED);
         bool next;
         if ((MLV_get_mouse_button_state(MLV_BUTTON_LEFT) == MLV_PRESSED)) {
-
             int bouton = board.inBoard(xInside, yInside);
             switch (bouton) {
                 case 0: 
@@ -344,7 +346,7 @@ void Interface::drawJeu(int width, int height) {
                     drawAllShapes(motif, motifShape, motifBorder);
                     MLV_actualise_window();
 	                break;
-	            case 4: // Quitter
+	            case 4: // Sauvegarder
 	                std::cout << "Sauvegarde" << std::endl;
                     save(width, height, fig);
                     break;
@@ -356,14 +358,9 @@ void Interface::drawJeu(int width, int height) {
 	            default: break;
 	        } 
 
-            // int x,y;s
             while(MLV_get_mouse_button_state(MLV_BUTTON_LEFT) != MLV_RELEASED ){
                 MLV_wait_milliseconds(500);
             }
-            // std::cout << MLV_wait_event <<
-          
-            
-	       // MLV_wait_milliseconds(500);
 	    }
         MLV_actualise_window();
     }

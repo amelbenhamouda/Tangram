@@ -9,9 +9,8 @@
 #include <vector>
 #include <iostream>
 #include "../include/shape.hpp"
-//#include "../include/point.hpp"
 
-namespace geometricShape{
+namespace geometricShape {
 	/*! \class RigthTriangle
      *  \brief classe representant le trianble
      *

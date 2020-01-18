@@ -12,8 +12,8 @@
 //valgrind --leak-check=full ./Tangram
 
 int main( int argc, char *argv[] ){
-    int width = 1500, height = 1000;
-    //int width = 1200, height = 600;
+    //int width = 1500, height = 1000;
+    int width = 1350, height = 700;
     Menu menu(width, height);
     Interface interface;
     int x, y ; //Point
@@ -25,7 +25,7 @@ int main( int argc, char *argv[] ){
     MLV_actualise_window();
     MLV_wait_mouse(&x, &y);
     bool action = true;
-    while (action){
+    while (action) {
         if (menu.inMenu(x, y) == 0) { // Jouer
             std::cout << "Jouer" << std::endl;
             // Afficher board

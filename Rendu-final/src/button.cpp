@@ -1,4 +1,4 @@
-// #include "../include/button.hpp"
+#include "../include/button.hpp"
 // Button::Button() : x(0), y(0), width(0), height(0), message(0), interligne(0), borderColor(MLV_COLOR_BLACK), textColor(MLV_COLOR_BLACK), backgroundColor(MLV_COLOR_BLACK) {}
 
 // Button::Button(int x, int y, int width, int height, const std::string message) : x(x), y(y), width(width), height(height), message(message), interligne(0), borderColor(MLV_COLOR_BLACK), textColor(MLV_COLOR_BLACK), backgroundColor(MLV_COLOR_BLACK) {}

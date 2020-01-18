@@ -10,7 +10,7 @@
 #include <iostream>
 #include "../include/shape.hpp"
 
-namespace geometricShape{
+namespace geometricShape {
     /*! \class Parallelogram
      *  \brief classe representant le parallelogram
      *
