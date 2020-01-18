@@ -30,8 +30,8 @@ std::list<MLV_Color> figcolor() {
 
 void Interface::initialiseShared(int size, int width, int height, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared) {
     shapeShared.clear();
-    int allHeigth = 50; //height - 225;
-    int allWidth = 50 ;//+ 7 * (size + 15); //50;
+    int allHeigth = 50;
+    int allWidth = 50;
 
     try {
         // shapeShared.push_back(std::make_shared<geometricShape::Square>(size, allWidth, allHeigth));
