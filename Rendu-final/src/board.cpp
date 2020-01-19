@@ -31,6 +31,9 @@ void Board::createButtonForBoard(unsigned int numFig) {
 }
 
 void Board::drawButtonForBoard(unsigned int numFig) {
+    if (numFig <= 0) {
+        return;
+    }
     int y = height / 2;
     int heightButton = round(height / 35);
     int interligne = 15;

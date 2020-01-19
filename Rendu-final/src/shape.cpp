@@ -228,17 +228,18 @@ bool geometricShape::Shape::isInside(const int &x, const int &y) const {
     return true;
 }
 
-bool geometricShape::isInsideBoard(const int &x, const int &y, const int &with, const int &heigth, const int &sizeW, const int &sizeH) {
-    std::vector<double> Boardx; // 40, 30, sizex 1150, sizey 950
+bool geometricShape::isInsideBoard(const int &x, const int &y, const int &width, const int &heigth) {
+    std::vector<double> Boardx;
     std::vector<double> Boardy;
     Boardx.push_back(45);
-    Boardy.push_back(35);
-    Boardx.push_back(45 + 1140);
-    Boardy.push_back(35);
-    Boardx.push_back(45 + 1140);
-    Boardy.push_back(35 + 940);
+    Boardx.push_back(width - 270);
+    Boardx.push_back(width - 270);
     Boardx.push_back(45);
-    Boardy.push_back(35 + 940);
+
+    Boardy.push_back(35);
+    Boardy.push_back(35);
+    Boardy.push_back(heigth - 12);
+    Boardy.push_back(heigth - 12);
 
     for (unsigned int i = 0; i < Boardx.size(); i++) {
         int Ax = Boardx[i];
@@ -344,7 +345,7 @@ void geometricShape::Shape::display(std::ostream & os) const {
 }
 
 void geometricShape::saveDraw(const std::vector<std::shared_ptr<geometricShape::Shape>> &fig) {
-    std::ofstream saveFig("savefig.txt",std::ios::app);
+    std::ofstream saveFig("doc/savefig.txt",std::ios::app);
     if (saveFig) {   
         int n = 1;
         for (auto it : fig) {

@@ -149,11 +149,10 @@ namespace geometricShape {
              *  \brief Methode permettant de regardé si un objet va dépasser les bordures de la fenêtre de l'interface.
              *  \param x : postion x de la souris.
              *  \param y : postion y de la souris.
-             *  \param heigth : 
-             *  \param sizeW : 
-             *  \param sizeH : 
+             *  \param width : 
+             *  \param heigth :  
              */  
-            friend bool isInsideBoard(const int &x, const int &y, const int &with, const int &heigth, const int &sizeW, const int &sizeH);
+            friend bool isInsideBoard(const int &x, const int &y, const int &width, const int &heigth);
              
             /*!
              *  \brief Methode permettant de faire la symétrie d'un objet.
@@ -239,7 +238,7 @@ namespace geometricShape {
     bool operator == (const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel) ;
     bool areEqual(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel);
     void saveDraw(const std::vector<std::shared_ptr<geometricShape::Shape>> &fig);  
-    bool isInsideBoard(const int &x, const int &y, const int &with = 0, const int &heigth = 0, const int &sizeW = 0,const int &sizeH = 0);   
+    bool isInsideBoard(const int &x, const int &y, const int &with = 1350, const int &heigth = 700);   
 }
 /*!
  *  \brief Surcharge du flux de sortie.

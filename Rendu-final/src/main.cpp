@@ -27,14 +27,14 @@ int main( int argc, char *argv[] ){
     bool action = true;
     while (action) {
         if (menu.inMenu(x, y) == 0) { // Jouer
-            std::cout << "Jouer" << std::endl;
+            //std::cout << "Jouer" << std::endl;
             // Afficher board
             interface.drawJeu(width, height);
             MLV_actualise_window();
             action = false;
         }
         else if (menu.inMenu(x, y) == 1) {
-            std::cout << "Quitter" << std::endl;
+            //std::cout << "Quitter" << std::endl;
             action = false;
             MLV_free_window();
             exit(EXIT_SUCCESS); 

@@ -34,14 +34,6 @@ void Interface::initialiseShared(int size, int width, int height, std::vector<st
     int allWidth = 50;
 
     try {
-        // shapeShared.push_back(std::make_shared<geometricShape::Square>(size, allWidth, allHeigth));
-        // shapeShared.push_back(std::make_shared<geometricShape::Parallelogram>(size, allWidth + 9 * (size + 15), allHeigth));
-        // shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size, allWidth + 1 * (size + 15), allHeigth));
-        // shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size, allWidth + 2 * (size + 15), allHeigth));
-        // shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size * 2, allWidth + 3 * (size + 15), allHeigth));
-        // shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size * 2, allWidth + 5 * (size + 15), allHeigth));
-        // shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(round(size * sqrt(2)), allWidth + 7 * (size + 15), allHeigth));
-
         shapeShared.push_back(std::make_shared<geometricShape::Square>(size, allWidth + 70, allHeigth + 100));
         shapeShared.push_back(std::make_shared<geometricShape::Parallelogram>(size, allWidth + 110, allHeigth + 500));
         shapeShared.push_back(std::make_shared<geometricShape::RigthTriangle>(size, allWidth + 70, allHeigth + 300));
@@ -62,24 +54,24 @@ void Interface::initialiseShared(int size, int width, int height, std::vector<st
 
 void Interface::initialiseMotif(int size, int width, int height, std::vector<std::shared_ptr<geometricShape::Shape>> &motif) {
     motif.clear();
-    int allHeigth = 250;
-    int allWidth = 300;
+    int allHeigth = 205;
+    int allWidth = 628;
 
     try {
         // Initialisation d'une figure de base - un lapin
         motif.push_back(std::make_shared<geometricShape::Square>(size, allWidth, allHeigth));
         motif.push_back(std::make_shared<geometricShape::Parallelogram>(size, allWidth + size * 2, allHeigth - size));
-        motif[1]->rotateHW(80, 3);
-        motif.push_back(std::make_shared<geometricShape::RigthTriangle>(size, allWidth - round(size / 3.3), allHeigth));
-        motif[2]->rotateHW(-60, 1);
-        motif.push_back(std::make_shared<geometricShape::RigthTriangle>(size, allWidth - round(size / 1.45), allHeigth - round(size / 2.7)));
-        motif[3]->rotateHW(120, 0);
-        motif.push_back(std::make_shared<geometricShape::RigthTriangle>(size * 2, allWidth + round(size / 0.9), allHeigth + 2.98 * size));
-        motif[4]->rotateHW(100, 0);
-        motif.push_back(std::make_shared<geometricShape::RigthTriangle>(size * 2, allWidth + round(size * 3.09), allHeigth + round(size * 2.62)));
-        motif[5]->rotateHW(-80, 0);
-        motif.push_back(std::make_shared<geometricShape::RigthTriangle>(round(size * sqrt(2)), allWidth + round(size * 2.4), allHeigth + round(size * 3.88)));
-        motif[6]->rotateHW(-35, 0);
+        motif[1]->rotateHW(85, 3);
+        motif.push_back(std::make_shared<geometricShape::RigthTriangle>(size, allWidth - round(size / 3.3) - 20, allHeigth));
+        motif[2]->rotateHW(-70, 1);
+        motif.push_back(std::make_shared<geometricShape::RigthTriangle>(size, allWidth - round(size / 1.45) - 12, allHeigth - round(size / 2.7) - 19));
+        motif[3]->rotateHW(110, 0);
+        motif.push_back(std::make_shared<geometricShape::RigthTriangle>(size * 2, allWidth + round(size / 0.9) - 50, allHeigth + 2.98 * size + 2));
+        motif[4]->rotateHW(90, 0);
+        motif.push_back(std::make_shared<geometricShape::RigthTriangle>(size * 2, allWidth + round(size * 3.09) - 47, allHeigth + round(size * 2.62) + 32));
+        motif[5]->rotateHW(-90, 0);
+        motif.push_back(std::make_shared<geometricShape::RigthTriangle>(round(size * sqrt(2)), allWidth + round(size * 2.4) - 73, allHeigth + round(size * 3.88) + 10));
+        motif[6]->rotateHW(-45, 0);
         drawAllShapes(motif, MLV_COLOR_BLACK, MLV_COLOR_ORANGE); 
     }
     catch (std::bad_alloc & e) {
@@ -98,7 +90,7 @@ void Interface::clone(std::vector<std::shared_ptr<geometricShape::Shape>> &clone
 }
 
 bool Interface::importDraw (const int n, const int size, std::vector<std::shared_ptr<geometricShape::Shape>> &motif) {
-    std::ifstream importFig("savefig.txt");
+    std::ifstream importFig("doc/savefig.txt");
     if (!importFig) {
         std::cout << "ERROR: Cannot open savefig.txt." << std::endl;
         return true;
@@ -127,7 +119,7 @@ bool Interface::importDraw (const int n, const int size, std::vector<std::shared
         }
 
         if (importFig.eof()) {
-            std::cout << " Eof or figure n° " << n << " does not exist" << std::endl;
+            //std::cout << " Eof or figure n° " << n << " does not exist" << std::endl;
             return 0;
         }
         for (int i = 0; i < countFig; i++) {
@@ -191,7 +183,6 @@ void Interface::saveFigure(int width, int height, std::vector<std::shared_ptr<ge
     MLV_actualise_window();
 
     int interligne = 40;
-
     Button<int> button1 (round(width / 2), round(height / 2), 50, 100, "Save");
     Button<int> button2 (round(width / 2) + 120, round(height / 2), 50, 100, "Cancel");
     button1.drawButton(interligne, MLV_COLOR_GREY, MLV_COLOR_BLACK, MLV_COLOR_WHITE);
@@ -229,12 +220,12 @@ void save(int width, int height, std::vector<std::shared_ptr<geometricShape::Sha
     bool save = true;
     while (save) {
         if (xInside >= round(width / 2) and xInside <= round(width / 2) + 100 and yInside >= round(height / 2) and yInside <= round(height / 2) + 50) {  // Bouton Save
-            std::cout << "Motif saved" << std::endl;
+            //std::cout << "Motif saved" << std::endl;
             saveDraw(fig);
             save = false;
         }
         else if (xInside >= round(width / 2) + 120 and xInside <= round(width / 2) + 220 and yInside >= round(height / 2) and yInside <= round(height / 2) + 50) {  // Bouton Cancel
-            std::cout << "Cancel" << std::endl;
+            //std::cout << "Cancel" << std::endl;
             save = false;
         }
         else {
@@ -300,7 +291,7 @@ void Interface::drawJeu(int width, int height) {
             int bouton = board.inBoard(xInside, yInside);
             switch (bouton) {
                 case 0: 
-                    std::cout << "Fleche gauche" << std::endl;
+                    //std::cout << "Fleche gauche" << std::endl;
 	                if (nbFig > 0) {
                         nbFig--;
 	                    drawAllShapes(fig, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
@@ -315,10 +306,10 @@ void Interface::drawJeu(int width, int height) {
 	                };
 	                break;
 	            case 1: 
-                    std::cout << "Num Fig: " << nbFig << std::endl;
+                    //std::cout << "Num Fig: " << nbFig << std::endl;
                     break;
 	            case 2: 
-	                std::cout << "Fleche droite" << std::endl;
+	                //std::cout << "Fleche droite" << std::endl;
 	                nbFig++;              
 	                drawAllShapes(fig, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
 	                drawAllShapes(motif, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
@@ -334,8 +325,7 @@ void Interface::drawJeu(int width, int height) {
 	                MLV_actualise_window();
                     break;
                 case 3: // Contour
-                    std::cout << "Contour" << std::endl;
-
+                    //std::cout << "Contour" << std::endl;
                     if ( contour == true ){
                         motifBorder = MLV_COLOR_ORANGE;
                     }
@@ -347,11 +337,11 @@ void Interface::drawJeu(int width, int height) {
                     MLV_actualise_window();
 	                break;
 	            case 4: // Sauvegarder
-	                std::cout << "Sauvegarde" << std::endl;
+	                //std::cout << "Sauvegarde" << std::endl;
                     save(width, height, fig);
                     break;
                 case 5: // Quitter
-                    std::cout << "Quitter" << std::endl;
+                    //std::cout << "Quitter" << std::endl;
                     MLV_free_window();
                     exit(EXIT_SUCCESS); 
                     break;
