@@ -24,6 +24,9 @@ bool geometricShape::Shape::operator==(const Shape & s) const {
     bool ret = false;
     double thresh = round(sizeCote * 0.2);
     unsigned int nbequal = 0;
+    if (px.size() != s.px.size())
+        return false;
+    
     for (unsigned int i = 0; i < px.size(); i++) {
         for (unsigned int j = 0; j < s.px.size(); j++) {
             if ((px[i] <= s.px[j] + thresh) && (px[i] >= s.px[j] - thresh) && (py[i] <= s.py[j] + thresh) && (py[i] >= s.py[j] - thresh)) {
@@ -37,6 +40,17 @@ bool geometricShape::Shape::operator==(const Shape & s) const {
     return ret;
 }
 
+bool  geometricShape::Shape::magnetisme(const Shape &s2) {
+    if(*this==s2){
+        *this=s2 ;
+        //std::cout << ret << std::endl;
+        return true;
+    }
+    return false;
+}
+
+
+
 bool operator==(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel){
     return areEqual(vectShapes, vectModel); 
 }
@@ -44,6 +58,8 @@ bool operator==(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectS
 bool geometricShape::areEqual(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel){
     unsigned int count = 0;
     bool ret = false;
+    drawAllShapes(vectShapes, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
+    drawAllShapes(vectModel, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
     if (vectShapes.size() == vectModel.size()) {
         for (auto shap_it : vectShapes) {
             for (auto model_it : vectModel) {
@@ -132,7 +148,7 @@ void geometricShape::Shape::rotateHW(int angle, unsigned int n) {
     double xM = center[0] - pivoX;
     double yM = center[1] - pivoY;
     center[0] = xM * cos(angleRad) + yM * sin(angleRad) + pivoX;
-    center[1] = xM * sin(angleRad) + yM * cos(angleRad) + pivoY;
+    center[1] = -xM * sin(angleRad) + yM * cos(angleRad) + pivoY;
 } 
 
 void geometricShape::Shape::rotateCenter(int angle, int x,int y, int x0, int y0) {   
@@ -329,6 +345,13 @@ void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<st
                 drawAllShapes(fig, colorfig, MLV_COLOR_RED);
                 MLV_actualise_window();
             }
+            drawAllShapes(motif, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
+            drawAllShapes(fig, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
+            for(auto it : motif){
+                    magnetisme(*it);
+            }
+            drawAllShapes(motif, motifShape, motifBorder);
+            drawAllShapes(fig, colorfig, MLV_COLOR_RED);
         }
         colorfig = colorfig_loc;
         drawAllShapes(motif, motifShape, motifBorder);

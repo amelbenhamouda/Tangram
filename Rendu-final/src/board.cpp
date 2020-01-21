@@ -49,12 +49,18 @@ void Board::drawButtonForBoard(unsigned int numFig) {
 }
 
 int Board::inBoard(int pX, int pY) {
-	int count = 0;
+	unsigned int count = 0;
     for (auto button : buttons) {
         bool ibout = button.second.inButton(pX, pY);
         if (ibout == true) {
             break;
         }
+        count++;
+    }
+    if(count == buttons.size()) {
+        count = 0;
+    }
+    else {
         count++;
     }
     return count;

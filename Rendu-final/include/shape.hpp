@@ -225,6 +225,16 @@ namespace geometricShape {
              */ 
             void operator()(int x, int y);
 
+
+            /*!
+             *  \brief Test si deux objets peuvent être magnétisé 
+             *  Test si l'objet en praramètre et l'objet courant sont égal. 
+             *  Si le test est vrai alors l'objet Shape en paramètre prend la valeur de l'objet courant.
+             *  Renvoie un booléen pour savoir si le magnétisme à eu lieu.
+             *  \param s2 : Objet à tester et à modifier si les test est vrai.
+             */ 
+            bool  magnetisme(const Shape &s2) ;
+
             bool isRevert = false; /*!< Booléen pour savoir si une symétrie à été effectué*/
                 
         private:        

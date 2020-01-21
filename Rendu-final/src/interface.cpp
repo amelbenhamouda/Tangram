@@ -256,6 +256,7 @@ void Interface::drawJeu(int width, int height) {
     bool contour = false; 
     std::list<MLV_Color> colorfig = figcolor();
     while (1) {
+        
         int xInside, yInside;
         MLV_get_mouse_position(&xInside, &yInside);
         auto fig_i = colorfig.begin();
@@ -287,10 +288,15 @@ void Interface::drawJeu(int width, int height) {
         drawAllShapes(motif, motifShape, motifBorder);
         drawAllShapes(fig, colorfig, MLV_COLOR_RED);
         bool next;
+
         if ((MLV_get_mouse_button_state(MLV_BUTTON_LEFT) == MLV_PRESSED)) {
             int bouton = board.inBoard(xInside, yInside);
+           // std::cout << bouton << std::endl;
+
             switch (bouton) {
-                case 0: 
+                case 0:
+                    break;
+                case 1: 
                     //std::cout << "Fleche gauche" << std::endl;
 	                if (nbFig > 0) {
                         nbFig--;
@@ -303,12 +309,15 @@ void Interface::drawJeu(int width, int height) {
 	                    drawAllShapes(fig, colorfig,MLV_COLOR_RED);
 	                    board.drawButtonForBoard(nbFig);
 	                    MLV_actualise_window();
+                        if(MLV_get_mouse_button_state(MLV_BUTTON_LEFT) != MLV_RELEASED ){
+                            MLV_wait_milliseconds(500);
+                        }
 	                };
 	                break;
-	            case 1: 
+	            case 2: 
                     //std::cout << "Num Fig: " << nbFig << std::endl;
                     break;
-	            case 2: 
+	            case 3: 
 	                //std::cout << "Fleche droite" << std::endl;
 	                nbFig++;              
 	                drawAllShapes(fig, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
@@ -316,6 +325,7 @@ void Interface::drawJeu(int width, int height) {
 	                next = importDraw(nbFig, size, motif);
 	                if (next == false) {
                         nbFig--;
+
                     } 
 	                motifShape = MLV_COLOR_BLACK;
 	                drawAllShapes(motif, motifShape, motifBorder);
@@ -323,8 +333,11 @@ void Interface::drawJeu(int width, int height) {
 	                drawAllShapes(fig, colorfig, MLV_COLOR_RED);
 	                board.drawButtonForBoard(nbFig);
 	                MLV_actualise_window();
+                    if(MLV_get_mouse_button_state(MLV_BUTTON_LEFT) != MLV_RELEASED ){
+                        MLV_wait_milliseconds(500);
+                    }
                     break;
-                case 3: // Contour
+                case 4: // Contour
                     //std::cout << "Contour" << std::endl;
                     if ( contour == true ){
                         motifBorder = MLV_COLOR_ORANGE;
@@ -336,11 +349,11 @@ void Interface::drawJeu(int width, int height) {
                     drawAllShapes(motif, motifShape, motifBorder);
                     MLV_actualise_window();
 	                break;
-	            case 4: // Sauvegarder
+	            case 5: // Sauvegarder
 	                //std::cout << "Sauvegarde" << std::endl;
                     save(width, height, fig);
                     break;
-                case 5: // Quitter
+                case 6: // Quitter
                     //std::cout << "Quitter" << std::endl;
                     MLV_free_window();
                     exit(EXIT_SUCCESS); 
@@ -348,9 +361,6 @@ void Interface::drawJeu(int width, int height) {
 	            default: break;
 	        } 
 
-            while(MLV_get_mouse_button_state(MLV_BUTTON_LEFT) != MLV_RELEASED ){
-                MLV_wait_milliseconds(500);
-            }
 	    }
         MLV_actualise_window();
     }
