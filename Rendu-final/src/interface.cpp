@@ -348,6 +348,9 @@ void Interface::drawJeu(int width, int height) {
                     contour = !contour;
                     drawAllShapes(motif, motifShape, motifBorder);
                     MLV_actualise_window();
+                    if(MLV_get_mouse_button_state(MLV_BUTTON_LEFT) != MLV_RELEASED ){
+                        MLV_wait_milliseconds(500);
+                    }
 	                break;
 	            case 5: // Sauvegarder
 	                //std::cout << "Sauvegarde" << std::endl;
