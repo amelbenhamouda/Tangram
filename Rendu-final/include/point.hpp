@@ -1,6 +1,6 @@
 /*!
- *  \file square.hpp
- *  \brief Header file of square.cpp.
+ *  \file point.hpp
+ *  \brief Header file of point.cpp.
  *  \author BEN HAMOUDA Amel & DURAND Aurélien
  */
 
@@ -14,7 +14,7 @@ namespace geometricShape {
 
     /*! \class Point
      *  \brief classe Pour créer des points 2D le carré
-     *
+     *  \tparam T Type associé à un bouton (int, double,...)
      *  Square hérite de geometricShape::Shape et calcul un carré en fonction de la taille de son côté.
      *  Le premier point est dessiné à la largeur et à la hauteur de position données.
      *        .

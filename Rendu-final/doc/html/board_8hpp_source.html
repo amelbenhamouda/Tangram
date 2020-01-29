@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Tangram:  Fichier source de include/board.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="titre.jpg"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Tangram
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">board.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="board_8hpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifndef BOARD_H</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define BOARD_H</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">    #include &lt;iostream&gt;</span> </div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">    #include &lt;MLV/MLV_all.h&gt;</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">    #include &lt;map&gt;</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">    #include &lt;cmath&gt;</span></div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; </div><div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_button.html">   15</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_button.html">Button</a>;</div><div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_board.html">   21</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_board.html">Board</a> {</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keyword">private</span>:</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            <span class="keywordtype">int</span> width; </div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="keywordtype">int</span> height; </div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            std::map&lt;int, Button&lt;int&gt;&gt; buttons; </div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">public</span>:</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <a class="code" href="class_board.html#aaa5fa080b8caf42a9a8309e4fc45a045">Board</a>(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height);</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keyword">virtual</span><a class="code" href="class_board.html#a2fba9e5428840eb48645c078b9f0dcce">~Board</a>();</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="class_board.html#a1845216283a171939dcb477dce3a17b8">drawBoard</a>();</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="class_board.html#a2d04e2638eb72204e89a2aab9991a949">createButtonForBoard</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> numFig) ;</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="class_board.html#acf0a6b5036a711d3ef207356f330d830">drawButtonForBoard</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> numFig);</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordtype">int</span> <a class="code" href="class_board.html#ac61d62b0969aa0a9f58d280d86bfd011">inBoard</a>(<span class="keywordtype">int</span> pX, <span class="keywordtype">int</span> pY);</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    };</div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#endif // BOARD_H</span></div><div class="ttc" id="class_board_html_acf0a6b5036a711d3ef207356f330d830"><div class="ttname"><a href="class_board.html#acf0a6b5036a711d3ef207356f330d830">Board::drawButtonForBoard</a></div><div class="ttdeci">void drawButtonForBoard(unsigned int numFig)</div></div>
+<div class="ttc" id="class_board_html_aaa5fa080b8caf42a9a8309e4fc45a045"><div class="ttname"><a href="class_board.html#aaa5fa080b8caf42a9a8309e4fc45a045">Board::Board</a></div><div class="ttdeci">Board(int width, int height)</div><div class="ttdoc">Constructeur. </div></div>
+<div class="ttc" id="class_board_html_a2fba9e5428840eb48645c078b9f0dcce"><div class="ttname"><a href="class_board.html#a2fba9e5428840eb48645c078b9f0dcce">Board::~Board</a></div><div class="ttdeci">virtual ~Board()</div><div class="ttdoc">Destructeur. </div></div>
+<div class="ttc" id="class_board_html"><div class="ttname"><a href="class_board.html">Board</a></div><div class="ttdoc">classe representant le plateau de jeu </div><div class="ttdef"><b>Definition:</b> board.hpp:21</div></div>
+<div class="ttc" id="class_board_html_a2d04e2638eb72204e89a2aab9991a949"><div class="ttname"><a href="class_board.html#a2d04e2638eb72204e89a2aab9991a949">Board::createButtonForBoard</a></div><div class="ttdeci">void createButtonForBoard(unsigned int numFig)</div></div>
+<div class="ttc" id="class_board_html_a1845216283a171939dcb477dce3a17b8"><div class="ttname"><a href="class_board.html#a1845216283a171939dcb477dce3a17b8">Board::drawBoard</a></div><div class="ttdeci">void drawBoard()</div><div class="ttdoc">Dessine un plateau gris. </div></div>
+<div class="ttc" id="class_button_html"><div class="ttname"><a href="class_button.html">Button</a></div><div class="ttdoc">classe representant le bouton </div><div class="ttdef"><b>Definition:</b> board.hpp:15</div></div>
+<div class="ttc" id="class_board_html_ac61d62b0969aa0a9f58d280d86bfd011"><div class="ttname"><a href="class_board.html#ac61d62b0969aa0a9f58d280d86bfd011">Board::inBoard</a></div><div class="ttdeci">int inBoard(int pX, int pY)</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

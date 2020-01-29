@@ -1,0 +1,117 @@
+\hypertarget{classgeometric_shape_1_1_parallelogram}{}\section{Référence de la classe geometric\+Shape\+:\+:Parallelogram}
+\label{classgeometric_shape_1_1_parallelogram}\index{geometric\+Shape\+::\+Parallelogram@{geometric\+Shape\+::\+Parallelogram}}
+
+
+classe representant le parallelogram  
+
+
+
+
+{\ttfamily \#include $<$parallelogram.\+hpp$>$}
+
+
+
+Graphe d\textquotesingle{}héritage de geometric\+Shape\+:\+:Parallelogram\+:
+% FIG 0
+
+
+Graphe de collaboration de geometric\+Shape\+:\+:Parallelogram\+:
+% FIG 1
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classgeometric_shape_1_1_parallelogram_ad65826d9cb438059b6c96e1326ade523}{Parallelogram} (double size\+Cote, int width, int height)
+\begin{DoxyCompactList}\small\item\em Constructeur de la class \hyperlink{classgeometric_shape_1_1_parallelogram}{Parallelogram} qui reçoit en entrer la taille d\textquotesingle{}un coté et la \hyperlink{classgeometric_shape_1_1_parallelogram}{Parallelogram} du carré dans la fenêtre. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgeometric_shape_1_1_parallelogram_a41a2cf96ae46971e44b010114fb12b5f}\label{classgeometric_shape_1_1_parallelogram_a41a2cf96ae46971e44b010114fb12b5f}} 
+virtual \hyperlink{classgeometric_shape_1_1_parallelogram_a41a2cf96ae46971e44b010114fb12b5f}{$\sim$\+Parallelogram} ()
+\begin{DoxyCompactList}\small\item\em destructeur de la class \hyperlink{classgeometric_shape_1_1_parallelogram}{Parallelogram} \end{DoxyCompactList}\item 
+\hyperlink{classgeometric_shape_1_1_parallelogram_a170744d0daa3346a5e867ca4ed566fec}{Parallelogram} (const \hyperlink{classgeometric_shape_1_1_parallelogram}{Parallelogram} \&tc)
+\item 
+\hyperlink{classgeometric_shape_1_1_parallelogram}{Parallelogram} \& \hyperlink{classgeometric_shape_1_1_parallelogram_a3c408a16bc3c0e40e0c26fde2279a9b9}{operator=} (const \hyperlink{classgeometric_shape_1_1_parallelogram}{Parallelogram} \&tc)
+\begin{DoxyCompactList}\small\item\em Constructeur de copie. \end{DoxyCompactList}\item 
+void \hyperlink{classgeometric_shape_1_1_parallelogram_a3e9f220add215e8f594da75daf19a8c1}{display} (std\+::ostream \&out=std\+::cout) const override
+\begin{DoxyCompactList}\small\item\em méthode d\textquotesingle{}affichage pour le fulx de sortie, Cette méthode permet d\textquotesingle{}afficher les paramètres de l\textquotesingle{}objet \hyperlink{classgeometric_shape_1_1_parallelogram}{Parallelogram} dans un flux de sortie ( par défault std\+::cout). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgeometric_shape_1_1_parallelogram_a7e21f9f5a2461973cf3cc3c14efb6e1a}\label{classgeometric_shape_1_1_parallelogram_a7e21f9f5a2461973cf3cc3c14efb6e1a}} 
+void \hyperlink{classgeometric_shape_1_1_parallelogram_a7e21f9f5a2461973cf3cc3c14efb6e1a}{reverse} () override
+\begin{DoxyCompactList}\small\item\em Surcharge de la méthode reverse specifique aux parallelogram La méthode reverse doit être surcharger car contrairement à la class \hyperlink{classgeometric_shape_1_1_square}{Square} et à la class \hyperlink{classgeometric_shape_1_1_rigth_triangle}{Rigth\+Triangle}, on doit réalisé le mirroir de celle-\/ci. On réalise donc la symétrie du parallèlogram dans cette méthode car un retournement par 180° n\textquotesingle{}est pas la symétrie du parralèlogramme. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Membres hérités additionnels}
+
+
+\subsection{Description détaillée}
+classe representant le parallelogram 
+
+Parallélogramme hérite de \hyperlink{classgeometric_shape_1_1_shape}{geometric\+Shape\+::\+Shape} et calcul un parallélogramme en fonction de la taille de son côté. Le premier point est dessiné à la largeur et à la hauteur de position données. 
+
+\subsection{Documentation des constructeurs et destructeur}
+\mbox{\Hypertarget{classgeometric_shape_1_1_parallelogram_ad65826d9cb438059b6c96e1326ade523}\label{classgeometric_shape_1_1_parallelogram_ad65826d9cb438059b6c96e1326ade523}} 
+\index{geometric\+Shape\+::\+Parallelogram@{geometric\+Shape\+::\+Parallelogram}!Parallelogram@{Parallelogram}}
+\index{Parallelogram@{Parallelogram}!geometric\+Shape\+::\+Parallelogram@{geometric\+Shape\+::\+Parallelogram}}
+\subsubsection{\texorpdfstring{Parallelogram()}{Parallelogram()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily geometric\+Shape\+::\+Parallelogram\+::\+Parallelogram (\begin{DoxyParamCaption}\item[{double}]{size\+Cote,  }\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})}
+
+
+
+Constructeur de la class \hyperlink{classgeometric_shape_1_1_parallelogram}{Parallelogram} qui reçoit en entrer la taille d\textquotesingle{}un coté et la \hyperlink{classgeometric_shape_1_1_parallelogram}{Parallelogram} du carré dans la fenêtre. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em int} & size\+Cote \+: taille d\textquotesingle{}un coté du \hyperlink{classgeometric_shape_1_1_parallelogram}{Parallelogram} \\
+\hline
+{\em height} & \+: emplacement du premier point en hauteur \\
+\hline
+{\em width} & \+: emplacement du premier point en largeur \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgeometric_shape_1_1_parallelogram_a170744d0daa3346a5e867ca4ed566fec}\label{classgeometric_shape_1_1_parallelogram_a170744d0daa3346a5e867ca4ed566fec}} 
+\index{geometric\+Shape\+::\+Parallelogram@{geometric\+Shape\+::\+Parallelogram}!Parallelogram@{Parallelogram}}
+\index{Parallelogram@{Parallelogram}!geometric\+Shape\+::\+Parallelogram@{geometric\+Shape\+::\+Parallelogram}}
+\subsubsection{\texorpdfstring{Parallelogram()}{Parallelogram()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily geometric\+Shape\+::\+Parallelogram\+::\+Parallelogram (\begin{DoxyParamCaption}\item[{const \hyperlink{classgeometric_shape_1_1_parallelogram}{Parallelogram} \&}]{tc }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Paramètres}
+{\em tc} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Documentation des fonctions membres}
+\mbox{\Hypertarget{classgeometric_shape_1_1_parallelogram_a3e9f220add215e8f594da75daf19a8c1}\label{classgeometric_shape_1_1_parallelogram_a3e9f220add215e8f594da75daf19a8c1}} 
+\index{geometric\+Shape\+::\+Parallelogram@{geometric\+Shape\+::\+Parallelogram}!display@{display}}
+\index{display@{display}!geometric\+Shape\+::\+Parallelogram@{geometric\+Shape\+::\+Parallelogram}}
+\subsubsection{\texorpdfstring{display()}{display()}}
+{\footnotesize\ttfamily void geometric\+Shape\+::\+Parallelogram\+::display (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out = {\ttfamily std\+:\+:cout} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+méthode d\textquotesingle{}affichage pour le fulx de sortie, Cette méthode permet d\textquotesingle{}afficher les paramètres de l\textquotesingle{}objet \hyperlink{classgeometric_shape_1_1_parallelogram}{Parallelogram} dans un flux de sortie ( par défault std\+::cout). 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em out} & \+: flux de sortie, par default std\+::cout \\
+\hline
+\end{DoxyParams}
+
+
+Réimplémentée à partir de \hyperlink{classgeometric_shape_1_1_shape_af666bd629db0595afa79982548b6cf78}{geometric\+Shape\+::\+Shape}.
+
+\mbox{\Hypertarget{classgeometric_shape_1_1_parallelogram_a3c408a16bc3c0e40e0c26fde2279a9b9}\label{classgeometric_shape_1_1_parallelogram_a3c408a16bc3c0e40e0c26fde2279a9b9}} 
+\index{geometric\+Shape\+::\+Parallelogram@{geometric\+Shape\+::\+Parallelogram}!operator=@{operator=}}
+\index{operator=@{operator=}!geometric\+Shape\+::\+Parallelogram@{geometric\+Shape\+::\+Parallelogram}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \hyperlink{classgeometric_shape_1_1_parallelogram}{Parallelogram}\& geometric\+Shape\+::\+Parallelogram\+::operator= (\begin{DoxyParamCaption}\item[{const \hyperlink{classgeometric_shape_1_1_parallelogram}{Parallelogram} \&}]{tc }\end{DoxyParamCaption})}
+
+
+
+Constructeur de copie. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em tc} & \+: objet de type \hyperlink{classgeometric_shape_1_1_parallelogram}{Parallelogram} à copié \\
+\hline
+\end{DoxyParams}
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{parallelogram_8hpp}{parallelogram.\+hpp}\end{DoxyCompactItemize}

@@ -43,7 +43,7 @@
             virtual~Board();
 
             /*!
-             *  \brief
+             *  \brief Dessine un plateau gris
 			 * 
 			 */
 	    	void drawBoard();
