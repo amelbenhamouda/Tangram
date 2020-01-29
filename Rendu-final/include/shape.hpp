@@ -1,6 +1,6 @@
 /*!
  *  \file shape.hpp
- *  \brief Header file of shape.cpp.
+ *  \brief Le fichier d'entête de shape.cpp.
  *  \author BEN HAMOUDA Amel & DURAND Aurélien
  */
 
@@ -12,39 +12,43 @@
 #include <MLV/MLV_all.h>
 #include <memory> // shared_ptr
 
-
+/*! \class Board
+ *  \brief Déclaration de l'objet Board.
+ *
+ */
 class Board;
+
 /*!
  *  \namespace geometricShape
- *  \brief  geometricShape.
- *  Le namespace geometricShape permet de regouper les différentes figures et fonction extern des class utiliser pour le tangram.
- *  Les classs du namespace sont shape, rigth_triangle, paralleogram, square. 
+ *  \brief  Espace de nommage geometricShape regroupant les différentes classes de figures utilisées.
+ *
+ *  Le namespace geometricShape permet de regouper les différentes figures et fonctions extern des class utiliser pour le tangram.
+ *  Les class du namespace sont shape, rigth_triangle, paralleogram, square. 
  */
-
 namespace geometricShape {
     /*!
      *  \class Shape
-     *  \brief Shape.
-     *  La class Shape est la class mère des figures du tangram elle permet aprés héritage de construire l'ensemble des figures(rigth_triangle, paralleogram, square)
+     *  \brief Classe Shape.
+     *
+     *  La classe Shape est la class mère des figures du tangram elle permet aprés héritage de construire l'ensemble des figures(rigth_triangle, paralleogram, square)
      *  et regroupe l'ensemble des méthodes permettant de manipuler les formes quand celle-ci n'ont pas besoin d'être virtuel.
      * 
      */
-    
     class Shape {       
         public:
             /*!
-             *  \brief Constructeur
+             *  \brief Constructeur de la class Shape.
              *
-             *  Constructeur explicit de la classe Shape
+             *  Constructeur explicit de la classe Shape.
              *
-             *  \param sizeCote : taille du coté de la figure
-             *  \param width : emplacement en ligne du premier point de construction
-             *  \param height : emplacement en collone du premier point de construction
+             *  \param sizeCote : Taille du coté de la figure.
+             *  \param width : Emplacement en ligne du premier point de construction.
+             *  \param height : Emplacement en collone du premier point de construction.
              */
             explicit Shape(double sizeCote, int width, int height);
 
             /*!
-             *  \brief Destructeur
+             *  \brief Destructeur de la class Shape.
              *
              *  Destructeur de la classe Shape déclaré en virtuel car on cette class est hérité par rigth_triangle, paralleogram et square.
              *  Le destructeur n'a pas d'implémentation car les attribut sont statics.
@@ -52,186 +56,213 @@ namespace geometricShape {
             virtual~Shape();
 
             /*!
-             *  \brief Constructeur de copie
+             *  \brief Constructeur de copie.
              *
-             *  Constructeur de copie de la classe Shape 
-             *  \param cshape : figure à copier.
+             *  Constructeur de copie de la classe Shape.
+             *  \param cshape : Figure à copier.
              */
             Shape(const Shape &cshape);
 
             /*!
-             *  \brief Operateur de copie
+             *  \brief Opérateur de copie.
              *
-             *  Assigment par copie de la classe Shape 
-             *  \param cshape : figure à copier.
+             *  Assigment par copie de la classe Shape.
+             *  \param cshape : Figure à copier.
              */
             Shape & operator=(const Shape &cshape);
 
             /*!
-             *  \brief Surcharge de l'opérateur de comparaison pour une figure
-             *  \param cshape : figure à comparer.
-             *  \return Un booléen indiquant l'égalité plus ou moins un seuil par sommets (20% de size_cote)
+             *  \brief Surcharge de l'opérateur de comparaison pour une figure.
+             *  \param cshape : Figure à comparer.
+             *  \return Un booléen indiquant l'égalité plus ou moins un seuil par sommets (20% de size_cote).
              */
             bool operator==(const Shape &cshape) const;
 
             /*!
              *  \brief Surcharge de l'opérateur de comparaison pour un ensemble figure
+             *
              *  \deprecated Pas Opérative pour l'instant utiliser areEqual.
+             *
              *  Fait appel à la surcharge de l' operator== pour une figure afin de comparé un ensemble de figure.
              *  \return Un booléen indiquant l'égalité plus ou moins un seuil par sommets (20% de size_cote)
-             *  \param vectShapes : figures de l'utilisateur à comparer aux modèles.
-             *  \param vectModel : figures modèles à comparer à la figure utilisateur.
+             *  \param vectShapes : Figures de l'utilisateur à comparer aux modèles.
+             *  \param vectModel : Figures modèles à comparer à la figure utilisateur.
              */
             friend bool operator==(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel);
       
             /*!
-             *  \brief Methode de comparaison pour un ensemble figure
+             *  \brief Méthode de comparaison pour un ensemble figure.
+             *
              *  \return Un booléen indiquant l'égalité plus ou moins un seuil (20% de size_cote)
-             *  \param vectShapes : figures de l'utilisateur à comparer aux modèles.
-             *  \param vectModel : figures modèles à comparer à la figure utilisateur.
+             *  \param vectShapes : Figures de l'utilisateur à comparer aux modèles.
+             *  \param vectModel : Figures modèles à comparer à la figure utilisateur.
              */
             friend bool areEqual(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel);
            
             /*!
-             *  \brief Methode permettant de géré les events utilisateur et les rotation/translation des figures.
-             *  \param xInside : position en x de la souris.
-             *  \param yInside :  position en y de la souris.
-             *  \param fig : ensembles des figures de l'utilisateur à bouger/redesinner.
-             *  \param motif : ensembles des figures de du modèle à redesinner.
-             *  \param colorfig : vecteur couleur de la figure.
+             *  \brief Méthode permettant de géré les events utilisateur et les rotation/translation des figures.
+             *
+             *  La méthode moveShape.
+             *
+             *  \param xInside : Position en x de la souris.
+             *  \param yInside :  Position en y de la souris.
+             *  \param fig : Ensembles des figures de l'utilisateur à bouger/redesinner.
+             *  \param motif : Ensembles des figures de du modèle à redesinner.
+             *  \param motifShape : Couleur de l'intérieur du motif.
+             *  \param motifBorder : Couleur du contour du motif.
+             *  \param colorfig : Vecteur couleur de la figure.
+             *  \param fig_num : Itérateur permetant de connaitre la couleur de la figure sélectionner.
+             *  \param board : Objet de la class Board permetant de redessiner le fond de la fenêtre en gris.
+             *  \param wincondi : Booléen pour connaitre l'état du jeu.
              */        
             void moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, MLV_Color motifBorder, std::list<MLV_Color> &colorfig, std::list<MLV_Color>::iterator  fig_num, Board &board, bool &wincondi);
            
             /*!
-             *  \brief Methode permettant desinner une figure de la classe Shape.
-             *  ....
-             *  \param colorShape : 
-             *  \param colorBorder : 
+             *  \brief Méthode permettant desinner une figure de la classe Shape.
+             * 
+             *  \param colorShape : Couleur de l'intérieur de la figure.
+             *  \param colorBorder : Couleur de la bordure de la figure.
              */          
             void draw(MLV_Color colorShape, MLV_Color colorBorder = MLV_COLOR_BLACK) const;
 
             /*!
-             *  \brief Methode de sauvegarder une figure réaliser sur l'interface.
+             *  \brief Méthode de sauvegarder une figure réaliser sur l'interface.
+             *
              *  Sauvegarde les positions x et y de pixels d'une figure ainsi que leurs centres et leur taille dans le fichier savefig.txt.
-             *  \param fig : ensembles des figures de l'utilisateur à sauvegarder.
+             *  \param fig : Ensembles des figures de l'utilisateur à sauvegarder.
              */  
             friend void saveDraw(const std::vector<std::shared_ptr<geometricShape::Shape>> &fig);
 
             /*!
-             *  \brief Methode permettant desinner un ensemble de figures de la classe Shape (tous les objets d'un motif de tangram).
+             *  \brief Méthode permettant desinner un ensemble de figures de la classe Shape (tous les objets d'un motif de tangram).
+             *
              *  Fait appel à MLV_draw_filled_polygon et MLV_draw_polygon.
-             *  \param vectShapes : ensembles des figures de l'utilisateur à desinner.
-             *  \param colorShape : couleur de la forme.
-             *  \param colorBorder : couleur du contour.
+             *  \param vectShapes : Ensembles des figures de l'utilisateur à desinner.
+             *  \param colorShape : Couleur de la forme.
+             *  \param colorBorder : Couleur du contour.
              */  
             friend void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder);
 
             /*!
-             *  \brief Methode permettant de desinner un ensemble de figures de la classe Shape (tous les objets d'un motif de tangram).
+             *  \brief Surcharge de la méthode drawAllShapes pour un vecteur de couleur.
+             *
              *  Fait appel à MLV_draw_filled_polygon et MLV_draw_polygon.
-             *  \param vectShapes : ensembles des figures de l'utilisateur à desinner.
-             *  \param colorShape : vecteur de couleurs de la forme.
-             *  \param colorBorder :  couleur du contour.
+             *  \param vectShapes : Ensembles des figures de l'utilisateur à desinner.
+             *  \param colorShapes : Vecteur de couleurs de la forme.
+             *  \param colorBorder : Couleur du contour.
              */  
             friend void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, std::list<MLV_Color> colorShapes, MLV_Color colorBorder);
            
             /*!
-             *  \brief Methode permettant d'afficher sur la console l'objet souhaité.
+             *  \brief Méthode permettant d'afficher sur la console l'objet souhaité.
+             *
              *   Méthode virtuel car dépend de la figure appelée.
-             *  \param out : flux de sortie sur la console.
+             *  \param out : Flux de sortie sur la console (par défault std::cout).
              */  
             virtual void display(std::ostream & out = std::cout) const;
 
             /*!
-             *  \brief Methode permettant de regardé sur un clique de la souris est compris dans un objet.
-             *  \param x : postion x de la souris.
-             *  \param y : postion y de la souris.
+             *  \brief Méthode permettant de regardé sur un clique de la souris est compris dans un objet.
+             *
+             *  \param x : Postion x de la souris.
+             *  \param y : Postion y de la souris.
              */  
             bool isInside(const int &x, const int &y) const;
 
             /*!
-             *  \brief Methode permettant de regardé si un objet va dépasser les bordures de la fenêtre de l'interface.
-             *  \param x : postion x de la souris.
-             *  \param y : postion y de la souris.
-             *  \param width : 
-             *  \param heigth :  
+             *  \brief Méthode permettant de regardé si un objet va dépasser les bordures de la fenêtre de l'interface.
+             *
+             *  \param x : Postion x de la souris.
+             *  \param y : Postion y de la souris.
+             *  \param width : Position du board en x dans la fenêtre.
+             *  \param heigth : Position du board en y dans la fenêtre.
              */  
             friend bool isInsideBoard(const int &x, const int &y, const int &width, const int &heigth);
              
             /*!
-             *  \brief Methode permettant de faire la symétrie d'un objet.
-             *  déclaré en virtuel car seul le parallelogram necessite une implementation complete de symetrie dans les autres cas on fait une rotation de 180°.
+             *  \brief Méthode permettant de faire la symétrie d'un objet.
+             *
+             *  Déclaré en virtuel car seul le parallelogram necessite une implementation complete de symetrie dans les autres cas on fait une rotation de 180°.
              */ 
             virtual void reverse();
             
             /*!
-             *  \brief Methode permettant de faire la rotation d'un objet par rapport à l'un de ses sommets.
-             *  utiliser danss le main pour constuire une figure de base.
-             *  \param angle : angle de la rotation.
-             *  \param n : n° du sommet qui sera le centre de la rotation.
+             *  \brief Méthode permettant de faire la rotation d'un objet par rapport à l'un de ses sommets.
+             *
+             *  \param angle : Angle de la rotation.
+             *  \param n : Numéro du sommet dans un objet shape qui sera le centre de la rotation.
              */ 
             void rotateHW(int angle, unsigned int n);
             
             /*!
-             *  \brief Seter de la class geometricShape
-             *  \param pXnew : nouvelle ensemble de coordonnée en x.
-             *  \param pYnew : nouvelle ensemble de coordonnée en x.
-             *  \param cnew : nouveau centre.
-             *  \param scnew : nnouvelle taille de coté.
+             *  \brief Seter de la class geometricShape.
+             *
+             *  \param pXnew : Nouvelle ensemble de coordonnée en x.
+             *  \param pYnew : Nouvelle ensemble de coordonnée en x.
+             *  \param cnew : Nouveau centre.
+             *  \param scnew : Nouvelle taille de coté.
              */ 
             void setShape(std::vector<double> &pXnew, std::vector<double> &pYnew, std::vector<double> &cnew, double &scnew);
                 
         protected:
             /*!
-             *  \brief Geter pour sizeCote de la class geometricShape
-             *  renvoie la taille du coté de construction de la forme
+             *  \brief Geter pour sizeCote de la class geometricShape.
+             *
+             *  Renvoie la taille du coté de construction de la forme.
              */ 
             double getSizeCote() const;
 
             /*!
              *  \brief Geter pour px la class geometricShape
-             *  renvoie les coordonnées en x de la figure
+             *
+             *  Renvoie les coordonnées en x de la figure
              */ 
             std::vector<double> getPx() const;
 
             /*!
-             *  \brief Geter pour py la class geometricShape
-             *  renvoie les coordonnées en y de la figure
+             *  \brief Geter pour py de la class geometricShape.
+             *
+             *  Renvoie les coordonnées en y de la figure.
              */ 
             std::vector<double> getPy() const;
 
             /*!
-             *  \brief Geter pour center la class geometricShape
-             *  renvoie les coordonnées du centre de la figure.
+             *  \brief Geter pour center la class geometricShape.
+             *
+             *  Renvoie les coordonnées du centre de la figure.
              */ 
             std::vector<double> getCenter() const;
 
             /*!
-             *  \brief Methode permettant de faire la rotation d'un objet par rapport à son centre.
-             *  \param angle : angle de la rotation.
-             *  \param x : position en x de la souris.
-             *  \param y : position en y de la souris.
-             *  \param x0 : position de la souris en x à n-1 ( pour obtenir un deux vecteurs).
-             *  \param y0 :  position de la souris en yà n-1 ( pour obtenir un deux vecteurs).
+             *  \brief Méthode permettant de faire la rotation d'un objet par rapport à son centre.
+             *
+             *  \param angle : Angle de la rotation.
+             *  \param x : Position en x de la souris.
+             *  \param y : Position en y de la souris.
+             *  \param x0 : Position de la souris en x à n-1 ( pour obtenir deux vecteurs).
+             *  \param y0 : Position de la souris en y à n-1 ( pour obtenir deux vecteurs).
              */ 
             void rotateCenter(int angle, int x = 0, int y = 0, int x0 = 0, int y0 = 0);
 
             /*!
-             *  \brief Methode permettant de faire la translation d'un objet.
-             *  \param x : position en x de la souris.
-             *  \param y : position en y de la souris.
+             *  \brief Méthode permettant de faire la translation d'un objet.
+             *
+             *  \param x : Position en x de la souris.
+             *  \param y : Position en y de la souris.
              */ 
             void translate(int x, int y);
             /*!
              *  \brief Foncteur de la méthode translate qui réalise donc la translation d'un objet.
-             *  \param x : position en x de la souris.
-             *  \param y : position en y de la souris.
+             *
+             *  \param x : Position en x de la souris.
+             *  \param y : Position en y de la souris.
              */ 
             void operator()(int x, int y);
 
 
             /*!
-             *  \brief Test si deux objets peuvent être magnétisé 
+             *  \brief Test si deux objets peuvent être magnétisé.
+             *
              *  Test si l'objet en praramètre et l'objet courant sont égal. 
              *  Si le test est vrai alors l'objet Shape en paramètre prend la valeur de l'objet courant.
              *  Renvoie un booléen pour savoir si le magnétisme à eu lieu.
@@ -239,13 +270,13 @@ namespace geometricShape {
              */ 
             bool  magnetisme(const Shape &s2) ;
 
-            bool isRevert = false; /*!< Booléen pour savoir si une symétrie à été effectué*/
+            bool isRevert = false; /*!< Booléen pour savoir si une symétrie à été effectuée.*/
                 
         private:        
-            double sizeCote; /*!< Taille du coté de la forme*/
-            std::vector<double> px; /*!< Coordonnée en x*/
-            std::vector<double> py; /*!< Coordonnée en y*/
-            std::vector<double> center; /*!< Coordonnée du centre*/
+            double sizeCote; /*!< Taille du coté de la forme.*/
+            std::vector<double> px; /*!< Coordonnées en x.*/
+            std::vector<double> py; /*!< Coordonnées en y.*/
+            std::vector<double> center; /*!< Coordonnées du centre.*/
     };
     void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder);
     void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, std::list<MLV_Color> colorShapes, MLV_Color colorBorder);
@@ -256,6 +287,7 @@ namespace geometricShape {
 }
 /*!
  *  \brief Surcharge du flux de sortie.
+ *
  *  Fait appel à la méthode virtuel display .
  */ 
 std::ostream &operator<<(std::ostream &os, const geometricShape::Shape &tr);

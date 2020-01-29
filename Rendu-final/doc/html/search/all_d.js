@@ -1,9 +1,11 @@
 var searchData=
 [
-  ['_7eboard',['~Board',['../class_board.html#a2fba9e5428840eb48645c078b9f0dcce',1,'Board']]],
-  ['_7eparallelogram',['~Parallelogram',['../classgeometric_shape_1_1_parallelogram.html#a41a2cf96ae46971e44b010114fb12b5f',1,'geometricShape::Parallelogram']]],
-  ['_7epoint',['~Point',['../classgeometric_shape_1_1_point.html#a6244b9b50d9633c5d5cf1911ffbb5d07',1,'geometricShape::Point']]],
-  ['_7erigthtriangle',['~RigthTriangle',['../classgeometric_shape_1_1_rigth_triangle.html#a3cad057825bf4f1ca6448686007c1103',1,'geometricShape::RigthTriangle']]],
-  ['_7eshape',['~Shape',['../classgeometric_shape_1_1_shape.html#a4e4470674c16e4a7058554d473aa5fbf',1,'geometricShape::Shape']]],
-  ['_7esquare',['~Square',['../classgeometric_shape_1_1_square.html#adc8b2aafbfccdd1f5aa39a2a518bc9d7',1,'geometricShape::Square']]]
+  ['savedraw',['saveDraw',['../classgeometric_shape_1_1_shape.html#a011759ae83f40587e0f422f2730ecbd4',1,'geometricShape::Shape::saveDraw()'],['../namespacegeometric_shape.html#ac15da5db3762601606a8f804884976d1',1,'geometricShape::saveDraw()']]],
+  ['savefigure',['saveFigure',['../class_interface.html#adcc750a1e9670363c8d41b6ef33146f3',1,'Interface']]],
+  ['setshape',['setShape',['../classgeometric_shape_1_1_shape.html#a393d5df22049c7c5efcab5f96a2d9018',1,'geometricShape::Shape']]],
+  ['shape',['Shape',['../classgeometric_shape_1_1_shape.html',1,'geometricShape::Shape'],['../classgeometric_shape_1_1_shape.html#aa45bec6f55f33a59991f83a1d0843a53',1,'geometricShape::Shape::Shape(double sizeCote, int width, int height)'],['../classgeometric_shape_1_1_shape.html#ad141f6bc47907a6f19825430fc3638e2',1,'geometricShape::Shape::Shape(const Shape &amp;cshape)']]],
+  ['shape_2ehpp',['shape.hpp',['../shape_8hpp.html',1,'']]],
+  ['sizecote',['sizeCote',['../classgeometric_shape_1_1_shape.html#a1fbc9b3cdfcf2170ef9e1c6aaf86402c',1,'geometricShape::Shape']]],
+  ['square',['Square',['../classgeometric_shape_1_1_square.html',1,'geometricShape::Square'],['../classgeometric_shape_1_1_square.html#ac8ab62028f88aa5a1683a287626ab8b3',1,'geometricShape::Square::Square(double sizeCote, int width, int height)'],['../classgeometric_shape_1_1_square.html#af51ec6057f978c91f935b16839dfebd1',1,'geometricShape::Square::Square(const Square &amp;tc)']]],
+  ['square_2ehpp',['square.hpp',['../square_8hpp.html',1,'']]]
 ];

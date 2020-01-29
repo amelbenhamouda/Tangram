@@ -1,6 +1,6 @@
 /*!
  *  \file point.hpp
- *  \brief Header file of point.cpp.
+ *  \brief Le fichier d'entête de point.cpp.
  *  \author BEN HAMOUDA Amel & DURAND Aurélien
  */
 
@@ -9,61 +9,61 @@
 #include <vector>
 #include <iostream>
 
-
 namespace geometricShape {
 
     /*! \class Point
-     *  \brief classe Pour créer des points 2D le carré
-     *  \tparam T Type associé à un bouton (int, double,...)
-     *  Square hérite de geometricShape::Shape et calcul un carré en fonction de la taille de son côté.
-     *  Le premier point est dessiné à la largeur et à la hauteur de position données.
-     *        .
+     *  \brief Classe pour créer des points 2D.
+     *
+     *  \tparam T Type associé à un bouton (int, double,...).
      */
-
     template<class T> 
     class Point {       
         public:
             /*!
-             *  \brief constructeur de Point
+             *  \brief Constructeur de Point.
              *
-             *  \param int sizeCote
-             *  \param height
-             *  \param width
+             *  \param x : La coordonnée x d'un point.
+             *  \param y : La coordonnée y d'un point.
              */
             Point(T x, T y);
 
             /*!
-             *  \brief Destructeur de Point
+             *  \brief Destructeur de Point.
+             *
+             *  Destructeur de la classe Point déclarée en virtuel.
+             *  Le destructeur n'a pas d'implémentation car les attributs sont statics.
              */
             virtual ~Point();
 
             /*!
-             *  \brief constructeur avec list d'initialisation de point
+             *  \brief Constructeur avec une liste d'initialisation de point.
              *
-             *  \param list_x : liste de coordonnée en x
-             *  \param list_y : liste de coordonnée en y 
+             *  \param list_x : Liste de coordonnée en x.
+             *  \param list_y : Liste de coordonnée en y.
              */
             Point(std::initializer_list<T> list_x, std::initializer_list<T> list_y);
 
             /*!
-             *  \brief Geter du vecteur _px
-             * 
+             *  \brief Geter du vecteur _px.
+             *
+             *   Renvoie le vecteur _px.
              */
             std::vector<T> get_Px() {
                 return _px;
             }
 
             /*!
-             *  \brief \brief Geter du vecteur _py
-             * 
+             *  \brief \brief Geter du vecteur _py.
+             *
+             *   Renvoie le vecteur _py.
              */
             std::vector<T> get_Py() {
                 return _py;
             }
             
         private:
-            std::vector<T> _px;
-            std::vector<T> _py;
+            std::vector<T> _px; /*!< Vecteur des coordonnées x. */
+            std::vector<T> _py; /*!< Vecteur des coordonnées y. */
     };
 
     template <class T>

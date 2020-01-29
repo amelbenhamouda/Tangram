@@ -101,7 +101,7 @@ void Interface::clone(std::vector<std::shared_ptr<geometricShape::Shape>> &clone
     }
 }
 
-bool Interface::importDraw (const int n, const int size, std::vector<std::shared_ptr<geometricShape::Shape>> &motif) {
+bool Interface::importDraw (const int n, std::vector<std::shared_ptr<geometricShape::Shape>> &motif) {
     std::ifstream importFig("doc/savefig.txt");
     if (!importFig) {
         std::cout << "ERROR: Cannot open savefig.txt." << std::endl;
@@ -192,14 +192,14 @@ bool Interface::importDraw (const int n, const int size, std::vector<std::shared
 void Interface::saveFigure(int width, int height, std::vector<std::shared_ptr<geometricShape::Shape>> &fig) {
     MLV_draw_filled_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_DIM_GREY);
     MLV_draw_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_BLACK);
-    MLV_actualise_window();
-
+    
     int interligne = 40;
-    Button<int> button1 (round(width / 2), round(height / 2), 50, 100, "Save");
-    Button<int> button2 (round(width / 2) + 120, round(height / 2), 50, 100, "Cancel");
+    Button<int> button1 (round(width / 2), round(height / 2), 100, 50, "Save");
+    Button<int> button2 (round(width / 2) + 120, round(height / 2), 100, 50, "Cancel");
     button1.drawButton(interligne, MLV_COLOR_GREY, MLV_COLOR_BLACK, MLV_COLOR_WHITE);
     button2.drawButton(interligne, MLV_COLOR_GREY, MLV_COLOR_BLACK, MLV_COLOR_WHITE);
-    
+    MLV_actualise_window();
+
     int xInside, yInside;
     MLV_wait_mouse(&xInside, &yInside);
     bool save = true;
@@ -219,35 +219,8 @@ void Interface::saveFigure(int width, int height, std::vector<std::shared_ptr<ge
     }
 }
 
-void save(int width, int height, std::vector<std::shared_ptr<geometricShape::Shape>> &fig){
-    int interligne = 40;
-    MLV_draw_filled_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_DIM_GREY);
-    MLV_draw_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_BLACK);
-    //MLV_actualise_window();
-    MLV_draw_text_box(round(width / 2), round(height / 2), 100, 50,"Save", interligne , MLV_COLOR_GREY,MLV_COLOR_BLACK,MLV_COLOR_WHITE,MLV_TEXT_LEFT, MLV_HORIZONTAL_CENTER,MLV_VERTICAL_CENTER);
-    MLV_draw_text_box(round(width / 2) + 120, round(height / 2), 100, 50, "Cancel", interligne , MLV_COLOR_GREY,MLV_COLOR_BLACK,MLV_COLOR_WHITE,MLV_TEXT_LEFT, MLV_HORIZONTAL_CENTER,MLV_VERTICAL_CENTER);
-    MLV_actualise_window();
-    int xInside, yInside;
-    MLV_wait_mouse(&xInside, &yInside);
-    bool save = true;
-    while (save) {
-        if (xInside >= round(width / 2) and xInside <= round(width / 2) + 100 and yInside >= round(height / 2) and yInside <= round(height / 2) + 50) {  // Bouton Save
-            //std::cout << "Motif saved" << std::endl;
-            saveDraw(fig);
-            save = false;
-        }
-        else if (xInside >= round(width / 2) + 120 and xInside <= round(width / 2) + 220 and yInside >= round(height / 2) and yInside <= round(height / 2) + 50) {  // Bouton Cancel
-            //std::cout << "Cancel" << std::endl;
-            save = false;
-        }
-        else {
-            MLV_wait_mouse(&xInside, &yInside);
-        }
-    }
-}
-
-void winner(int width, int height) {
-    MLV_Image *image = MLV_load_image("doc/image/test.png");
+void Interface::winner(int width, int height) {
+    MLV_Image *image = MLV_load_image("images/winner.png");
     int image_width, image_height;
     MLV_get_image_size(image, &image_width, &image_height);
     MLV_resize_image_with_proportions(image, image_width * 2, image_height * 2);
@@ -342,7 +315,7 @@ void Interface::drawJeu(int width, int height) {
 
 	    if (MLV_get_keyboard_state(MLV_KEYBOARD_LCTRL) == MLV_PRESSED && MLV_get_keyboard_state(MLV_KEYBOARD_s) == MLV_PRESSED) {
 	            /* Save a polygon for new figure */
-	    	    save(width, height, fig);
+	    	    saveFigure(width, height, fig);
                 board.drawBoard();
 
 	    }
@@ -359,10 +332,13 @@ void Interface::drawJeu(int width, int height) {
                     //std::cout << "Fleche gauche" << std::endl;
 	                if (nbFig > 0) {
                         nbFig--;
-	                    drawAllShapes(fig, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
-	                    drawAllShapes(motif, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
-	                    importDraw(nbFig, size, motif);
-	                    motifShape = MLV_COLOR_BLACK;
+                        board.drawBoard();
+	                    //drawAllShapes(fig, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
+	                    //drawAllShapes(motif, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
+	                    importDraw(nbFig, motif);
+                        motifShape = MLV_COLOR_BLACK;
+                        motifBorder = MLV_COLOR_BLACK;
+                        contour = false; 
 	                    drawAllShapes(motif, motifShape, motifBorder);
 	                    initialiseShared(size, width, height, fig);
 	                    colorfig = normal_color;
@@ -380,14 +356,17 @@ void Interface::drawJeu(int width, int height) {
 	            case 3: 
 	                //std::cout << "Fleche droite" << std::endl;
 	                nbFig++;              
-	                drawAllShapes(fig, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
-	                drawAllShapes(motif, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
-	                next = importDraw(nbFig, size, motif);
+	                // drawAllShapes(fig, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
+	                //drawAllShapes(motif, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
+	                next = importDraw(nbFig, motif);
 	                if (next == false) {
                         nbFig--;
 
                     } 
+                    board.drawBoard();
 	                motifShape = MLV_COLOR_BLACK;
+                    motifBorder = MLV_COLOR_BLACK;
+                    contour = false; 
 	                drawAllShapes(motif, motifShape, motifBorder);
 	                initialiseShared(size, width, height, fig);
 	                colorfig = normal_color;
@@ -416,7 +395,7 @@ void Interface::drawJeu(int width, int height) {
 	                break;
 	            case 5: // Sauvegarder
 	                //std::cout << "Sauvegarde" << std::endl;
-                    save(width, height, fig);
+                    saveFigure(width, height, fig);
                     board.drawBoard();
                     break;
                 case 6: // Quitter

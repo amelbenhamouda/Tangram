@@ -10,7 +10,7 @@ void Menu::drawMenu() {
     int heightButton = round(height / 35);
     int interligne = 15;
     
-    MLV_Image *image = MLV_load_image("doc/image/titre.jpg");
+    MLV_Image *image = MLV_load_image("images/titre.jpg");
     int image_width, image_height;
     MLV_get_image_size(image, &image_width, &image_height);
     MLV_resize_image_with_proportions(image, image_width * 2, image_height * 2);

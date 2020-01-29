@@ -6,5 +6,6 @@ var searchData=
   ['drawboard',['drawBoard',['../class_board.html#a1845216283a171939dcb477dce3a17b8',1,'Board']]],
   ['drawbutton',['drawButton',['../class_button.html#a1f70ff604d61122e4f39ce9f557023f9',1,'Button']]],
   ['drawbuttonforboard',['drawButtonForBoard',['../class_board.html#acf0a6b5036a711d3ef207356f330d830',1,'Board']]],
-  ['drawjeu',['drawJeu',['../class_interface.html#a0101527d22a169fb5ad0825b9efc9807',1,'Interface']]]
+  ['drawjeu',['drawJeu',['../class_interface.html#a0101527d22a169fb5ad0825b9efc9807',1,'Interface']]],
+  ['drawmenu',['drawMenu',['../class_menu.html#a9df102abcebc51e69c4728dc3d3c3be0',1,'Menu']]]
 ];
