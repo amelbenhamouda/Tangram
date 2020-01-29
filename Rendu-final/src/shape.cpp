@@ -1,4 +1,6 @@
+
 #include "../include/shape.hpp"
+#include "../include/board.hpp"
 #include <cmath>
 #include <assert.h> 
 #include <fstream>
@@ -58,8 +60,7 @@ bool operator==(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectS
 bool geometricShape::areEqual(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel){
     unsigned int count = 0;
     bool ret = false;
-    drawAllShapes(vectShapes, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
-    drawAllShapes(vectModel, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
+
     if (vectShapes.size() == vectModel.size()) {
         for (auto shap_it : vectShapes) {
             for (auto model_it : vectModel) {
@@ -71,6 +72,8 @@ bool geometricShape::areEqual(const std::vector<std::shared_ptr<geometricShape::
             }
         }
         if (count == vectShapes.size()) {
+            /*drawAllShapes(vectShapes, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
+            drawAllShapes(vectModel, MLV_COLOR_GRAY, MLV_COLOR_GRAY);*/
             ret = true;
         }
         else {
@@ -284,8 +287,15 @@ bool geometricShape::isInsideBoard(const int &x, const int &y, const int &width,
 
 void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, 
                                     std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, MLV_Color motifBorder, 
-                                    std::list<MLV_Color> &colorfig, std::list<MLV_Color>::iterator fig_num) {
+                                    std::list<MLV_Color> &colorfig, std::list<MLV_Color>::iterator fig_num,Board &board, bool &wincondi) {
     if (isInside(xInside, yInside) == 1) { 
+        if (wincondi){
+            board.drawBoard();
+            drawAllShapes(motif, motifShape, motifBorder);
+            drawAllShapes(fig, colorfig, MLV_COLOR_RED);
+        }
+
+        MLV_actualise_window();
         bool done = false;
         std::list<MLV_Color> colorfig_loc = colorfig;
         Uint8 red, green, blue, alpha;

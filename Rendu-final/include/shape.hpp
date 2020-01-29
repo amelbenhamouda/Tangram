@@ -12,12 +12,15 @@
 #include <MLV/MLV_all.h>
 #include <memory> // shared_ptr
 
+
+class Board;
 /*!
  *  \namespace geometricShape
  *  \brief  geometricShape.
  *  Le namespace geometricShape permet de regouper les différentes figures et fonction extern des class utiliser pour le tangram.
  *  Les classs du namespace sont shape, rigth_triangle, paralleogram, square. 
  */
+
 namespace geometricShape {
     /*!
      *  \class Shape
@@ -26,6 +29,7 @@ namespace geometricShape {
      *  et regroupe l'ensemble des méthodes permettant de manipuler les formes quand celle-ci n'ont pas besoin d'être virtuel.
      * 
      */
+    
     class Shape {       
         public:
             /*!
@@ -96,7 +100,7 @@ namespace geometricShape {
              *  \param motif : ensembles des figures de du modèle à redesinner.
              *  \param colorfig : vecteur couleur de la figure.
              */        
-            void moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, MLV_Color motifBorder, std::list<MLV_Color> &colorfig, std::list<MLV_Color>::iterator  fig_num);
+            void moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, MLV_Color motifBorder, std::list<MLV_Color> &colorfig, std::list<MLV_Color>::iterator  fig_num, Board &board, bool &wincondi);
            
             /*!
              *  \brief Methode permettant desinner une figure de la classe Shape.
