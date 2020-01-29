@@ -1,1 +1,46 @@
-# Tangram
+Tangram
+=======
+
+Projet du jeu Tangram programmé en C++ à l'aide de la librairie MLV.
+
+Installation
+============
+
+## Dependence
+    * 'MLV' http://www-igm.univ-mlv.fr/~boussica/mlv/api/French/html/index.html
+    * (optional) 'Doxygen' si on veut de la documentation.
+
+## Compilation tester
+    * g++ 6.3.0
+    * g++ 7.4.0
+
+Utilisation
+===========
+
+## Exécutable
+    * make dans le dossier Tangram.
+    * ./Tangram pour lancer l'exécutable.
+
+## Interface du jeu
+	* bouton "Contour" pour afficher une aide pour résoudre la figure.
+	* bouton "Sauvegarder" pour sauvegarder une nouvelle figure.
+	* bouton "<-" et "->" pour changer de figure, les données des figures sont contenues dans le fichier savefig.txt
+
+## Commandes du jeu
+	* clique gauche pour les événement lier aux boutons.
+	* clique gauche sur une figure pour la séléctionner.
+	* clique gauche en dehors de la figure pour la déséléctionner.
+	* quand la figure est séléctionner :
+		* clique droit pour la rotation.
+		* clique gauche + droit pour la rotation lente.
+		* clique molette symétrie.
+	* ctrl+s pour sauvegarder une figure (en plus du bouton).
+
+
+Notes
+=====
+
+## Authors
+    * BEN HAMOUDA Amel (Université Paris-Est Marne-la-Vallee, France)
+    * DURAND Aurélien (Université Paris-Est Marne-la-Vallee, France)
+
