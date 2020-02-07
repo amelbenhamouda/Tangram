@@ -2,7 +2,7 @@ TARGET = main rigth_triangle square parallelogram shape menu board interface
 
 ##########################################################"
 
-CFLAGS = -g -O2 -Wall -Weffc++ -Werror
+CFLAGS = -std=c++17 -Wall -Wfatal-errors -Weffc++ -Werror
 LDFLAGS = `pkg-config --libs-only-other --libs-only-L MLV`
 LDLIBS = `pkg-config --libs-only-l MLV`
 TARGET_OBJECT = $(addprefix bin/, $(addsuffix .o, $(TARGET)))
