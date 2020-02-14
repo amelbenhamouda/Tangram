@@ -40,10 +40,10 @@ std::list<MLV_Color> figWincondition() {
 }
 
 
-void Interface::initialiseShared(int size, int width, int height, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared) {
+void Interface::initialiseShared(const int size,const int width,const int height, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared) {
     shapeShared.clear();
-    int allHeigth = 50;
-    int allWidth = 50;
+    constexpr int allHeigth = 50;
+    constexpr int allWidth = 50;
 
     try {
         shapeShared.push_back(std::make_shared<geometricShape::Square>(size, allWidth + 70, allHeigth + 100));
@@ -64,10 +64,10 @@ void Interface::initialiseShared(int size, int width, int height, std::vector<st
     return;
 }
 
-void Interface::initialiseMotif(int size, int width, int height, std::vector<std::shared_ptr<geometricShape::Shape>> &motif) {
+void Interface::initialiseMotif(const int size,const int width,const int height, std::vector<std::shared_ptr<geometricShape::Shape>> &motif) {
     motif.clear();
-    int allHeigth = 205;
-    int allWidth = 628;
+    constexpr int allHeigth = 205;
+    constexpr int allWidth = 628;
 
     try {
         // Initialisation d'une figure de base - un lapin
@@ -189,7 +189,7 @@ bool Interface::importDraw (const int n, std::vector<std::shared_ptr<geometricSh
     return true;
 }
 
-void Interface::saveFigure(int width, int height, std::vector<std::shared_ptr<geometricShape::Shape>> &fig) {
+void Interface::saveFigure(const int width,const int height,const std::vector<std::shared_ptr<geometricShape::Shape>> &fig) {
     MLV_draw_filled_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_DIM_GREY);
     MLV_draw_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_BLACK);
     
@@ -219,7 +219,7 @@ void Interface::saveFigure(int width, int height, std::vector<std::shared_ptr<ge
     }
 }
 
-void Interface::winner(int width, int height) {
+void Interface::winner(const int width,const int height) {
     MLV_Image *image = MLV_load_image("images/winner.png");
     int image_width, image_height;
     MLV_get_image_size(image, &image_width, &image_height);
@@ -232,7 +232,7 @@ void Interface::winner(int width, int height) {
     MLV_actualise_window();
 }
 
-void Interface::drawJeu(int width, int height) {
+void Interface::drawJeu(const int width,const int height) {
     Board board(width, height);
     MLV_draw_filled_rectangle(0, 0, width, height, MLV_COLOR_BLACK);
     MLV_actualise_window();
@@ -271,7 +271,6 @@ void Interface::drawJeu(int width, int height) {
             fig_i++;
         });
         
-      
 
         if (areEqual(motif, fig) == 1 && wincondi==false) {//// Probleme doit faire double clic
             wincondi = true;

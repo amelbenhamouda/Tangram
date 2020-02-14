@@ -52,10 +52,11 @@ bool  geometricShape::Shape::magnetisme(const Shape &s2) {
 }
 
 
-
+/*
 bool operator==(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel){
     return areEqual(vectShapes, vectModel); 
-}
+}*/
+
 
 bool geometricShape::areEqual(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel){
     unsigned int count = 0;

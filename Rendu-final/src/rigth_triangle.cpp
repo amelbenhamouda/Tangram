@@ -10,7 +10,8 @@ geometricShape::RigthTriangle & geometricShape::RigthTriangle::operator=(const R
         return *this;
     }
     geometricShape::RigthTriangle copy(tc);
-    std::swap(hauteur, copy.hauteur);
+    // std::swap(hauteur, copy.hauteur);
+    *this = copy;
     return *this;
 }
 

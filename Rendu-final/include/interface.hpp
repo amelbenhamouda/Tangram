@@ -34,7 +34,7 @@
              *  \param height : La largeur de la fenêtre.
              *  \param shapeShared : Le vecteur de shared_ptr de type Shape à remplir.
              */
-            void initialiseShared(int size, int width, int height, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared);
+            void initialiseShared(const int size,const int width,const int height, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared);
 
             /*!
              *  \brief Initialisation d'un motif initial.
@@ -46,7 +46,7 @@
              *  \param height : La largeur de la fenêtre.
              *  \param motif : Le vecteur de shared_ptr de type Shape à remplir.
              */
-            void initialiseMotif(int size, int width, int height, std::vector<std::shared_ptr<geometricShape::Shape>> &motif);
+            void initialiseMotif(const int size, const int width, const int height, std::vector<std::shared_ptr<geometricShape::Shape>> &motif);
 
             /*!
              *  \brief Permet la copie d'un shared_ptr.
@@ -75,7 +75,7 @@
              *  \param height : La largeur de la fenêtre.
              *  \param fig : Le vecteur de shared_ptr de type Shape remplie.
              */
-            void saveFigure(int width, int height, std::vector<std::shared_ptr<geometricShape::Shape>> &fig);
+            void saveFigure(const int width,const int height,const std::vector<std::shared_ptr<geometricShape::Shape>> &fig);
 
             /*!
              *  \brief Méthode permettant d'afficher une image (message) quand le joueur gagne.
@@ -83,7 +83,7 @@
              *  \param width : La longeur de la fenêtre.
              *  \param height : La largeur de la fenêtre.
              */
-            void winner(int width, int height);
+            void winner(const int width, const int height);
 
             /*!
              *  \brief Méthode permettant de dessiner l'interface graphique du jeu.
@@ -91,7 +91,7 @@
              *  \param width : La longeur de la fenêtre.
              *  \param height : La largeur de la fenêtre.
              */
-            void drawJeu(int width, int height);
+            void drawJeu(const int width,const int height);
     };
 
 #endif // INTERFACE_H

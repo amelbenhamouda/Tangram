@@ -8,7 +8,7 @@
 #define POINT_H
 #include <vector>
 #include <iostream>
-
+#include <assert.h>
 namespace geometricShape {
 
     /*! \class Point
@@ -76,7 +76,9 @@ namespace geometricShape {
     Point<T>::~Point(){};
 
     template <class T>
-    Point<T>::Point(std::initializer_list<T> list_x, std::initializer_list<T> list_y) : _px(list_x), _py(list_y){};
+    Point<T>::Point(std::initializer_list<T> list_x, std::initializer_list<T> list_y) : _px(list_x), _py(list_y){
+        assert(list_y.size() == list_x.size());
+    };
 }
 
 #endif // POINT_H

@@ -25,6 +25,7 @@ geometricShape::Parallelogram & geometricShape::Parallelogram::operator=(const P
         return *this;
     }
     geometricShape::Parallelogram copy(tc);
+    *this = copy;
     return *this;
 }
 

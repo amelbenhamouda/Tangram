@@ -13,7 +13,7 @@
 
 int main( int argc, char *argv[] ){
     //int width = 1500, height = 1000;
-    int width = 1350, height = 700;
+    constexpr int width = 1350, height = 700;
     Menu menu(width, height);
     Interface interface;
     int x, y ; //Point

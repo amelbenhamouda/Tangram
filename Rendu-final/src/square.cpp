@@ -10,6 +10,7 @@ geometricShape::Square & geometricShape::Square::operator=(const Square & tc) {
         return *this;
     }
     geometricShape::Square copy(tc);
+    *this = copy;
     return *this;
 }
 

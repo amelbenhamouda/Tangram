@@ -203,7 +203,8 @@ namespace geometricShape {
              *  \param scnew : Nouvelle taille de coté.
              */ 
             void setShape(std::vector<double> &pXnew, std::vector<double> &pYnew, std::vector<double> &cnew, double &scnew);
-                
+             
+
         protected:
             /*!
              *  \brief Geter pour sizeCote de la class geometricShape.
@@ -280,7 +281,7 @@ namespace geometricShape {
     };
     void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder);
     void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, std::list<MLV_Color> colorShapes, MLV_Color colorBorder);
-    bool operator == (const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel) ;
+  //  bool operator == (const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel) ;
     bool areEqual(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel);
     void saveDraw(const std::vector<std::shared_ptr<geometricShape::Shape>> &fig);  
     bool isInsideBoard(const int &x, const int &y, const int &with = 1350, const int &heigth = 700);   
