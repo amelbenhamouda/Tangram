@@ -1,7 +1,7 @@
 #include "../include/menu.hpp"
 #include "../include/button.hpp"
 
-Menu::Menu(int width, int height) : width(width), height(height), buttons(0) {}
+Menu::Menu(const int width, const int height) : width(width), height(height), buttons(0) {}
 
 Menu::~Menu() {}
 
@@ -30,7 +30,7 @@ void Menu::drawMenu() {
     MLV_free_image(image);
 }
 
-int Menu::inMenu(int pX, int pY) {
+int Menu::inMenu(const int pX, const int pY) {
     int count = 0;
     for (auto button : buttons) {
         bool ibout = button.inButton(pX, pY);

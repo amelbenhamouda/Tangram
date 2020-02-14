@@ -37,7 +37,7 @@
 			 *  \param width : La longeur de la fenêtre.
 		     *  \param height : La largeur de la fenêtre.
 			 */
-	    	Menu(int width, int height);
+	    	Menu(const int width, const int height);
 
 	    	/*!
 	    	 *  \brief Destructeur de Menu.
@@ -62,7 +62,7 @@
 			 *  \param pX : La coordonnée x du clic de la souris.
              *  \param pY : La coordonnée y du clic de la souris.
 			 */
-	    	int inMenu(int pX, int pY);
+	    	int inMenu(const int pX, const int pY);
 	};
 
 #endif // MENU_H

@@ -28,9 +28,9 @@ Utilisation
 
 ## Commandes du jeu
 	* clique gauche pour les événement lier aux boutons.
-	* clique gauche sur une figure pour la séléctionner.
-	* clique gauche en dehors de la figure pour la déséléctionner.
-	* quand la figure est séléctionner :
+	* clique gauche sur une figure pour la sélectionner.
+	* clique gauche en dehors de la figure pour la désélectionner.
+	* quand la figure est sélectionner :
 		* clique droit pour la rotation.
 		* clique gauche + droit pour la rotation lente.
 		* clique molette symétrie.

@@ -39,7 +39,7 @@
 		     *  \param width : La longeur de la fenêtre.
 		     *  \param height : La largeur de la fenêtre.
 		     */
-	    	Board(int width, int height);
+	    	Board(const int width, const int height);
 
 	    	/*!
 		     *  \brief Destructeur de Board.
@@ -60,14 +60,14 @@
 	    	 *
 			 *  \param numFig : Le numéro de la figure que le joueur essaie de résoudre.
 			 */
-	    	void createButtonForBoard(unsigned int numFig) ;
+	    	void createButtonForBoard(const unsigned int numFig);
 
 	    	/*!
 	    	 *  \brief Affiche les boutons pour le jeu.
 	    	 *
 			 *  \param numFig : Le numéro de la figure que le joueur essaie de résoudre.
 			 */
-	    	void drawButtonForBoard(unsigned int numFig);
+	    	void drawButtonForBoard(const unsigned int numFig);
 
 	    	/*!
 	    	 *  \brief Savoir si on a cliqué sur le bouton
@@ -77,7 +77,7 @@
 			 *  \param pX : La coordonnée x du clic de la souris.
              *  \param pY : La coordonnée y du clic de la souris.
 			 */
-	    	int inBoard(int pX, int pY);
+	    	int inBoard(const int pX, const int pY);
 	};
 
 #endif // BOARD_H

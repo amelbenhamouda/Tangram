@@ -1,7 +1,7 @@
 #include "../include/board.hpp"
 #include "../include/button.hpp"
 
-Board::Board(int width, int height) : width(width), height(height), buttons() {}
+Board::Board(const int width, const int height) : width(width), height(height), buttons() {}
 
 Board::~Board() {}
 
@@ -10,7 +10,7 @@ void Board::drawBoard() {
 	MLV_actualise_window();
 }
 
-void Board::createButtonForBoard(unsigned int numFig) {
+void Board::createButtonForBoard(const unsigned int numFig) {
     int y = height / 2;
     int widthButton = round(width / 6) - 50;
     int heightButton = round(height / 35);
@@ -22,7 +22,7 @@ void Board::createButtonForBoard(unsigned int numFig) {
     buttons.insert(std::make_pair(1,Button<int>(x, y, size, heightButton, "<-")));
     buttons.insert(std::make_pair(2,Button<int>(x + heightButton + interligne, y, size, heightButton, (std::to_string(numFig)).c_str())));
     buttons.insert(std::make_pair(3,Button<int>(x + (interligne + heightButton) * 2, y, size, heightButton, "->")));
-    buttons.insert(std::make_pair(4,Button<int>(x, y + heightButton + interligne, widthButton, heightButton, "Contour")));
+    buttons.insert(std::make_pair(4,Button<int>(x, y + heightButton + interligne, widthButton, heightButton, "Solution")));
     buttons.insert(std::make_pair(5,Button<int>(x, y + (heightButton * 2) + (interligne * 2), widthButton, heightButton, "Sauvegarder")));
     buttons.insert(std::make_pair(6,Button<int>(x, y + (heightButton * 3) + (interligne * 3), widthButton, heightButton, "Quitter")));
     for (auto button : buttons) {
@@ -30,7 +30,7 @@ void Board::createButtonForBoard(unsigned int numFig) {
     }    
 }
 
-void Board::drawButtonForBoard(unsigned int numFig) {
+void Board::drawButtonForBoard(const unsigned int numFig) {
     if (numFig <= 0) {
         return;
     }
@@ -48,7 +48,7 @@ void Board::drawButtonForBoard(unsigned int numFig) {
     }
 }
 
-int Board::inBoard(int pX, int pY) {
+int Board::inBoard(const int pX, const int pY) {
 	unsigned int count = 0;
     for (auto button : buttons) {
         bool ibout = button.second.inButton(pX, pY);
