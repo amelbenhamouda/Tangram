@@ -57,6 +57,15 @@
             void clone(std::vector<std::shared_ptr<geometricShape::Shape>> &clone, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared);
 
             /*!
+             *  \brief Permet la deplacement sémantique d'un shared_ptr.
+             *
+             *  \param clone : Le vecteur de shared_ptr de type Shape à déplacer.
+             *  \param shapeShared : Le vecteur de shared_ptr de type Shape à remplir.
+             */
+            void move(std::vector<std::shared_ptr<geometricShape::Shape>> &clone, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared);
+
+
+            /*!
              *  \brief Méthode permettant d'importé des figures.
              *
              *  Permet d'ouvrir le fichier texte savefig.txt qui contient l'ensemble des figures sauvegardées obtenues grâce à la méthode saveFigure.

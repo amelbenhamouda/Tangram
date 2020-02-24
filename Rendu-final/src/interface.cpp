@@ -100,6 +100,20 @@ void Interface::clone(std::vector<std::shared_ptr<geometricShape::Shape>> &clone
         clone.push_back(it);
     }
 }
+void Interface::move(std::vector<std::shared_ptr<geometricShape::Shape>> &move, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared) {
+	std::cout << "Before move shapeShared size :" << shapeShared.size() << "  contents: " ;
+	for (auto it : shapeShared) {
+		std::cout << *it << " ";
+	}
+	std::cout <<  std::endl; 
+	move = std::move(shapeShared);
+	std::cout << "After move shapeShared size :" << shapeShared.size() << "  contents: " ;
+		for (auto it : shapeShared) {
+			std::cout << *it << " ";
+	}
+	std::cout <<  std::endl;
+}
+
 
 bool Interface::importDraw (const int n, std::vector<std::shared_ptr<geometricShape::Shape>> &motif) {
     std::ifstream importFig("doc/savefig.txt");
@@ -246,9 +260,13 @@ void Interface::drawJeu(const int width,const int height) {
 
     std::vector<std::shared_ptr<geometricShape::Shape>> fig;
     initialiseShared(size, width, height, fig);
-
+    /// Utilisation du move sémantic
+    std::vector<std::shared_ptr<geometricShape::Shape>> motif_to_copie;
     std::vector<std::shared_ptr<geometricShape::Shape>> motif;
-    initialiseMotif(size, width, height, motif);
+   // initialiseMotif(size, width, height, motif);
+    initialiseMotif(size, width, height, motif_to_copie);
+    move(motif,motif_to_copie);
+
     MLV_actualise_window();
     unsigned int nbFig = 1; // figure motif
     bool contour = false; 
