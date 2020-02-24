@@ -10,7 +10,6 @@ geometricShape::RigthTriangle & geometricShape::RigthTriangle::operator=(const R
         return *this;
     }
     geometricShape::RigthTriangle copy(tc);
-    // std::swap(hauteur, copy.hauteur);
     *this = copy;
     return *this;
 }
@@ -36,5 +35,5 @@ geometricShape::RigthTriangle::RigthTriangle(double sizeCote, int width, int hei
 void geometricShape::RigthTriangle::display(std::ostream & os) const {
     os << "[RigthTriangle]";
     geometricShape::Shape::display();
-    os << "Hauteur: "<< hauteur << std::endl;
+    os << "Hauteur: " << hauteur << std::endl;
 }

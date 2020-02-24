@@ -64,7 +64,6 @@
              */
             void move(std::vector<std::shared_ptr<geometricShape::Shape>> &clone, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared);
 
-
             /*!
              *  \brief Méthode permettant d'importé des figures.
              *

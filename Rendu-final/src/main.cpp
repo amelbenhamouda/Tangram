@@ -12,7 +12,6 @@
 //valgrind --leak-check=full ./Tangram
 
 int main( int argc, char *argv[] ){
-    //int width = 1500, height = 1000;
     constexpr int width = 1350, height = 700;
     Menu menu(width, height);
     Interface interface;
@@ -27,14 +26,12 @@ int main( int argc, char *argv[] ){
     bool action = true;
     while (action) {
         if (menu.inMenu(x, y) == 0) { // Jouer
-            //std::cout << "Jouer" << std::endl;
             // Afficher board
             interface.drawJeu(width, height);
             MLV_actualise_window();
             action = false;
         }
-        else if (menu.inMenu(x, y) == 1) {
-            //std::cout << "Quitter" << std::endl;
+        else if (menu.inMenu(x, y) == 1) { //Quitter
             action = false;
             MLV_free_window();
             exit(EXIT_SUCCESS); 

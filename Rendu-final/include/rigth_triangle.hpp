@@ -16,7 +16,6 @@ namespace geometricShape {
      *
      *  RigthTriangle hérite de geometricShape::Shape et calcul un triangle en fonction de la taille de son côté.
      *  Le premier point est dessiné à la largeur et à la hauteur des positions données (width/heigth).
-     *        .
      */
     class RigthTriangle : public geometricShape::Shape {       
         public:

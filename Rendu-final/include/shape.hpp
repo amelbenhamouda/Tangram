@@ -36,6 +36,7 @@ namespace geometricShape {
      */
     class Shape {       
         public:
+            static constexpr float PI = 3.141592653589793238462643383279;
             /*!
              *  \brief Constructeur de la class Shape.
              *

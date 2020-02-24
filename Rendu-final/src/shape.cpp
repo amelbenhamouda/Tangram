@@ -26,8 +26,9 @@ bool geometricShape::Shape::operator==(const Shape & s) const {
     bool ret = false;
     double thresh = round(sizeCote * 0.2);
     unsigned int nbequal = 0;
-    if (px.size() != s.px.size())
+    if (px.size() != s.px.size()) {
         return false;
+    }
     
     for (unsigned int i = 0; i < px.size(); i++) {
         for (unsigned int j = 0; j < s.px.size(); j++) {
@@ -45,20 +46,12 @@ bool geometricShape::Shape::operator==(const Shape & s) const {
 bool  geometricShape::Shape::magnetisme(const Shape &s2) {
     if(*this==s2){
         *this=s2 ;
-        //std::cout << ret << std::endl;
         return true;
     }
     return false;
 }
 
-
-/*
-bool operator==(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel){
-    return areEqual(vectShapes, vectModel); 
-}*/
-
-
-bool geometricShape::areEqual(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel){
+bool geometricShape::areEqual(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel) {
     unsigned int count = 0;
     bool ret = false;
 
@@ -73,8 +66,6 @@ bool geometricShape::areEqual(const std::vector<std::shared_ptr<geometricShape::
             }
         }
         if (count == vectShapes.size()) {
-            /*drawAllShapes(vectShapes, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
-            drawAllShapes(vectModel, MLV_COLOR_GRAY, MLV_COLOR_GRAY);*/
             ret = true;
         }
         else {
@@ -115,8 +106,8 @@ void geometricShape::Shape::draw(MLV_Color colorShape, MLV_Color colorBorder) co
     std::vector<int> pxDraw;
     std::vector<int> pyDraw;
     for (unsigned int i = 0; i < px.size(); i++) {
-      pxDraw.push_back(floor(px[i] + 0.5));
-      pyDraw.push_back(floor(py[i] + 0.5));
+        pxDraw.push_back(floor(px[i] + 0.5));
+        pyDraw.push_back(floor(py[i] + 0.5));
     }
     MLV_draw_filled_polygon(pxDraw.data(), pyDraw.data(), px.size(), colorShape);
     MLV_draw_polygon(pxDraw.data(), pyDraw.data(), px.size(), colorBorder);
@@ -140,7 +131,7 @@ void geometricShape::Shape::rotateHW(int angle, unsigned int n) {
     assert(n <= px.size() && n >= 0);
     double pivoX = px[n];
     double pivoY = py[n];
-    double angleRad = (double) angle * 3.141592653589793238462643383279 / 180;
+    double angleRad = (double) angle * PI / 180;
     for (unsigned int it = 0; it < px.size(); it++) {
         if (it != n) {
             double xM = px[it] - pivoX;
@@ -171,7 +162,7 @@ void geometricShape::Shape::rotateCenter(int angle, int x,int y, int x0, int y0)
         angleRad = copysign(angleRad, det);
     }
     else {
-        angleRad = (double) angle * 3.141592653589793238462643383279 / 180;
+        angleRad = (double) angle * PI / 180;
     }
     std::vector<double> pxloc = px;
     std::vector<double> pyloc = py; 
@@ -198,7 +189,7 @@ void geometricShape::Shape::translate(int x, int y) {
     std::vector<double> pyloc = py; 
     bool inside = false;
     for (unsigned int it = 0; it < pxloc.size(); it++) {
-        pxloc[it] += x;   /* [cos(0) -sin(0); sin(0) cos(0)]*/
+        pxloc[it] += x;
         pyloc[it] += y;
         inside = isInsideBoard(pxloc[it], pyloc[it]);
         if (inside == false) {
@@ -231,7 +222,7 @@ bool geometricShape::Shape::isInside(const int &x, const int &y) const {
             Bx = px[0];
             By = py[0];
         }
-        else {          // else B take the point at i+1
+        else { // else B take the point at i+1
             Bx = px[i + 1];
             By = py[i + 1];
         }
