@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['parallelogram',['Parallelogram',['../classgeometric_shape_1_1_parallelogram.html',1,'geometricShape::Parallelogram'],['../classgeometric_shape_1_1_parallelogram.html#ad65826d9cb438059b6c96e1326ade523',1,'geometricShape::Parallelogram::Parallelogram(double sizeCote, int width, int height)'],['../classgeometric_shape_1_1_parallelogram.html#a170744d0daa3346a5e867ca4ed566fec',1,'geometricShape::Parallelogram::Parallelogram(const Parallelogram &amp;tc)']]],
-  ['parallelogram_2ehpp',['parallelogram.hpp',['../parallelogram_8hpp.html',1,'']]],
-  ['point',['Point',['../classgeometric_shape_1_1_point.html',1,'geometricShape::Point&lt; T &gt;'],['../classgeometric_shape_1_1_point.html#a48370365295e37fbe37ef6b02ca3c2fc',1,'geometricShape::Point::Point(T x, T y)'],['../classgeometric_shape_1_1_point.html#a68d7c17f7593f7ab9e564830b6ad8466',1,'geometricShape::Point::Point(std::initializer_list&lt; T &gt; list_x, std::initializer_list&lt; T &gt; list_y)']]],
-  ['point_2ehpp',['point.hpp',['../point_8hpp.html',1,'']]],
-  ['px',['px',['../classgeometric_shape_1_1_shape.html#a6b033608b1d9356adabdf48f8afee1ef',1,'geometricShape::Shape']]],
-  ['py',['py',['../classgeometric_shape_1_1_shape.html#af972aa88c0abd18ffa39adba776e1ba7',1,'geometricShape::Shape']]]
+  ['savedraw',['saveDraw',['../classgeometric_shape_1_1_shape.html#a011759ae83f40587e0f422f2730ecbd4',1,'geometricShape::Shape::saveDraw()'],['../namespacegeometric_shape.html#ac15da5db3762601606a8f804884976d1',1,'geometricShape::saveDraw()']]],
+  ['savefigure',['saveFigure',['../class_interface.html#abc95d6cb21503360bfc2215d1dede24a',1,'Interface']]],
+  ['setshape',['setShape',['../classgeometric_shape_1_1_shape.html#a393d5df22049c7c5efcab5f96a2d9018',1,'geometricShape::Shape']]],
+  ['shape',['Shape',['../classgeometric_shape_1_1_shape.html',1,'geometricShape::Shape'],['../classgeometric_shape_1_1_shape.html#aa45bec6f55f33a59991f83a1d0843a53',1,'geometricShape::Shape::Shape(double sizeCote, int width, int height)'],['../classgeometric_shape_1_1_shape.html#ad141f6bc47907a6f19825430fc3638e2',1,'geometricShape::Shape::Shape(const Shape &amp;cshape)']]],
+  ['shape_2ehpp',['shape.hpp',['../shape_8hpp.html',1,'']]],
+  ['square',['Square',['../classgeometric_shape_1_1_square.html',1,'geometricShape::Square'],['../classgeometric_shape_1_1_square.html#ac8ab62028f88aa5a1683a287626ab8b3',1,'geometricShape::Square::Square(double sizeCote, int width, int height)'],['../classgeometric_shape_1_1_square.html#af51ec6057f978c91f935b16839dfebd1',1,'geometricShape::Square::Square(const Square &amp;tc)']]],
+  ['square_2ehpp',['square.hpp',['../square_8hpp.html',1,'']]]
 ];

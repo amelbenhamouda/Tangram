@@ -94,8 +94,6 @@ Fonctions</h2></td></tr>
 <tr class="separator:a3f737265078bd7963e0398d2035f0efc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f9377ec0eea0bd91baccaf8ad242278"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegeometric_shape.html#a5f9377ec0eea0bd91baccaf8ad242278">drawAllShapes</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classgeometric_shape_1_1_shape.html">geometricShape::Shape</a> &gt;&gt; &amp;vectShapes, std::list&lt; MLV_Color &gt; colorShapes, MLV_Color colorBorder)</td></tr>
 <tr class="separator:a5f9377ec0eea0bd91baccaf8ad242278"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28f5ddcd750c6f9ae4be6f3efe4b7b58"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegeometric_shape.html#a28f5ddcd750c6f9ae4be6f3efe4b7b58">operator==</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classgeometric_shape_1_1_shape.html">geometricShape::Shape</a> &gt;&gt; &amp;vectShapes, const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classgeometric_shape_1_1_shape.html">geometricShape::Shape</a> &gt;&gt; &amp;vectModel)</td></tr>
-<tr class="separator:a28f5ddcd750c6f9ae4be6f3efe4b7b58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac696d1fa878ce8e5aac23407fe3483f0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegeometric_shape.html#ac696d1fa878ce8e5aac23407fe3483f0">areEqual</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classgeometric_shape_1_1_shape.html">geometricShape::Shape</a> &gt;&gt; &amp;vectShapes, const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classgeometric_shape_1_1_shape.html">geometricShape::Shape</a> &gt;&gt; &amp;vectModel)</td></tr>
 <tr class="separator:ac696d1fa878ce8e5aac23407fe3483f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac15da5db3762601606a8f804884976d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegeometric_shape.html#ac15da5db3762601606a8f804884976d1">saveDraw</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classgeometric_shape_1_1_shape.html">geometricShape::Shape</a> &gt;&gt; &amp;fig)</td></tr>
@@ -270,43 +268,6 @@ Fonctions</h2></td></tr>
     <tr><td class="paramname">y</td><td>: Postion y de la souris. </td></tr>
     <tr><td class="paramname">width</td><td>: Position du board en x dans la fenêtre. </td></tr>
     <tr><td class="paramname">heigth</td><td>: Position du board en y dans la fenêtre. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a28f5ddcd750c6f9ae4be6f3efe4b7b58"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28f5ddcd750c6f9ae4be6f3efe4b7b58">&#9670;&nbsp;</a></span>operator==()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool geometricShape::operator== </td>
-          <td>(</td>
-          <td class="paramtype">const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classgeometric_shape_1_1_shape.html">geometricShape::Shape</a> &gt;&gt; &amp;&#160;</td>
-          <td class="paramname"><em>vectShapes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classgeometric_shape_1_1_shape.html">geometricShape::Shape</a> &gt;&gt; &amp;&#160;</td>
-          <td class="paramname"><em>vectModel</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Obsolète:</a></b></dt><dd>Pas Opérative pour l'instant utiliser areEqual.</dd></dl>
-<p>Fait appel à la surcharge de l' operator== pour une figure afin de comparé un ensemble de figure. </p><dl class="section return"><dt>Renvoie</dt><dd>Un booléen indiquant l'égalité plus ou moins un seuil par sommets (20% de size_cote) </dd></dl>
-<dl class="params"><dt>Paramètres</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">vectShapes</td><td>: Figures de l'utilisateur à comparer aux modèles. </td></tr>
-    <tr><td class="paramname">vectModel</td><td>: Figures modèles à comparer à la figure utilisateur. </td></tr>
   </table>
   </dd>
 </dl>
