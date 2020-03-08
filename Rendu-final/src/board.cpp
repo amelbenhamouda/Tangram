@@ -57,7 +57,7 @@ int Board::inBoard(const int pX, const int pY) {
         }
         count++;
     }
-    if(count == buttons.size()) {
+    if (count == buttons.size()) {
         count = 0;
     }
     else {

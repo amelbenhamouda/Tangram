@@ -24,7 +24,7 @@ void Menu::drawMenu() {
     int y = (height / 2) - (heightButton / 2);
     buttons.push_back(Button<int>(x, y, widthButton, heightButton, "Jouer"));
     buttons.push_back(Button<int>(x, y + heightButton + interligne, widthButton, heightButton, "Quitter"));
-    for (auto button : buttons){
+    for (auto button : buttons) {
         button.drawButton(interligne, MLV_COLOR_GREY, MLV_COLOR_BLACK, MLV_COLOR_WHITE);
     }
     MLV_free_image(image);

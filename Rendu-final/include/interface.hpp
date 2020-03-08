@@ -34,7 +34,7 @@
              *  \param height : La largeur de la fenêtre.
              *  \param shapeShared : Le vecteur de shared_ptr de type Shape à remplir.
              */
-            void initialiseShared(const int size,const int width,const int height, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared);
+            void initialiseShared(const int size, const int width, const int height, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared);
 
             /*!
              *  \brief Initialisation d'un motif initial.
@@ -83,7 +83,7 @@
              *  \param height : La largeur de la fenêtre.
              *  \param fig : Le vecteur de shared_ptr de type Shape remplie.
              */
-            void saveFigure(const int width,const int height,const std::vector<std::shared_ptr<geometricShape::Shape>> &fig);
+            void saveFigure(const int width, const int height, const std::vector<std::shared_ptr<geometricShape::Shape>> &fig);
 
             /*!
              *  \brief Méthode permettant d'afficher une image (message) quand le joueur gagne.
@@ -99,7 +99,7 @@
              *  \param width : La longeur de la fenêtre.
              *  \param height : La largeur de la fenêtre.
              */
-            void drawJeu(const int width,const int height);
+            void drawJeu(const int width, const int height);
     };
 
 #endif // INTERFACE_H

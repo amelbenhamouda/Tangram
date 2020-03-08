@@ -9,9 +9,7 @@
 #include <iostream>
 #include <string>
 
-//valgrind --leak-check=full ./Tangram
-
-int main( int argc, char *argv[] ){
+int main(int argc, char *argv[]) {
     constexpr int width = 1350, height = 700;
     Menu menu(width, height);
     Interface interface;

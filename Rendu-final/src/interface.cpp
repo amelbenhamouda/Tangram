@@ -40,7 +40,7 @@ std::list<MLV_Color> figWincondition() {
     return figloc;
 }
 
-void Interface::initialiseShared(const int size,const int width,const int height, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared) {
+void Interface::initialiseShared(const int size, const int width, const int height, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared) {
     shapeShared.clear();
     constexpr int allHeigth = 50;
     constexpr int allWidth = 50;
@@ -64,7 +64,7 @@ void Interface::initialiseShared(const int size,const int width,const int height
     return;
 }
 
-void Interface::initialiseMotif(const int size,const int width,const int height, std::vector<std::shared_ptr<geometricShape::Shape>> &motif) {
+void Interface::initialiseMotif(const int size, const int width, const int height, std::vector<std::shared_ptr<geometricShape::Shape>> &motif) {
     motif.clear();
     constexpr int allHeigth = 205;
     constexpr int allWidth = 628;
@@ -104,7 +104,6 @@ void Interface::clone(std::vector<std::shared_ptr<geometricShape::Shape>> &clone
 void Interface::move(std::vector<std::shared_ptr<geometricShape::Shape>> &move, std::vector<std::shared_ptr<geometricShape::Shape>> &shapeShared) {
 	move = std::move(shapeShared);
 }
-
 
 bool Interface::importDraw (const int n, std::vector<std::shared_ptr<geometricShape::Shape>> &motif) {
     std::ifstream importFig("doc/savefig.txt");
@@ -193,7 +192,7 @@ bool Interface::importDraw (const int n, std::vector<std::shared_ptr<geometricSh
     return true;
 }
 
-void Interface::saveFigure(const int width,const int height,const std::vector<std::shared_ptr<geometricShape::Shape>> &fig) {
+void Interface::saveFigure(const int width, const int height, const std::vector<std::shared_ptr<geometricShape::Shape>> &fig) {
     MLV_draw_filled_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_DIM_GREY);
     MLV_draw_rectangle(round(width / 2) - 20, round(height / 2) - 20, 260, 90, MLV_COLOR_BLACK);
     
@@ -209,12 +208,10 @@ void Interface::saveFigure(const int width,const int height,const std::vector<st
     bool save = true;
     while (save) {
         if (button1.inButton(xInside, yInside)){
-            std::cout << "Motif saved" << std::endl;
             saveDraw(fig);
             save = false;
         }
         else if (button2.inButton(xInside, yInside)){
-            std::cout << "Cancel" << std::endl;
             save = false;
         }
         else {
@@ -223,7 +220,7 @@ void Interface::saveFigure(const int width,const int height,const std::vector<st
     }
 }
 
-void Interface::winner(const int width,const int height) {
+void Interface::winner(const int width, const int height) {
     MLV_Image *image = MLV_load_image("images/winner.png");
     int image_width, image_height;
     MLV_get_image_size(image, &image_width, &image_height);
@@ -236,12 +233,12 @@ void Interface::winner(const int width,const int height) {
     MLV_actualise_window();
 }
 
-void Interface::drawJeu(const int width,const int height) {
+void Interface::drawJeu(const int width, const int height) {
     Board board(width, height);
     MLV_draw_filled_rectangle(0, 0, width, height, MLV_COLOR_BLACK);
     MLV_actualise_window();
     /* Loading contour. */
-    int size = (width + height) / 25; //100;
+    int size = (width + height) / 25;
     MLV_Color motifBorder = MLV_COLOR_BLACK ;
     MLV_Color motifShape = MLV_COLOR_BLACK ;
     
@@ -254,7 +251,7 @@ void Interface::drawJeu(const int width,const int height) {
     std::vector<std::shared_ptr<geometricShape::Shape>> motif_to_copie;
     std::vector<std::shared_ptr<geometricShape::Shape>> motif;
     initialiseMotif(size, width, height, motif_to_copie);
-    move(motif,motif_to_copie);
+    move(motif, motif_to_copie);
 
     MLV_actualise_window();
     unsigned int nbFig = 1; // figure motif
@@ -282,14 +279,15 @@ void Interface::drawJeu(const int width,const int height) {
             drawAllShapes(fig, colorfig, MLV_COLOR_RED);
             winner(width, height); 
         } 
-        else if(wincondi) {
+        else if (wincondi) {
         	if (areEqual(motif, fig) == 0) {
         		wincondi = false;
 	            colorfig = normal_color;
 	            board.drawBoard();
 	            drawAllShapes(motif, motifShape, motifBorder);
 	        	drawAllShapes(fig, colorfig, MLV_COLOR_RED);
-        	} else {
+        	} 
+            else {
 	       		drawAllShapes(motif, motifShape, motifBorder);
 	        	drawAllShapes(fig, colorfig, MLV_COLOR_RED);
             	winner(width, height); 
@@ -322,7 +320,7 @@ void Interface::drawJeu(const int width,const int height) {
 	                    drawAllShapes(fig, colorfig,MLV_COLOR_RED);
 	                    board.drawButtonForBoard(nbFig);
 	                    MLV_actualise_window();
-                        if(MLV_get_mouse_button_state(MLV_BUTTON_LEFT) != MLV_RELEASED ){
+                        if (MLV_get_mouse_button_state(MLV_BUTTON_LEFT) != MLV_RELEASED) {
                             MLV_wait_milliseconds(500);
                         }
 	                };
@@ -345,22 +343,22 @@ void Interface::drawJeu(const int width,const int height) {
 	                drawAllShapes(fig, colorfig, MLV_COLOR_RED);
 	                board.drawButtonForBoard(nbFig);
 	                MLV_actualise_window();
-                    if(MLV_get_mouse_button_state(MLV_BUTTON_LEFT) != MLV_RELEASED ){
+                    if (MLV_get_mouse_button_state(MLV_BUTTON_LEFT) != MLV_RELEASED) {
                         MLV_wait_milliseconds(500);
                     }
                     break;
                 case 4: // Contour
-                    if ( contour == true ){
+                    if (contour == true) {
                         motifBorder = MLV_COLOR_ORANGE;
                     }
-                    else if( contour == false){
+                    else if (contour == false) {
                        motifBorder = MLV_COLOR_BLACK; 
                     }
                     contour = !contour;
                     drawAllShapes(motif, motifShape, motifBorder);
                     drawAllShapes(fig, colorfig, MLV_COLOR_RED);
                     MLV_actualise_window();
-                    if(MLV_get_mouse_button_state(MLV_BUTTON_LEFT) != MLV_RELEASED ){
+                    if (MLV_get_mouse_button_state(MLV_BUTTON_LEFT) != MLV_RELEASED) {
                         MLV_wait_milliseconds(500);
                     }
 	                break;

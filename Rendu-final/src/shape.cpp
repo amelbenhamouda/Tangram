@@ -44,8 +44,8 @@ bool geometricShape::Shape::operator==(const Shape & s) const {
 }
 
 bool  geometricShape::Shape::magnetisme(const Shape &s2) {
-    if(*this==s2){
-        *this=s2 ;
+    if (*this == s2) {
+        *this = s2;
         return true;
     }
     return false;
@@ -114,7 +114,7 @@ void geometricShape::Shape::draw(MLV_Color colorShape, MLV_Color colorBorder) co
 }
 
 void geometricShape::drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder) {
-    for(auto it : vectShapes){
+    for (auto it : vectShapes) {
         it->draw(colorShape, colorBorder);
     }
 }
@@ -146,7 +146,7 @@ void geometricShape::Shape::rotateHW(int angle, unsigned int n) {
     center[1] = -xM * sin(angleRad) + yM * cos(angleRad) + pivoY;
 } 
 
-void geometricShape::Shape::rotateCenter(int angle, int x,int y, int x0, int y0) {   
+void geometricShape::Shape::rotateCenter(int angle, int x, int y, int x0, int y0) {   
     double angleRad;
     if ((x != 0) && (y != 0) && x != x0 && y != y0) {
         double Ux = x - center[0];
@@ -170,7 +170,7 @@ void geometricShape::Shape::rotateCenter(int angle, int x,int y, int x0, int y0)
     for (unsigned int it = 0; it < px.size(); it++) {
         double xM = pxloc[it] - center[0];
         double yM = pyloc[it] - center[1];
-        pxloc[it] = xM * cos(angleRad) + yM * sin(angleRad) + center[0];   /* [cos(0) -sin(0); sin(0) cos(0)]*/
+        pxloc[it] = xM * cos(angleRad) + yM * sin(angleRad) + center[0];
         pyloc[it] = -xM * sin(angleRad) + yM * cos(angleRad) + center[1];
         inside = isInsideBoard(pxloc[it], pyloc[it]);
         if (inside == 0) {
@@ -279,9 +279,9 @@ bool geometricShape::isInsideBoard(const int &x, const int &y, const int &width,
 
 void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, 
                                     std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, MLV_Color motifBorder, 
-                                    std::list<MLV_Color> &colorfig, std::list<MLV_Color>::iterator fig_num,Board &board, bool &wincondi) {
+                                    std::list<MLV_Color> &colorfig, std::list<MLV_Color>::iterator fig_num, Board &board, bool &wincondi) {
     if (isInside(xInside, yInside) == 1) { 
-        if (wincondi){
+        if (wincondi) {
             board.drawBoard();
             drawAllShapes(motif, motifShape, motifBorder);
             drawAllShapes(fig, colorfig, MLV_COLOR_RED);
@@ -327,19 +327,19 @@ void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<st
                 done = true;
             }
             while (MLV_get_mouse_button_state(MLV_BUTTON_RIGHT) == MLV_PRESSED) {
-                    draw(MLV_COLOR_GRAY, MLV_COLOR_GRAY);
-                    int xRot, yRot;
-                    MLV_get_mouse_position(&xRot, &yRot);
-                    if ((xRot != x) && (yRot != y)) {
-                        rotateCenter(1, xRot, yRot, x, y);
-                        drawAllShapes(motif, motifShape, motifBorder);
-                        drawAllShapes(fig, colorfig, MLV_COLOR_RED);
-                        MLV_actualise_window();
-                        MLV_wait_milliseconds(10);
-                        x = xRot;
-                        y = yRot;
-                    }
+                draw(MLV_COLOR_GRAY, MLV_COLOR_GRAY);
+                int xRot, yRot;
+                MLV_get_mouse_position(&xRot, &yRot);
+                if ((xRot != x) && (yRot != y)) {
+                    rotateCenter(1, xRot, yRot, x, y);
+                    drawAllShapes(motif, motifShape, motifBorder);
+                    drawAllShapes(fig, colorfig, MLV_COLOR_RED);
+                    MLV_actualise_window();
+                    MLV_wait_milliseconds(10);
+                    x = xRot;
+                    y = yRot;
                 }
+            }
             if (MLV_get_mouse_button_state(MLV_BUTTON_MIDDLE) == MLV_PRESSED) {
                 draw(MLV_COLOR_GRAY, MLV_COLOR_GRAY);
                 reverse();
@@ -349,8 +349,8 @@ void geometricShape::Shape::moveShape(int &xInside, int &yInside, std::vector<st
             }
             drawAllShapes(motif, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
             drawAllShapes(fig, MLV_COLOR_GRAY, MLV_COLOR_GRAY);
-            for(auto it : motif){
-                    magnetisme(*it);
+            for (auto it : motif) {
+                magnetisme(*it);
             }
             drawAllShapes(motif, motifShape, motifBorder);
             drawAllShapes(fig, colorfig, MLV_COLOR_RED);
@@ -370,7 +370,7 @@ void geometricShape::Shape::display(std::ostream & os) const {
 }
 
 void geometricShape::saveDraw(const std::vector<std::shared_ptr<geometricShape::Shape>> &fig) {
-    std::ofstream saveFig("doc/savefig.txt",std::ios::app);
+    std::ofstream saveFig("doc/savefig.txt", std::ios::app);
     if (saveFig) {   
         int n = 1;
         for (auto it : fig) {

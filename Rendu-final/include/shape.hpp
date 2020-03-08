@@ -116,7 +116,7 @@ namespace geometricShape {
              *  \param board : Objet de la class Board permetant de redessiner le fond de la fenêtre en gris.
              *  \param wincondi : Booléen pour connaitre l'état du jeu.
              */        
-            void moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, MLV_Color motifBorder, std::list<MLV_Color> &colorfig, std::list<MLV_Color>::iterator  fig_num, Board &board, bool &wincondi);
+            void moveShape(int &xInside, int &yInside, std::vector<std::shared_ptr<geometricShape::Shape>> &fig, std::vector<std::shared_ptr<geometricShape::Shape>> &motif, MLV_Color motifShape, MLV_Color motifBorder, std::list<MLV_Color> &colorfig, std::list<MLV_Color>::iterator fig_num, Board &board, bool &wincondi);
            
             /*!
              *  \brief Méthode permettant desinner une figure de la classe Shape.
@@ -279,13 +279,12 @@ namespace geometricShape {
             std::vector<double> px; /*!< Coordonnées en x.*/
             std::vector<double> py; /*!< Coordonnées en y.*/
             std::vector<double> center; /*!< Coordonnées du centre.*/
-    };
-    void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder);
-    void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, std::list<MLV_Color> colorShapes, MLV_Color colorBorder);
-  //  bool operator == (const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel) ;
-    bool areEqual(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel);
-    void saveDraw(const std::vector<std::shared_ptr<geometricShape::Shape>> &fig);  
-    bool isInsideBoard(const int &x, const int &y, const int &with = 1350, const int &heigth = 700);   
+      };
+      void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, MLV_Color colorShape, MLV_Color colorBorder);
+      void drawAllShapes(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, std::list<MLV_Color> colorShapes, MLV_Color colorBorder);
+      bool areEqual(const std::vector<std::shared_ptr<geometricShape::Shape>> &vectShapes, const std::vector<std::shared_ptr<geometricShape::Shape>> &vectModel);
+      void saveDraw(const std::vector<std::shared_ptr<geometricShape::Shape>> &fig);  
+      bool isInsideBoard(const int &x, const int &y, const int &with = 1350, const int &heigth = 700);   
 }
 /*!
  *  \brief Surcharge du flux de sortie.
